@@ -17,5 +17,5 @@ public interface TestModuleService {
 
 	SysUser queryUserOneById(String id);
 	
-	List<TestModule> selectAllList();
+	List<TestModule> queryAllList();
 }

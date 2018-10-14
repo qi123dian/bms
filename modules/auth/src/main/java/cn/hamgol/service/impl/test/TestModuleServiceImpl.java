@@ -45,7 +45,7 @@ public class TestModuleServiceImpl implements TestModuleService{
 	}
 
 	@Override
-	public List<TestModule> selectAllList() {
+	public List<TestModule> queryAllList() {
 		return testModuleCustomMapperDao.selectAllList();
 	}
 }
