@@ -71,5 +71,7 @@ public class TestModuleServiceTest extends BaseServiceTest{
 		log.info("+++++++++++++++++++++++++++++++++++++++++++++++++++");
 		
 		testModuleService.queryAllList();
+		
+		testModuleService.testTransaction();
 	}
 }

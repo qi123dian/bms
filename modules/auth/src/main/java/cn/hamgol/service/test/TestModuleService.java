@@ -18,4 +18,6 @@ public interface TestModuleService {
 	SysUser queryUserOneById(String id);
 	
 	List<TestModule> queryAllList();
+
+	void testTransaction();
 }
