@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.hamgol.common.test.BaseServiceTest;
-import cn.hamgol.entity.test.TestModule;
+import cn.hamgol.entity.db.test.TestModule;
 
 public class TestModuleServiceTest extends BaseServiceTest{
 	
@@ -72,6 +72,10 @@ public class TestModuleServiceTest extends BaseServiceTest{
 		
 		testModuleService.queryAllList();
 		
+		log.info("******************************************************************************");
+		
 		testModuleService.testTransaction();
+		
+		log.info("******************************************************************************");
 	}
 }

@@ -1,6 +1,6 @@
-package cn.hamgol.dao.test;
+package cn.hamgol.dao.db.test;
 
-import cn.hamgol.entity.test.TestModule;
+import cn.hamgol.entity.db.test.TestModule;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.ResultMap;
@@ -56,7 +56,7 @@ public interface TestModuleMapper {
         "from test_module",
         "where id = #{id,jdbcType=VARCHAR}"
     })
-    @ResultMap("cn.hamgol.dao.test.TestModuleMapper.BaseResultMap")
+    @ResultMap("cn.hamgol.dao.db.test.TestModuleMapper.BaseResultMap")
     TestModule selectByPrimaryKey(String id);
 
     /**

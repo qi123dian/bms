@@ -1,6 +1,6 @@
-package cn.hamgol.dao.auth;
+package cn.hamgol.dao.core.auth;
 
-import cn.hamgol.entity.auth.SysUser;
+import cn.hamgol.entity.core.auth.SysUser;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.ResultMap;
@@ -60,7 +60,7 @@ public interface SysUserMapper {
         "from auth_sys_user",
         "where user_id = #{userId,jdbcType=VARCHAR}"
     })
-    @ResultMap("cn.hamgol.dao.auth.SysUserMapper.BaseResultMap")
+    @ResultMap("cn.hamgol.dao.core.auth.SysUserMapper.BaseResultMap")
     SysUser selectByPrimaryKey(String userId);
 
     /**

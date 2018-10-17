@@ -1,6 +1,6 @@
-package cn.hamgol.dao.auth;
+package cn.hamgol.dao.core.auth;
 
-import cn.hamgol.entity.auth.SysRole;
+import cn.hamgol.entity.core.auth.SysRole;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.ResultMap;
@@ -52,7 +52,7 @@ public interface SysRoleMapper {
         "from auth_sys_role",
         "where role_id = #{roleId,jdbcType=VARCHAR}"
     })
-    @ResultMap("cn.hamgol.dao.auth.SysRoleMapper.BaseResultMap")
+    @ResultMap("cn.hamgol.dao.core.auth.SysRoleMapper.BaseResultMap")
     SysRole selectByPrimaryKey(String roleId);
 
     /**

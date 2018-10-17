@@ -2,8 +2,8 @@ package cn.hamgol.service.test;
 
 import java.util.List;
 
-import cn.hamgol.entity.auth.SysUser;
-import cn.hamgol.entity.test.TestModule;
+import cn.hamgol.entity.core.auth.SysUser;
+import cn.hamgol.entity.db.test.TestModule;
 
 public interface TestModuleService {
 	

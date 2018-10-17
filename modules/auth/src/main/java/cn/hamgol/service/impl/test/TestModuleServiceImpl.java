@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.hamgol.dao.auth.SysUserMapper;
-import cn.hamgol.dao.test.custom.TestModuleCustomMapper;
-import cn.hamgol.entity.auth.SysUser;
-import cn.hamgol.entity.test.TestModule;
+import cn.hamgol.dao.core.auth.SysUserMapper;
+import cn.hamgol.dao.db.test.custom.TestModuleCustomMapper;
+import cn.hamgol.entity.core.auth.SysUser;
+import cn.hamgol.entity.db.test.TestModule;
 import cn.hamgol.service.test.TestModuleService;
 
 @Service
@@ -61,6 +61,12 @@ public class TestModuleServiceImpl implements TestModuleService{
 	@Transactional
 	@Override
 	public void testTransaction() {
+		
+		SysUser su = sysUserMapperDao.selectByPrimaryKey("admin");
+		su.setUpdateTime(new Date());
+		su.setUpdateUser("sys11111");
+		
+		sysUserMapperDao.updateByPrimaryKey(su);
 		
 		TestModule tm = new TestModule();
 		tm.setId(UUID.randomUUID().toString().replace("-", "").toUpperCase());

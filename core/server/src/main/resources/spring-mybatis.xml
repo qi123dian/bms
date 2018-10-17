@@ -15,26 +15,47 @@
 	<!-- load jdbc properties -->
 	<context:property-placeholder ignore-resource-not-found="true" location="classpath:jdbc.properties" ignore-unresolvable="true"/>
 	
-	<!-- JDBC Data Source -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+	<!-- Default JDBC Data Source -->
+	<bean id="dataSource_db" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
-		<property name="driverClassName" value="${jdbc.driverClassName}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
+		<property name="driverClassName" value="${db.driverClassName}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
 		<property name="validationQuery" value="SELECT 1" />
 	</bean>
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="mapperLocations" value="classpath*:mapping/**/*Mapper.xml" />
-		<property name="dataSource" ref="dataSource" />
+	<bean id="sqlSessionFactory_db" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="mapperLocations" value="classpath*:mapping/db/**/*Mapper.xml" />
+		<property name="dataSource" ref="dataSource_db" />
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="cn.hamgol.dao.*" />
-		<!-- 自动扫描mapping.xml文件 -->
+		<property name="basePackage" value="cn.hamgol.dao.db.*" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory_db"></property>
 	</bean>
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
+	<bean id="transactionManager_db" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource_db" />
 	</bean>
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:annotation-driven transaction-manager="transactionManager_db" />
+	
+	<!-- Core JDBC Data Source -->
+	<bean id="dataSource_core" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="driverClassName" value="${core.driverClassName}" />
+		<property name="url" value="${core.url}" />
+		<property name="username" value="${core.username}" />
+		<property name="password" value="${core.password}" />
+		<property name="validationQuery" value="SELECT 1" />
+	</bean>
+	<bean id="sqlSessionFactory_core" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource_core" />
+		<property name="mapperLocations" value="classpath*:mapping/core/**/*Mapper.xml" />
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="cn.hamgol.dao.core.*" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory_core"></property>
+	</bean>
+	<bean id="transactionManager_core" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource_core" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager_core" />
 </beans>

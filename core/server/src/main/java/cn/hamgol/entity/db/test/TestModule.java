@@ -1,4 +1,4 @@
-package cn.hamgol.entity.test;
+package cn.hamgol.entity.db.test;
 
 import java.io.Serializable;
 import java.util.Date;

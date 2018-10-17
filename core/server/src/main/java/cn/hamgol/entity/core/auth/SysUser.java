@@ -1,4 +1,4 @@
-package cn.hamgol.entity.auth;
+package cn.hamgol.entity.core.auth;
 
 import java.io.Serializable;
 import java.util.Date;
