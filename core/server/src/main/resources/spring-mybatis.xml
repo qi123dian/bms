@@ -10,20 +10,32 @@
 	http://www.springframework.org/schema/tx
 	http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
 	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context-4.1.xsd">
-	
+	http://www.springframework.org/schema/context/spring-context-4.1.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
 	<!-- load jdbc properties -->
-	<context:property-placeholder ignore-resource-not-found="true" location="classpath:jdbc.properties" ignore-unresolvable="true"/>
+	<context:property-placeholder
+		ignore-resource-not-found="true" location="classpath:jdbc.properties"
+		ignore-unresolvable="true" />
 	
-	<!-- Default JDBC Data Source -->
-	<bean id="dataSource_db" class="com.alibaba.druid.pool.DruidDataSource"
+	<!-- DB JDBC Data Source -->
+	<bean id="dataSource_db" class="com.atomikos.jdbc.AtomikosDataSourceBean"
 		init-method="init" destroy-method="close">
-		<property name="driverClassName" value="${db.driverClassName}" />
-		<property name="url" value="${db.url}" />
-		<property name="username" value="${db.username}" />
-		<property name="password" value="${db.password}" />
-		<property name="validationQuery" value="SELECT 1" />
+		<property name="uniqueResourceName" value="dataSource_db" />
+		<property name="xaDataSourceClassName" value="${db.dataSourceClassName}" />
+		<property name="xaProperties">
+			<props>
+				<prop key="user">${db.username}</prop>
+				<prop key="password">${db.password}</prop>
+				<prop key="url">${db.url}</prop>
+			</props>
+		</property>
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="50" />
+		<property name="maxIdleTime" value="60" />
 	</bean>
+	
 	<bean id="sqlSessionFactory_db" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="mapperLocations" value="classpath*:mapping/db/**/*Mapper.xml" />
 		<property name="dataSource" ref="dataSource_db" />
@@ -32,20 +44,24 @@
 		<property name="basePackage" value="cn.hamgol.dao.db.*" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory_db"></property>
 	</bean>
-	<bean id="transactionManager_db" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource_db" />
-	</bean>
-	<tx:annotation-driven transaction-manager="transactionManager_db" />
 	
 	<!-- Core JDBC Data Source -->
-	<bean id="dataSource_core" class="com.alibaba.druid.pool.DruidDataSource"
+	<bean id="dataSource_core" class="com.atomikos.jdbc.AtomikosDataSourceBean"
 		init-method="init" destroy-method="close">
-		<property name="driverClassName" value="${core.driverClassName}" />
-		<property name="url" value="${core.url}" />
-		<property name="username" value="${core.username}" />
-		<property name="password" value="${core.password}" />
-		<property name="validationQuery" value="SELECT 1" />
+		<property name="uniqueResourceName" value="dataSource_core" />
+		<property name="xaDataSourceClassName" value="${core.dataSourceClassName}" />
+		<property name="xaProperties">
+			<props>
+				<prop key="user">${core.username}</prop>
+				<prop key="password">${core.password}</prop>
+				<prop key="url">${core.url}</prop>
+			</props>
+		</property>
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="50" />
+		<property name="maxIdleTime" value="60" />
 	</bean>
+	
 	<bean id="sqlSessionFactory_core" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource_core" />
 		<property name="mapperLocations" value="classpath*:mapping/core/**/*Mapper.xml" />
@@ -54,8 +70,29 @@
 		<property name="basePackage" value="cn.hamgol.dao.core.*" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory_core"></property>
 	</bean>
-	<bean id="transactionManager_core" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource_core" />
+
+	<!-- 定义事务 -->
+	<bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager"
+		init-method="init" destroy-method="close">
+		<property name="forceShutdown">
+			<value>true</value>
+		</property>
 	</bean>
-	<tx:annotation-driven transaction-manager="transactionManager_core" />
+
+	<bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp">
+		<property name="transactionTimeout" value="300" />
+	</bean>
+
+	<bean id="springTransactionManager"
+		class="org.springframework.transaction.jta.JtaTransactionManager">
+		<property name="transactionManager">
+			<ref bean="atomikosTransactionManager" />
+		</property>
+		<property name="userTransaction">
+			<ref bean="atomikosUserTransaction" />
+		</property>
+		<property name="allowCustomIsolationLevels" value="true" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="springTransactionManager" proxy-target-class="true" />
 </beans>

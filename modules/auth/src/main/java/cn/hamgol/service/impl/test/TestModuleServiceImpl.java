@@ -64,7 +64,7 @@ public class TestModuleServiceImpl implements TestModuleService{
 		
 		SysUser su = sysUserMapperDao.selectByPrimaryKey("admin");
 		su.setUpdateTime(new Date());
-		su.setUpdateUser("sys11111");
+		su.setUpdateUser("sysupdate001");
 		
 		sysUserMapperDao.updateByPrimaryKey(su);
 		
