@@ -8,7 +8,9 @@ import javax.annotation.Resource;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
+import cn.hamgol.common.arch.ApplicationContextUtil;
 import cn.hamgol.common.test.BaseServiceTest;
 import cn.hamgol.entity.db.test.TestModule;
 
@@ -77,5 +79,7 @@ public class TestModuleServiceTest extends BaseServiceTest{
 		testModuleService.testTransaction();
 		
 		log.info("******************************************************************************");
+		
+		ApplicationContext ac = ApplicationContextUtil.getApplicationContext();
 	}
 }

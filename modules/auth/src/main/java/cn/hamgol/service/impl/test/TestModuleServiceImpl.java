@@ -66,7 +66,15 @@ public class TestModuleServiceImpl implements TestModuleService{
 		su.setUpdateTime(new Date());
 		su.setUpdateUser("sysupdate001");
 		
-		sysUserMapperDao.updateByPrimaryKey(su);
+		su = new SysUser();
+		
+		su.setUserId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
+		su.setUserName("testTransaction");
+		su.setUserPwd("123456");
+		su.setCreateUser("admin");
+		su.setCreateTime(new Date());
+		
+		sysUserMapperDao.insert(su);
 		
 		TestModule tm = new TestModule();
 		tm.setId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
@@ -82,8 +90,8 @@ public class TestModuleServiceImpl implements TestModuleService{
 		
 		System.out.println(t1);
 		
-		tm.setTitle("Test TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest Transaction");
-		// tm.setTitle("Test Transaction Update");
+		// tm.setTitle("Test TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest Transaction");
+		tm.setTitle("Test Transaction Update");
 		
 		testModuleCustomMapperDao.updateByPrimaryKey(tm);
 

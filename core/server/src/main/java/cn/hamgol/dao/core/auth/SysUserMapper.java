@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 
 public interface SysUserMapper {
@@ -37,7 +36,6 @@ public interface SysUserMapper {
         "#{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, ",
         "#{updateUser,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="userId", before=true, resultType=String.class)
     int insert(SysUser record);
 
     /**

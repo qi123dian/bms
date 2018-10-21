@@ -55,7 +55,7 @@
 			selectByExampleQueryId="false" enableSelectByPrimaryKey="true"
 			enableUpdateByPrimaryKey="true"
 			enableDeleteByPrimaryKey="true">
-			<generatedKey column="user_id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+			<!-- <generatedKey column="user_id" sqlStatement="SELECT LAST_INSERT_ID()"/> -->
 			<!-- 去掉名称前缀 -->
 			<domainObjectRenamingRule searchString="^Auth" replaceString="" />
 		</table>
