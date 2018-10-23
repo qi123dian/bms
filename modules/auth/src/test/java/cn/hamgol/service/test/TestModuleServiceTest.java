@@ -1,6 +1,7 @@
 package cn.hamgol.service.test;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -8,9 +9,9 @@ import javax.annotation.Resource;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
 
-import cn.hamgol.common.arch.ApplicationContextUtil;
+import com.github.pagehelper.PageHelper;
+
 import cn.hamgol.common.test.BaseServiceTest;
 import cn.hamgol.entity.db.test.TestModule;
 
@@ -23,6 +24,7 @@ public class TestModuleServiceTest extends BaseServiceTest{
 	
 	@Test
 	public void test() {
+		
 		log.info("================================================");
 		log.info("================================================");
 		log.info("================================================");
@@ -72,14 +74,20 @@ public class TestModuleServiceTest extends BaseServiceTest{
 		log.info("+++++++++++++++++++++++++++++++++++++++++++++++++++");
 		log.info("+++++++++++++++++++++++++++++++++++++++++++++++++++");
 		
-		testModuleService.queryAllList();
+		PageHelper.startPage(1, 10);
+		List<TestModule> listD = testModuleService.queryAllList();
+		
+		log.info("listD : " + listD.toString());
+		log.info("listD : " + listD.size());
+		
+		for(TestModule tm1 : listD) {
+			log.info(tm1.toString());
+		}
 		
 		log.info("******************************************************************************");
 		
 		testModuleService.testTransaction();
 		
 		log.info("******************************************************************************");
-		
-		ApplicationContext ac = ApplicationContextUtil.getApplicationContext();
 	}
 }

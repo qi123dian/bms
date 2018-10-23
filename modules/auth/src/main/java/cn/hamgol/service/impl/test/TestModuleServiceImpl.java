@@ -90,8 +90,8 @@ public class TestModuleServiceImpl implements TestModuleService{
 		
 		System.out.println(t1);
 		
-		// tm.setTitle("Test TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest Transaction");
-		tm.setTitle("Test Transaction Update");
+		tm.setTitle("Test TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest TransactionTest Transaction");
+		// tm.setTitle("Test Transaction Update");
 		
 		testModuleCustomMapperDao.updateByPrimaryKey(tm);
 
