@@ -85,8 +85,11 @@ public class TestModuleServiceTest extends BaseServiceTest{
 		}
 		
 		log.info("******************************************************************************");
-		
-		testModuleService.testTransaction();
+		try {
+			testModuleService.testTransaction();
+		} catch(Exception e) {
+			log.info("Transaction Exception");
+		}
 		
 		log.info("******************************************************************************");
 	}
