@@ -11,22 +11,24 @@
 		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
-
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/views/" />
+	
+	<mvc:resources mapping="/assets/**" location="/assets/" />
+	
+	<mvc:annotation-driven />
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
+	
 	<bean id="viewMappings"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-
 		<property name="defaultHandler">
 			<bean name="index"
 				class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
 		</property>
 	</bean>
-
+	
 	<!--RequestMappingHandlerAdapter -->
 	<mvc:annotation-driven>
 		<mvc:message-converters>
