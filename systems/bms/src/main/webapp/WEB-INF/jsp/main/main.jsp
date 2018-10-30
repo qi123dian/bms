@@ -21,6 +21,7 @@
 				border: none;
 				background: #2196F3;
 				color: #FFF;
+				z-index: 1001;
 			}
 			.main-top .ui.header {
 				color: #FFF;
@@ -77,17 +78,34 @@
 				width: 52px;
 				height: 52px;
 			}
+			.main-left .accordion .title {
+				display: none;
+			}
+			.main-left .accordion .content .buttons .ui.button {
+				color: #262626 !important;
+				font-weight: 500 !important;
+				text-align: center;
+				padding: 1em 1.5em 1em 2em;
+				font-weight: bold;
+			}
+			.main-left .accordion .content .buttons .button:hover {
+				background: #f7f7f7 !important;
+			}
+			.main-left .accordion .content .buttons .ui.button .icon {
+				margin: 0 1.5em 0 -.21428571em;
+			}
 			/* main-left end */
 			
 			/* main-center begin */
 			.main-center {
 				width: 100%;
-				padding-left: 20em;
-				padding-top: 6em;
-				padding-right: 1em;
+				padding-left: 19em;
+				padding-top: 5em;
+				padding-right: 0;
+				padding-bottom: 0;
 			}
 			.main-center .main-box {
-				margin-bottom: 1em;
+				padding: 1em 2em 0em 2em;
 			}
 			.main-center .main-box .ui.secondary.menu {
 				margin: 0;
@@ -146,10 +164,21 @@
 				<div class="content">
 					<img class="ui medium circular image" src="<c:url value="/assets/resources/img/main/avatar1.jpg" />">
 				</div>
-				<button class="fluid ui primary basic button"><span>Primary</span><i class="angle down icon"></i><div class="cleaxfix"></div></button>
+				<button class="fluid ui primary basic button" id="accordionBtId"><span>Primary</span><i class="angle down icon"></i><div class="cleaxfix"></div></button>
 				
 			</div>
-			
+			<div class="ui accordion">
+				<div class="title"><i class="dropdown icon"></i></div>
+				<div class="content">
+					<div class="ui vertical fluid buttons">
+						<button class="ui basic button"><i class="icon user"></i>User</button>
+						<button class="ui basic button"><i class="icon music"></i>Music</button>
+						<button class="ui basic button"><i class="icon wifi"></i>WIFI</button>
+						<button class="ui basic button"><i class="icon cog"></i>Settings</button>
+						<button class="ui basic button"><i class="icon calendar outline"></i>Date</button>
+					</div>
+				</div>
+			</div>
 			<a class="item">
 				1
 			</a>
@@ -162,8 +191,9 @@
 		</div>
 		
 		<div class="main-center">
+			
 			<div class="main-box">
-				<div class="ui secondary menu">
+				<div class="ui secondary menu page-header">
 					<div class="item">
 						<div class="ui medium header">
 							<h4 class="ui header">
@@ -205,10 +235,7 @@
 						<p>Bottom</p>
 					</div>
 				</div>
-			</div>
-			
-			<div class="main-box">
-			
+				
 				<div class="ui segment">
 					
 					<h5 class="ui header">
@@ -244,6 +271,46 @@
 					</table>
 					
 				</div>
+				
+				<div class="ui segment">
+					
+					<h5 class="ui header">
+						账户设置
+						<div class="sub header">管理你的账户设置并设置邮箱</div>
+					</h5>
+					
+					<div class="ui form">
+						<div class="two fields">
+							<div class="field error">
+								<label>First Name</label>
+								<input placeholder="First Name" type="text">
+							</div>
+							<div class="field">
+								<label>Last Name</label>
+								<input placeholder="Last Name" type="text">
+							</div>
+						</div>
+						<div class="field error">
+							<label>Gender</label>
+							<div class="ui selection dropdown">
+								<div class="default text">Select</div>
+								<i class="dropdown icon"></i>
+								<input type="hidden" name="gender">
+								<div class="menu">
+									<div class="item" data-value="male">Male</div>
+									<div class="item" data-value="female">Female</div>
+								</div>
+							</div>
+						</div>
+						<div class="inline field error">
+							<div class="ui checkbox">
+								<input type="checkbox" tabindex="0" class="hidden">
+								<label>我同意本条款和条件</label>
+							</div>
+						</div>
+					</div>
+					
+				</div>
 			</div>
 			
 		</div>
@@ -251,7 +318,17 @@
 		<script type="text/javascript" src="<c:url value="/assets/components/jquery/dist/jquery.min.js" />"></script>
 		<script type="text/javascript" src="<c:url value="/assets/components/semantic-ui-v2.2/semantic.min.js" />"></script>
 		
-		<script>
+		<script type="text/javascript">
+			$('.main-box').dimmer('show');
+			
+			$('.ui.accordion').accordion({
+				duration: 100
+			});
+			
+			$('#accordionBtId').click(function() {
+				console.log('---------------------------------------------------------------');
+				$('.ui.accordion').accordion('toggle', 0);
+			});
 		</script>
 	</body>
 </html>
