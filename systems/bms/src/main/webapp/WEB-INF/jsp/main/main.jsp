@@ -5,9 +5,10 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>HagmoL</title>
+		<title>Hamgol</title>
 		
 		<link rel="stylesheet" type="text/css" href="<c:url value="/assets/components/semantic-ui-v2.2/semantic.min.css" />">
+		<link rel="stylesheet" type="text/css" href="<c:url value="/assets/components/malihu-custom-scrollbar-plugin-master-v3.1.5/jquery.mCustomScrollbar.css" />">
 		
 		<style>
 			body {
@@ -23,8 +24,23 @@
 				color: #FFF;
 				z-index: 1001;
 			}
-			.main-top .ui.header {
+			.main-top .ui.medium.header {
 				color: #FFF;
+			}
+			.main-top .right.borderless.item .search {
+				margin-right: 2em;
+			}
+			.main-top .right.borderless.item .button {
+				margin-right: 2em;
+				color: rgba(0,0,0,.87);
+				background-color: #FFF;
+			}
+			.main-top .right.borderless.item .button .floating.ui.teal.label{
+				padding: .3833em .533em;
+				background-color: red !important;
+			}
+			.main-top .right.borderless.item .dropdown.button .vertical.menu .scrolling.menu {
+				margin: 0!important;
 			}
 			/* main-top end */
 			
@@ -78,21 +94,48 @@
 				width: 52px;
 				height: 52px;
 			}
-			.main-left .accordion .title {
+			.main-left .main-menu.accordion .title {
 				display: none;
 			}
-			.main-left .accordion .content .buttons .ui.button {
+			.main-left .main-menu.accordion .content .buttons .ui.button {
 				color: #262626 !important;
 				font-weight: 500 !important;
 				text-align: center;
 				padding: 1em 1.5em 1em 2em;
 				font-weight: bold;
 			}
-			.main-left .accordion .content .buttons .button:hover {
+			.main-left .main-menu.accordion .content .buttons .button:hover {
 				background: #f7f7f7 !important;
 			}
-			.main-left .accordion .content .buttons .ui.button .icon {
+			.main-left .main-menu.accordion .content .buttons .ui.button .icon {
 				margin: 0 1.5em 0 -.21428571em;
+			}
+			.main-left .tree-menu-box .accordion .right.floated.content {
+				margin-top: 2px;
+			}
+			.main-left .tree-menu-box .accordion .title .tree-menu-title {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			.main-left .tree-menu-box .tree-menu.ui.accordion .accordion {
+				margin: 0;
+			}
+			.main-left .tree-menu-box .tree-menu.ui.accordion .accordion .title {
+				padding: 1em 1em 1em 1em;
+				border-left: 2px solid #e0e1e2;
+			}
+			.main-left .tree-menu-box .accordion .title .header {
+				font-weight: 400;
+			}
+			.main-left .tree-menu-box .tree-menu.ui.accordion .title {
+				padding: 1em 1em 1em 1em;
+			}
+			.main-left .tree-menu-box .tree-menu.ui.accordion .content:not(.floated) {
+				padding: 0 0 0 2em;
+			}
+			.main-left .tree-menu-box .tree-menu.ui.accordion .title .header .icon {
+				margin: 0 1rem 0 0;
 			}
 			/* main-left end */
 			
@@ -105,7 +148,7 @@
 				padding-bottom: 0;
 			}
 			.main-center .main-box {
-				padding: 1em 2em 0em 2em;
+				padding: 1em 2em 2em 2em;
 			}
 			.main-center .main-box .ui.secondary.menu {
 				margin: 0;
@@ -118,7 +161,8 @@
 				box-shadow: 0 1px 1px rgba(0,0,0,.1);
 			}
 			.main-center .main-box .ui.header {
-				color: #777;
+				color: #777 !important;
+				font-weight: 400 !important;
 			}
 			.main-center .main-box .right.item .button {
 				margin-right: .5em;
@@ -152,10 +196,69 @@
 				</div>
 			</div>
 			<div class="right borderless item">
+				<div class="ui fluid category search">
+					<div class="ui icon input">
+						<input class="prompt" type="text" placeholder="搜寻动物……">
+						<i class="search icon"></i>
+					</div>
+					<div class="results"></div>
+				</div>
 				<button class="circular ui icon button">
 					<i class="icon settings"></i>
 					<div class="floating ui teal label">22</div>
 				</button>
+				<div class="circular ui icon top left pointing dropdown button">
+					<i class="wrench icon"></i><div class="floating ui teal label">22</div>
+				</div>
+				
+				<div class="circular ui icon top left pointing dropdown button">
+					<i class="wrench icon"></i><div class="floating ui teal label">22</div>
+					
+					<div class="ui vertical massive menu">
+						<div class="header">
+							<i class="calendar icon"></i> Filter by date
+						</div>
+						<div class="divider"></div>
+						<div class="ui search icon input">
+							<i class="search icon"></i>
+							<input type="text" name="search" placeholder="Search issues...">
+						</div>
+						<div class="scrolling menu">
+							<div class="item">
+								<i class="olive circle icon"></i> This Week
+							</div>
+							<div class="item">
+								<i class="violet circle icon"></i> This Month
+							</div>
+							<div class="item">
+								<i class="orange circle icon"></i> This Year
+							</div>
+							<div class="item" data-value="jenny"><img class="ui mini avatar image" src="<c:url value="/assets/resources/img/main/avatar1.jpg" />"> Jenny Hess </div>
+							<div class="item"><i class="conversation right floated icon"></i> Discussion </div>
+							<div class="item">
+								<i class="grid layout icon"></i> Browse
+							</div>
+							<div class="item">
+								<span class="description">2 new</span>
+								<span class="text">Important</span>
+							</div>
+							<div class="item">
+								<h5 class="ui header">
+									<img class="ui small avatar image" src="<c:url value="/assets/resources/img/main/avatar1.jpg" />">
+									<div class="content">
+										账户设置 <div class="sub header">Manage your preferences</div>
+									</div>
+								</h5>
+							</div>
+						</div>
+						<div class="divider"></div>
+						<div class="header">
+							<button class="ui fluid basic button"><i class="icon wifi"></i>WIFI</button>
+						</div>
+					</div>
+					
+				</div>
+				
 			</div>
 		</div>
 		
@@ -165,9 +268,9 @@
 					<img class="ui medium circular image" src="<c:url value="/assets/resources/img/main/avatar1.jpg" />">
 				</div>
 				<button class="fluid ui primary basic button" id="accordionBtId"><span>Primary</span><i class="angle down icon"></i><div class="cleaxfix"></div></button>
-				
 			</div>
-			<div class="ui accordion">
+			
+			<div class="main-menu ui accordion">
 				<div class="title"><i class="dropdown icon"></i></div>
 				<div class="content">
 					<div class="ui vertical fluid buttons">
@@ -179,15 +282,118 @@
 					</div>
 				</div>
 			</div>
-			<a class="item">
-				1
-			</a>
-			<a class="item">
-				2
-			</a>
-			<a class="item">
-				3
-			</a>
+			
+			<div class="tree-menu-box ui middle aligned list">
+				<div class="item">
+					<div class="ui accordion tree-menu">
+						<div class="title">
+							<div class="right floated content">
+								<i class="dropdown icon"></i>
+							</div>
+							<div class="header tree-menu-title"><i class="icon wifi"></i>Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1</div>
+						</div>
+						<div class="content">
+							<div class="accordion">
+								<div class="title">
+									<div class="right floated content">
+										<i class="dropdown icon"></i>
+									</div>
+									<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 1A</div>
+								</div>
+								<div class="content">
+									<div class="accordion">
+										<div class="title">
+											<div class="right floated content">
+												<i class="dropdown icon"></i>
+											</div>
+											<div class="header tree-menu-title">Level Level Level Level Level Level Level Level Level Level 1A-A</div>
+										</div>
+										<div class="content">
+										</div>
+										<div class="title">
+											<div class="right floated content">
+												<i class="dropdown icon"></i>
+											</div>
+											<div class="header tree-menu-title">Level Level Level Level Level Level Level Level Level Level 1A-B</div>
+										</div>
+										<div class="content">
+										</div>
+									</div>
+								</div>
+								<div class="title">
+									<div class="right floated content">
+										<i class="dropdown icon"></i>
+									</div>
+									<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 1B</div>
+								</div>
+								<div class="content">
+								</div>
+								<div class="title">
+									<div class="right floated content">
+										<i class="dropdown icon"></i>
+									</div>
+									<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 1C</div>
+								</div>
+								<div class="content">
+								</div>
+							</div>
+						</div>
+						<div class="title">
+							<div class="right floated content">
+								<i class="dropdown icon"></i>
+							</div>
+							<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 2</div>
+						</div>
+						<div class="content">
+							<div class="accordion">
+								<div class="title">
+									<div class="right floated content">
+										<i class="dropdown icon"></i>
+									</div>
+									<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 2A</div>
+								</div>
+								<div class="content">
+									<div class="accordion">
+										<div class="title">
+											<div class="right floated content">
+												<i class="dropdown icon"></i>
+											</div>
+											<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 2A-A</div>
+										</div>
+										<div class="content">
+										</div>
+										<div class="title">
+											<div class="right floated content">
+												<i class="dropdown icon"></i>
+											</div>
+											<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 2A-B</div>
+										</div>
+										<div class="content">
+										</div>
+									</div>
+								</div>
+								<div class="title">
+									<div class="right floated content">
+										<i class="dropdown icon"></i>
+									</div>
+									<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 2B</div>
+								</div>
+								<div class="content">
+								</div>
+								<div class="title">
+									<div class="right floated content">
+										<i class="dropdown icon"></i>
+									</div>
+									<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 2C</div>
+								</div>
+								<div class="content">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 		</div>
 		
 		<div class="main-center">
@@ -233,6 +439,47 @@
 					</div>
 					<div class="ui segment">
 						<p>Bottom</p>
+					</div>
+				</div>
+				
+				<div class="ui three column doubling stackable grid" style="margin-bottom: 0;">
+					<div class="column">
+						<div class="ui segment">Content</div>
+					</div>
+					<div class="column">
+						<div class="ui segment">Content</div>
+					</div>
+					<div class="column">
+						<div class="ui segment">Content</div>
+					</div>
+				</div>
+				
+				<div class="clearfix"></div>
+				
+				<div class="ui four column doubling stackable grid" style="margin-bottom: 0;">
+					<div class="column">
+						<div class="ui segment">Content</div>
+					</div>
+					<div class="column">
+						<div class="ui segment">Content</br></br></br></br></br></br></br></div>
+					</div>
+					<div class="column">
+						<div class="ui segment">Content</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></div>
+					</div>
+					<div class="column">
+						<div class="ui segment">Content</div>
+					</div>
+				</div>
+				
+				
+				<div class="clearfix"></div>
+				
+				<div class="ui two column doubling stackable grid" style="margin-bottom: 0;">
+					<div class="column">
+						<div class="ui segment">Content</div>
+					</div>
+					<div class="column">
+						<div class="ui segment">Content</div>
 					</div>
 				</div>
 				
@@ -315,19 +562,30 @@
 			
 		</div>
 		
-		<script type="text/javascript" src="<c:url value="/assets/components/jquery/dist/jquery.min.js" />"></script>
+		<script type="text/javascript" src="<c:url value="/assets/components/jquery-v3.1.1/dist/jquery.min.js" />"></script>
 		<script type="text/javascript" src="<c:url value="/assets/components/semantic-ui-v2.2/semantic.min.js" />"></script>
+		<script type="text/javascript" src="<c:url value="/assets/components/malihu-custom-scrollbar-plugin-master-v3.1.5/jquery.mCustomScrollbar.concat.min.js" />"></script>
 		
 		<script type="text/javascript">
-			$('.main-box').dimmer('show');
+			// $('.main-box').dimmer('show');
 			
+			/*  */
 			$('.ui.accordion').accordion({
 				duration: 100
 			});
 			
+			$('.ui.dropdown').dropdown();
+			
+			$('.ui.accordion.tree-menu').accordion({
+				duration: 100,
+				exclusive: false
+			});
+			
+			// $(".main-left").mCustomScrollbar();
+			
 			$('#accordionBtId').click(function() {
 				console.log('---------------------------------------------------------------');
-				$('.ui.accordion').accordion('toggle', 0);
+				$('.main-menu.ui.accordion').accordion('toggle', 0);
 			});
 		</script>
 	</body>
