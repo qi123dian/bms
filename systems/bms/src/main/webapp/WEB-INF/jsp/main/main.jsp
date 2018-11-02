@@ -677,27 +677,25 @@
 		<script type="text/javascript" src="<c:url value="/assets/components/malihu-custom-scrollbar-plugin-master-v3.1.5/jquery.mCustomScrollbar.concat.min.js" />"></script>
 		
 		<script type="text/javascript">
-			window.onload = function() {
-				// $('.main-box').dimmer('show');
-				
-				$('.ui.accordion').accordion({
-					duration: 100
-				});
-				
-				$('.ui.dropdown').dropdown();
-				
-				$('.ui.accordion.tree-menu').accordion({
-					duration: 100,
-					exclusive: false
-				});
-				
-				$('.tabular.menu .item').tab();
-				
-				$('#accordionBtId').click(function() {
-					console.log('---------------------------------------------------------------');
-					$('.main-menu.ui.accordion').accordion('toggle', 0);
-				});
-			}
+			// $('.main-box').dimmer('show');
+			
+			$('.ui.accordion').accordion({
+				duration: 100
+			});
+			
+			$('.ui.dropdown').dropdown();
+			
+			$('.ui.accordion.tree-menu').accordion({
+				duration: 100,
+				exclusive: false
+			});
+			
+			$('.tabular.menu .item').tab();
+			
+			$('#accordionBtId').click(function() {
+				console.log('---------------------------------------------------------------');
+				$('.main-menu.ui.accordion').accordion('toggle', 0);
+			});
 		</script>
 	</body>
 </html>
