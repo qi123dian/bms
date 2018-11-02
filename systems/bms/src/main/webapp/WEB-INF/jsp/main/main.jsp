@@ -560,7 +560,7 @@
 							</div>
 						</div>
 						<div class="column">
-							<div class="ui segment" style="height: 200px;">
+							<div class="ui segment" style="height: 400px;">
 								left - center - right
 							</div>
 						</div>
@@ -612,7 +612,7 @@
 				<div class="six wide column">
 					<div class="ui column grid">
 						<div class="column">
-							<div class="ui segment" style="height: 200px;">
+							<div class="ui segment" style="height: 400px;">
 								left - center - right
 							</div>
 						</div>
