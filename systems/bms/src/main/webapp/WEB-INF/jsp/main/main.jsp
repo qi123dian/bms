@@ -24,10 +24,13 @@
 				color: #FFF;
 				z-index: 1001;
 			}
+			.main-top .top-title {
+				width: 19em;
+			}
 			.main-top .ui.medium.header {
 				color: #FFF;
 			}
-			.main-top .right.borderless.item .search {
+			.main-top .right.borderless.item .search:not(.icon) {
 				margin-right: 2em;
 			}
 			.main-top .right.borderless.item .button {
@@ -148,13 +151,19 @@
 				padding-bottom: 0;
 			}
 			.main-center .main-box {
-				padding: 1em 2em 2em 2em;
+				padding: 1em 2em 1em 2em;
 			}
 			.main-center .main-box .ui.secondary.menu {
 				margin: 0;
 				height: 4em;
 			}
-			.main-center .main-box .ui.segment {
+			.main-center .main-box>.ui.segment {
+				margin-top: 0;
+				border-width: 0px;
+				border-radius: 2px;
+				box-shadow: 0 1px 1px rgba(0,0,0,.1);
+			}
+			.main-center .main-box .column>.ui.segment {
 				margin-top: 0;
 				border-width: 0px;
 				border-radius: 2px;
@@ -180,6 +189,19 @@
 			}
 			/* main-center end */
 			
+			/* main-footer begin */
+			.main-footer {
+				width: 100%;
+				padding-left: 19em;
+				padding-top: 0;
+				padding-right: 0;
+				padding-bottom: 0;
+			}
+			.main-footer .footer-box {
+				padding: 1em 2em 1em 2em;
+			}
+			/* main-footer end */
+			
 			/* common begin */
 			.cleaxfix {
 				clear: both;
@@ -188,13 +210,23 @@
 		</style>
 	</head>
 	<body>
-		
+		<!-- 顶部菜单 -->
 		<div class="main-top ui fixed borderless menu">
-			<div class="item">
+			<!-- 网站标题 -->
+			<div class="item top-title">
 				<div class="ui medium header">
-					<h4>Uptime Guarantee </h4>
+					<h4>HamgoL</h4>
 				</div>
 			</div>
+			
+			<!-- 多页面标签 -->
+			<div class="ui secondary pointing tabular menu top-tabmenu">
+				<a class="item" data-tab="tab-name">Link</a>
+				<a class="item active" data-tab="tab-name2">Link</a>
+				<a class="item" data-tab="tab-name3">Link</a>
+			</div>
+			
+			<!-- 顶部菜单 -->
 			<div class="right borderless item">
 				<div class="ui fluid category search">
 					<div class="ui icon input">
@@ -208,7 +240,7 @@
 					<div class="floating ui teal label">22</div>
 				</button>
 				<div class="circular ui icon top left pointing dropdown button">
-					<i class="wrench icon"></i><div class="floating ui teal label">22</div>
+					<i class="wrench icon"></i><div class="floating ui teal label">99+</div>
 				</div>
 				
 				<div class="circular ui icon top left pointing dropdown button">
@@ -262,7 +294,9 @@
 			</div>
 		</div>
 		
+		<!-- 左侧菜单区域 -->
 		<div class="main-left ui sidebar vertical menu visible">
+			<!-- 个人资料 -->
 			<div class="card">
 				<div class="content">
 					<img class="ui medium circular image" src="<c:url value="/assets/resources/img/main/avatar1.jpg" />">
@@ -270,6 +304,7 @@
 				<button class="fluid ui primary basic button" id="accordionBtId"><span>Primary</span><i class="angle down icon"></i><div class="cleaxfix"></div></button>
 			</div>
 			
+			<!-- 个人设置 -->
 			<div class="main-menu ui accordion">
 				<div class="title"><i class="dropdown icon"></i></div>
 				<div class="content">
@@ -283,6 +318,7 @@
 				</div>
 			</div>
 			
+			<!-- 菜单 -->
 			<div class="tree-menu-box ui middle aligned list">
 				<div class="item">
 					<div class="ui accordion tree-menu">
@@ -396,170 +432,244 @@
 			
 		</div>
 		
+		<!-- 网页主体 -->
 		<div class="main-center">
-			
-			<div class="main-box">
-				<div class="ui secondary menu page-header">
-					<div class="item">
-						<div class="ui medium header">
-							<h4 class="ui header">
-								<i class="settings icon"></i>
-								<div class="content">
-									账户设置
-									<div class="sub header">Manage your preferences</div>
-								</div>
-							</h4>
+			<!-- 主题页面容器 -->
+			<div class="ui grid main-box">
+				<!-- 主体页面标题操作区域 -->
+				<div class="sixteen wide column">
+					<div class="ui secondary menu page-header">
+						<!-- 页面标题 -->
+						<div class="item">
+							<div class="ui medium header">
+								<h4 class="ui header">
+									<i class="settings icon"></i>
+									<div class="content">
+										账户设置
+										<div class="sub header">Manage your preferences</div>
+									</div>
+								</h4>
+							</div>
+						</div>
+						<!-- 页面操作 -->
+						<div class="right borderless item">
+							<button class="circular ui icon button">
+								<i class="icon settings"></i>
+							</button>
+							<button class="circular ui icon button">
+								<i class="icon question circle outline"></i>
+							</button>
+							<button class="circular ui icon button">
+								<i class="icon ellipsis vertical"></i>
+							</button>
 						</div>
 					</div>
-					<div class="right borderless item">
+					<!-- 页面内容 -->
+					<div class="ui segment" style="height: 200px;">
+						left - center - left
+					</div>
+				</div>
+				<div class="sixteen wide column">
+					<div class="ui segment">
+						<h5 class="ui header">
+							账户设置
+							<div class="sub header">管理你的账户设置并设置邮箱</div>
+						</h5>
 						
-						<button class="circular ui icon button">
-							<i class="icon settings"></i>
-						</button>
-						<button class="circular ui icon button">
-							<i class="icon question circle outline"></i>
-						</button>
-						<button class="circular ui icon button">
-							<i class="icon ellipsis vertical"></i>
-						</button>
+						<table class="ui very basic table">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Status</th>
+									<th>Notes</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>约翰</td>
+									<td>已审核</td>
+									<td>None</td>
+								</tr>
+								<tr>
+									<td>杰米</td>
+									<td>已审核</td>
+									<td>必须回答</td>
+								</tr>
+								<tr>
+									<td>吉尔</td>
+									<td>Denied</td>
+									<td>None</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="sixteen wide column">
+					<div class="ui segment">
+						<h5 class="ui header">
+							账户设置
+							<div class="sub header">管理你的账户设置并设置邮箱</div>
+						</h5>
 						
-					</div>
-				</div>
-				
-				<div class="ui segment">
-					<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-				</div>
-				
-				<div class="ui horizontal segments">
-					<div class="ui segment">
-						<p>Top</p>
-					</div>
-					<div class="ui segment">
-						<p>Middle</p>
-					</div>
-					<div class="ui segment">
-						<p>Bottom</p>
-					</div>
-				</div>
-				
-				<div class="ui three column doubling stackable grid" style="margin-bottom: 0;">
-					<div class="column">
-						<div class="ui segment">Content</div>
-					</div>
-					<div class="column">
-						<div class="ui segment">Content</div>
-					</div>
-					<div class="column">
-						<div class="ui segment">Content</div>
-					</div>
-				</div>
-				
-				<div class="clearfix"></div>
-				
-				<div class="ui four column doubling stackable grid" style="margin-bottom: 0;">
-					<div class="column">
-						<div class="ui segment">Content</div>
-					</div>
-					<div class="column">
-						<div class="ui segment">Content</br></br></br></br></br></br></br></div>
-					</div>
-					<div class="column">
-						<div class="ui segment">Content</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></div>
-					</div>
-					<div class="column">
-						<div class="ui segment">Content</div>
-					</div>
-				</div>
-				
-				
-				<div class="clearfix"></div>
-				
-				<div class="ui two column doubling stackable grid" style="margin-bottom: 0;">
-					<div class="column">
-						<div class="ui segment">Content</div>
-					</div>
-					<div class="column">
-						<div class="ui segment">Content</div>
-					</div>
-				</div>
-				
-				<div class="ui segment">
-					
-					<h5 class="ui header">
-						账户设置
-						<div class="sub header">管理你的账户设置并设置邮箱</div>
-					</h5>
-					
-					<table class="ui very basic table">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Status</th>
-								<th>Notes</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>约翰</td>
-								<td>已审核</td>
-								<td>None</td>
-							</tr>
-							<tr>
-								<td>杰米</td>
-								<td>已审核</td>
-								<td>必须回答</td>
-							</tr>
-							<tr>
-								<td>吉尔</td>
-								<td>Denied</td>
-								<td>None</td>
-							</tr>
-						</tbody>
-					</table>
-					
-				</div>
-				
-				<div class="ui segment">
-					
-					<h5 class="ui header">
-						账户设置
-						<div class="sub header">管理你的账户设置并设置邮箱</div>
-					</h5>
-					
-					<div class="ui form">
-						<div class="two fields">
+						<div class="ui form">
+							<div class="two fields">
+								<div class="field error">
+									<label>First Name</label>
+									<input placeholder="First Name" type="text">
+								</div>
+								<div class="field">
+									<label>Last Name</label>
+									<input placeholder="Last Name" type="text">
+								</div>
+							</div>
 							<div class="field error">
-								<label>First Name</label>
-								<input placeholder="First Name" type="text">
+								<label>Gender</label>
+								<div class="ui selection dropdown">
+									<div class="default text">Select</div>
+									<i class="dropdown icon"></i>
+									<input type="hidden" name="gender">
+									<div class="menu">
+										<div class="item" data-value="male">Male</div>
+										<div class="item" data-value="female">Female</div>
+									</div>
+								</div>
 							</div>
-							<div class="field">
-								<label>Last Name</label>
-								<input placeholder="Last Name" type="text">
-							</div>
-						</div>
-						<div class="field error">
-							<label>Gender</label>
-							<div class="ui selection dropdown">
-								<div class="default text">Select</div>
-								<i class="dropdown icon"></i>
-								<input type="hidden" name="gender">
-								<div class="menu">
-									<div class="item" data-value="male">Male</div>
-									<div class="item" data-value="female">Female</div>
+							<div class="inline field error">
+								<div class="ui checkbox">
+									<input type="checkbox" tabindex="0" class="hidden">
+									<label>我同意本条款和条件</label>
 								</div>
 							</div>
 						</div>
-						<div class="inline field error">
-							<div class="ui checkbox">
-								<input type="checkbox" tabindex="0" class="hidden">
-								<label>我同意本条款和条件</label>
+					</div>
+				</div>
+				
+				
+				<div class="ten wide column">
+					<div class="ui column grid">
+						<div class="column">
+							<div class="ui segment" style="height: 100px;">
+								left - top
 							</div>
 						</div>
 					</div>
-					
+					<div class="ui two column grid">
+						<div class="column">
+							<div class="ui segment" style="height: 200px;">
+								left - center - left
+							</div>
+						</div>
+						<div class="column">
+							<div class="ui segment" style="height: 200px;">
+								left - center - right
+							</div>
+						</div>
+					</div>
+					<div class="ui two column grid">
+						<div class="column">
+							<div class="ui segment" style="height: 200px;">
+								left - center - left
+							</div>
+						</div>
+						<div class="column">
+							<div class="ui segment" style="height: 200px;">
+								left - center - right
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="six wide column">
+					<div class="ui segment" style="height:  800px;">
+						right
+					</div>
+				</div>
+				<div class="sixteen wide column">
+					<div class="ui segment" style="height: 200px;">
+						left - center - right
+					</div>
+				</div>
+				<div class="ten wide column">
+					<div class="ui two column grid">
+						<div class="column">
+							<div class="ui segment" style="height: 200px;">
+								left - center - right11111111111111
+							</div>
+						</div>
+						<div class="column">
+							<div class="ui segment" style="height: 200px;">
+								left - center - right11111111111111
+							</div>
+						</div>
+					</div>
+					<div class="ui column grid">
+						<div class="column">
+							<div class="ui segment" style="height: 200px;">
+								left - center - right11111111111111
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="six wide column">
+					<div class="ui column grid">
+						<div class="column">
+							<div class="ui segment" style="height: 200px;">
+								left - center - right
+							</div>
+						</div>
+					</div>
+					<div class="ui column grid">
+						<div class="column">
+							<div class="ui segment" style="height: 200px;">
+								left - center - right
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			
+		</div>
+		
+		<!-- 网页底部 -->
+		<div class="main-footer">
+			<div class="footer-box">
+				<div class="ui vertical segment">
+					<div class="ui center aligned container">
+						<div class="ui stackable grid">
+							<div class="three wide column">
+								<h4 class="ui header">社区</h4>
+								<div class="ui link list">
+									<a class="item" href="" target="_blank">协助翻译</a>
+									<a class="item" href="" target="_blank">提交问题</a>
+									<a class="item" href="" target="_blank">加入讨论</a>
+									<a class="item" href="" target="_blank">CLA</a>
+								</div>
+							</div>
+							<div class="three wide column">
+								<h4 class="ui header">网络</h4>
+								<div class="ui link list">
+									<a class="item" href="" target="_blank">GitHub 库</a>
+									<a class="item" href="" target="_blank">用户论坛</a>
+									<a class="item" href="">1.x 版本文档</a>
+									<a class="item" href="">0.x 版本文档</a>
+								</div>
+							</div>
+							<div class="seven wide right floated column">
+								<h4 class="ui header">帮助维持本项目</h4>
+								<p> 社区为 Semantic UI 持续不断的发展提供了直接的支持。</p>
+								<form action="" method="post" target="_top">
+									<input type="hidden" name="cmd" value="_s-xclick">
+									<input type="hidden" name="hosted_button_id" value="7ZAF2Q8DBZAQL">
+									<button type="submit" class="ui large teal button">现在捐赠</button>
+								</form>
+							</div>
+						</div>
+						<div class="ui section divider"></div>
+						<img src="<c:url value="/assets/resources/img/main/avatar1.jpg" />" class="ui centered mini image">
+						<div class="ui horizontal small divided link list">
+							<a class="item" href="" target="_blank">Free &amp; Open Source (MIT)</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		
 		<script type="text/javascript" src="<c:url value="/assets/components/jquery-v3.1.1/dist/jquery.min.js" />"></script>
@@ -567,26 +677,27 @@
 		<script type="text/javascript" src="<c:url value="/assets/components/malihu-custom-scrollbar-plugin-master-v3.1.5/jquery.mCustomScrollbar.concat.min.js" />"></script>
 		
 		<script type="text/javascript">
-			// $('.main-box').dimmer('show');
-			
-			/*  */
-			$('.ui.accordion').accordion({
-				duration: 100
-			});
-			
-			$('.ui.dropdown').dropdown();
-			
-			$('.ui.accordion.tree-menu').accordion({
-				duration: 100,
-				exclusive: false
-			});
-			
-			// $(".main-left").mCustomScrollbar();
-			
-			$('#accordionBtId').click(function() {
-				console.log('---------------------------------------------------------------');
-				$('.main-menu.ui.accordion').accordion('toggle', 0);
-			});
+			window.onload = function() {
+				// $('.main-box').dimmer('show');
+				
+				$('.ui.accordion').accordion({
+					duration: 100
+				});
+				
+				$('.ui.dropdown').dropdown();
+				
+				$('.ui.accordion.tree-menu').accordion({
+					duration: 100,
+					exclusive: false
+				});
+				
+				$('.tabular.menu .item').tab();
+				
+				$('#accordionBtId').click(function() {
+					console.log('---------------------------------------------------------------');
+					$('.main-menu.ui.accordion').accordion('toggle', 0);
+				});
+			}
 		</script>
 	</body>
 </html>
