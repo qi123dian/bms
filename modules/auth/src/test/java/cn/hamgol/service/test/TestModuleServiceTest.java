@@ -14,6 +14,7 @@ import com.github.pagehelper.PageHelper;
 
 import cn.hamgol.common.test.BaseServiceTest;
 import cn.hamgol.entity.db.test.TestModule;
+import cn.hamgol.entity.db.test.custom.TestModuleCustom;
 
 public class TestModuleServiceTest extends BaseServiceTest{
 	
@@ -75,7 +76,7 @@ public class TestModuleServiceTest extends BaseServiceTest{
 		log.info("+++++++++++++++++++++++++++++++++++++++++++++++++++");
 		
 		PageHelper.startPage(1, 10);
-		List<TestModule> listD = testModuleService.queryAllList();
+		List<TestModuleCustom> listD = testModuleService.queryAllList();
 		
 		log.info("listD : " + listD.toString());
 		log.info("listD : " + listD.size());
@@ -88,6 +89,7 @@ public class TestModuleServiceTest extends BaseServiceTest{
 		try {
 			testModuleService.testTransaction();
 		} catch(Exception e) {
+			e.printStackTrace();
 			log.info("Transaction Exception");
 		}
 		

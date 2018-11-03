@@ -212,6 +212,9 @@
 	<body>
 		<!-- 顶部菜单 -->
 		<div class="main-top ui fixed borderless menu">
+			<div class="ui top attached progress warning">
+				<div class="bar"></div>
+			</div>
 			<!-- 网站标题 -->
 			<div class="item top-title">
 				<div class="ui medium header">
@@ -633,6 +636,7 @@
 			<div class="footer-box">
 				<div class="ui vertical segment">
 					<div class="ui center aligned container">
+						<div class="ui section divider"></div>
 						<div class="ui stackable grid">
 							<div class="three wide column">
 								<h4 class="ui header">社区</h4>
@@ -691,6 +695,8 @@
 			});
 			
 			$('.tabular.menu .item').tab();
+			
+			// $('.attached.progress').progress();
 			
 			$('#accordionBtId').click(function() {
 				console.log('---------------------------------------------------------------');

@@ -12,6 +12,7 @@ import cn.hamgol.dao.core.auth.SysUserMapper;
 import cn.hamgol.dao.db.test.custom.TestModuleCustomMapper;
 import cn.hamgol.entity.core.auth.SysUser;
 import cn.hamgol.entity.db.test.TestModule;
+import cn.hamgol.entity.db.test.custom.TestModuleCustom;
 import cn.hamgol.service.test.TestModuleService;
 
 @Service
@@ -51,7 +52,7 @@ public class TestModuleServiceImpl implements TestModuleService{
 	 * Custom sql
 	 */
 	@Override
-	public List<TestModule> queryAllList() {
+	public List<TestModuleCustom> queryAllList() {
 		return testModuleCustomMapperDao.selectAllList();
 	}
 	

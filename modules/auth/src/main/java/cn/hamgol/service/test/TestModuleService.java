@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.hamgol.entity.core.auth.SysUser;
 import cn.hamgol.entity.db.test.TestModule;
+import cn.hamgol.entity.db.test.custom.TestModuleCustom;
 
 public interface TestModuleService {
 	
@@ -17,7 +18,7 @@ public interface TestModuleService {
 
 	SysUser queryUserOneById(String id);
 	
-	List<TestModule> queryAllList();
+	List<TestModuleCustom> queryAllList();
 
 	void testTransaction();
 }
