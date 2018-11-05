@@ -23,18 +23,9 @@ public class TestModuleCustom extends TestModule{
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(super.getId());
-        sb.append(", title=").append(super.getTitle());
-        sb.append(", createTime=").append(super.getCreateTime());
-        sb.append(", createId=").append(super.getCreateId());
-        sb.append(", updateTime=").append(super.getUpdateTime());
-        sb.append(", updateId=").append(super.getUpdateId());
         sb.append(", customColumn=").append(customColumn);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
-        return sb.toString();
+        
+        return super.toString().replaceAll("\\]$", sb.toString());
     }
 }
