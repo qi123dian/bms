@@ -16,19 +16,6 @@
 	
 	<mvc:annotation-driven />
 	
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-	
-	<bean id="viewMappings"
-		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-		<property name="defaultHandler">
-			<bean name="index"
-				class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
-		</property>
-	</bean>
-	
 	<!--RequestMappingHandlerAdapter -->
 	<mvc:annotation-driven>
 		<mvc:message-converters>
@@ -98,7 +85,7 @@
 			<list>
 				<bean
 					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-					<property name="prefix" value="/WEB-INF/jsp/" />
+					<property name="prefix" value="/WEB-INF/views/" />
 					<property name="suffix" value=".jsp" />
 				</bean>
 			</list>

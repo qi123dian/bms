@@ -8,9 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
- * 公共URL跳转
+ * 公共页面跳转
  * @author hamgol
  */
 @Controller
@@ -20,7 +21,7 @@ public class PageJumpController {
 	private static final Logger log = LoggerFactory.getLogger(PageJumpController.class);
 	
 	@RequestMapping("/{path}/{page}")
-	public String urlJump(@PathVariable(value="path") String path, @PathVariable(value="page") String page, HttpServletRequest req) {
+	public ModelAndView urlJump(@PathVariable(value="path") String path, @PathVariable(value="page") String page, HttpServletRequest req) {
 		
 		String url = req.getServletPath();
 		
@@ -29,6 +30,12 @@ public class PageJumpController {
 		log.info("path : " + path);
 		log.info("page : " + page);
 		
-		return path + "/" + page;
+		url = path + "/" + page;
+		
+		log.info("url : " + url);
+		
+		ModelAndView mav = new ModelAndView(url);
+		
+		return mav;
 	}
 }
