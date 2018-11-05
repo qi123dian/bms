@@ -212,9 +212,10 @@
 	<body>
 		<!-- 顶部菜单 -->
 		<div class="main-top ui fixed borderless menu">
-			<div class="ui top attached progress warning">
+			<!-- 页面进度条 -->
+			<!-- <div class="ui top attached progress warning">
 				<div class="bar"></div>
-			</div>
+			</div> -->
 			<!-- 网站标题 -->
 			<div class="item top-title">
 				<div class="ui medium header">
@@ -224,9 +225,9 @@
 			
 			<!-- 多页面标签 -->
 			<div class="ui secondary pointing tabular menu top-tabmenu">
-				<a class="item" data-tab="tab-name">Link</a>
-				<a class="item active" data-tab="tab-name2">Link</a>
-				<a class="item" data-tab="tab-name3">Link</a>
+				<a class="item active" data-tab="tab-name" data-content="Add users to your feed">First</a>
+				<a class="item" data-tab="tab-name2">Second</a>
+				<a class="item" data-tab="tab-name3">Third</a>
 			</div>
 			
 			<!-- 顶部菜单 -->
@@ -437,193 +438,223 @@
 		
 		<!-- 网页主体 -->
 		<div class="main-center">
+			<div class="ui bottom attached tab active main-box" data-tab="tab-name">
+				<div class="ui grid">
+					<div class="sixteen wide column">
+						<div class="ui segment">
+							First
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ui bottom attached tab main-box" data-tab="tab-name2">
+				<div class="ui grid">
+					<div class="sixteen wide column">
+						<div class="ui segment">
+							Second
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ui bottom attached tab main-box" data-tab="tab-name3">
+				<div class="ui grid">
+					<div class="sixteen wide column">
+						<div class="ui segment">
+							Third
+						</div>
+					</div>
+				</div>
+			</div>
+			
 			<!-- 主题页面容器 -->
-			<div class="ui grid main-box">
-				<!-- 主体页面标题操作区域 -->
-				<div class="sixteen wide column">
-					<div class="ui secondary menu page-header">
-						<!-- 页面标题 -->
-						<div class="item">
-							<div class="ui medium header">
-								<h4 class="ui header">
-									<i class="settings icon"></i>
-									<div class="content">
-										账户设置
-										<div class="sub header">Manage your preferences</div>
-									</div>
-								</h4>
+			<div class="ui main-box">
+				<div class="ui grid">
+					<!-- 主体页面标题操作区域 -->
+					<div class="sixteen wide column">
+						<div class="ui secondary menu page-header">
+							<!-- 页面标题 -->
+							<div class="item">
+								<div class="ui medium header">
+									<h4 class="ui header">
+										<i class="settings icon"></i>
+										<div class="content">
+											账户设置
+											<div class="sub header">Manage your preferences</div>
+										</div>
+									</h4>
+								</div>
+							</div>
+							<!-- 页面操作 -->
+							<div class="right borderless item">
+								<button class="circular ui icon button">
+									<i class="icon settings"></i>
+								</button>
+								<button class="circular ui icon button">
+									<i class="icon question circle outline"></i>
+								</button>
+								<button class="circular ui icon button">
+									<i class="icon ellipsis vertical"></i>
+								</button>
 							</div>
 						</div>
-						<!-- 页面操作 -->
-						<div class="right borderless item">
-							<button class="circular ui icon button">
-								<i class="icon settings"></i>
-							</button>
-							<button class="circular ui icon button">
-								<i class="icon question circle outline"></i>
-							</button>
-							<button class="circular ui icon button">
-								<i class="icon ellipsis vertical"></i>
-							</button>
+						<!-- 页面内容 -->
+						<div class="ui segment" style="height: 200px;">
+							left - center - left
 						</div>
 					</div>
-					<!-- 页面内容 -->
-					<div class="ui segment" style="height: 200px;">
-						left - center - left
+					<div class="sixteen wide column">
+						<div class="ui segment">
+							<h5 class="ui header">
+								账户设置
+								<div class="sub header">管理你的账户设置并设置邮箱</div>
+							</h5>
+							
+							<table class="ui very basic table">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Status</th>
+										<th>Notes</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>约翰</td>
+										<td>已审核</td>
+										<td>None</td>
+									</tr>
+									<tr>
+										<td>杰米</td>
+										<td>已审核</td>
+										<td>必须回答</td>
+									</tr>
+									<tr>
+										<td>吉尔</td>
+										<td>Denied</td>
+										<td>None</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
-				</div>
-				<div class="sixteen wide column">
-					<div class="ui segment">
-						<h5 class="ui header">
-							账户设置
-							<div class="sub header">管理你的账户设置并设置邮箱</div>
-						</h5>
-						
-						<table class="ui very basic table">
-							<thead>
-								<tr>
-									<th>Name</th>
-									<th>Status</th>
-									<th>Notes</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>约翰</td>
-									<td>已审核</td>
-									<td>None</td>
-								</tr>
-								<tr>
-									<td>杰米</td>
-									<td>已审核</td>
-									<td>必须回答</td>
-								</tr>
-								<tr>
-									<td>吉尔</td>
-									<td>Denied</td>
-									<td>None</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="sixteen wide column">
-					<div class="ui segment">
-						<h5 class="ui header">
-							账户设置
-							<div class="sub header">管理你的账户设置并设置邮箱</div>
-						</h5>
-						
-						<div class="ui form">
-							<div class="two fields">
+					<div class="sixteen wide column">
+						<div class="ui segment">
+							<h5 class="ui header">
+								账户设置
+								<div class="sub header">管理你的账户设置并设置邮箱</div>
+							</h5>
+							
+							<div class="ui form">
+								<div class="two fields">
+									<div class="field error">
+										<label>First Name</label>
+										<input placeholder="First Name" type="text">
+									</div>
+									<div class="field">
+										<label>Last Name</label>
+										<input placeholder="Last Name" type="text">
+									</div>
+								</div>
 								<div class="field error">
-									<label>First Name</label>
-									<input placeholder="First Name" type="text">
+									<label>Gender</label>
+									<div class="ui selection dropdown">
+										<div class="default text">Select</div>
+										<i class="dropdown icon"></i>
+										<input type="hidden" name="gender">
+										<div class="menu">
+											<div class="item" data-value="male">Male</div>
+											<div class="item" data-value="female">Female</div>
+										</div>
+									</div>
 								</div>
-								<div class="field">
-									<label>Last Name</label>
-									<input placeholder="Last Name" type="text">
-								</div>
-							</div>
-							<div class="field error">
-								<label>Gender</label>
-								<div class="ui selection dropdown">
-									<div class="default text">Select</div>
-									<i class="dropdown icon"></i>
-									<input type="hidden" name="gender">
-									<div class="menu">
-										<div class="item" data-value="male">Male</div>
-										<div class="item" data-value="female">Female</div>
+								<div class="inline field error">
+									<div class="ui checkbox">
+										<input type="checkbox" tabindex="0" class="hidden">
+										<label>我同意本条款和条件</label>
 									</div>
 								</div>
 							</div>
-							<div class="inline field error">
-								<div class="ui checkbox">
-									<input type="checkbox" tabindex="0" class="hidden">
-									<label>我同意本条款和条件</label>
+						</div>
+					</div>
+					
+					
+					<div class="ten wide column">
+						<div class="ui column grid">
+							<div class="column">
+								<div class="ui segment" style="height: 100px;">
+									left - top
+								</div>
+							</div>
+						</div>
+						<div class="ui two column grid">
+							<div class="column">
+								<div class="ui segment" style="height: 200px;">
+									left - center - left
+								</div>
+							</div>
+							<div class="column">
+								<div class="ui segment" style="height: 400px;">
+									left - center - right
+								</div>
+							</div>
+						</div>
+						<div class="ui two column grid">
+							<div class="column">
+								<div class="ui segment loading" style="height: 300px;">
+									left - center - left
+								</div>
+							</div>
+							<div class="column">
+								<div class="ui segment" style="height: 200px;">
+									left - center - right
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				
-				
-				<div class="ten wide column">
-					<div class="ui column grid">
-						<div class="column">
-							<div class="ui segment" style="height: 100px;">
-								left - top
+					<div class="six wide column">
+						<div class="ui segment loading" style="height:  800px;">
+							right
+						</div>
+					</div>
+					<div class="sixteen wide column">
+						<div class="ui segment" style="height: 200px;">
+							left - center - right
+						</div>
+					</div>
+					<div class="ten wide column">
+						<div class="ui two column grid">
+							<div class="column">
+								<div class="ui segment" style="height: 200px;">
+									left - center - right11111111111111
+								</div>
+							</div>
+							<div class="column">
+								<div class="ui segment" style="height: 200px;">
+									left - center - right11111111111111
+								</div>
+							</div>
+						</div>
+						<div class="ui column grid">
+							<div class="column">
+								<div class="ui segment" style="height: 200px;">
+									left - center - right11111111111111
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="ui two column grid">
-						<div class="column">
-							<div class="ui segment" style="height: 200px;">
-								left - center - left
+					<div class="six wide column">
+						<div class="ui column grid">
+							<div class="column">
+								<div class="ui segment" style="height: 400px;">
+									left - center - right
+								</div>
 							</div>
 						</div>
-						<div class="column">
-							<div class="ui segment" style="height: 400px;">
-								left - center - right
-							</div>
-						</div>
-					</div>
-					<div class="ui two column grid">
-						<div class="column">
-							<div class="ui segment" style="height: 200px;">
-								left - center - left
-							</div>
-						</div>
-						<div class="column">
-							<div class="ui segment" style="height: 200px;">
-								left - center - right
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="six wide column">
-					<div class="ui segment" style="height:  800px;">
-						right
-					</div>
-				</div>
-				<div class="sixteen wide column">
-					<div class="ui segment" style="height: 200px;">
-						left - center - right
-					</div>
-				</div>
-				<div class="ten wide column">
-					<div class="ui two column grid">
-						<div class="column">
-							<div class="ui segment" style="height: 200px;">
-								left - center - right11111111111111
-							</div>
-						</div>
-						<div class="column">
-							<div class="ui segment" style="height: 200px;">
-								left - center - right11111111111111
-							</div>
-						</div>
-					</div>
-					<div class="ui column grid">
-						<div class="column">
-							<div class="ui segment" style="height: 200px;">
-								left - center - right11111111111111
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="six wide column">
-					<div class="ui column grid">
-						<div class="column">
-							<div class="ui segment" style="height: 400px;">
-								left - center - right
-							</div>
-						</div>
-					</div>
-					<div class="ui column grid">
-						<div class="column">
-							<div class="ui segment" style="height: 200px;">
-								left - center - right
+						<div class="ui column grid">
+							<div class="column">
+								<div class="ui segment" style="height: 200px;">
+									left - center - right
+								</div>
 							</div>
 						</div>
 					</div>
