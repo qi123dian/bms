@@ -41,12 +41,15 @@ window.hmg = hmg = {};
 		
 		function successBefore() {
 			console.log('successBefore');
+			return true;
 		}
 		function errorBefore() {
 			console.log('errorBefore');
+			return true;
 		}
 		function completeBefore() {
 			console.log('completeBefore');
+			return true;
 		}
 		
 		oOpt = $.extend({}, {
@@ -59,16 +62,16 @@ window.hmg = hmg = {};
 		var oPrm = $.extend({}, oOpt);
 		
 		oPrm.success = function() {
-			successBefore();
-			oOpt.success();
+			if(successBefore())
+				oOpt.success();
 		}
 		oPrm.error = function() {
-			errorBefore();
-			oOpt.error();
+			if(errorBefore())
+				oOpt.error();
 		}
 		oPrm.complete = function() {
-			completeBefore();
-			oOpt.complete();
+			if(completeBefore())
+				oOpt.complete();
 		}
 		
 		$.ajax = $.ajax(oPrm);
