@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.hamgol.service.test.TestModuleService;
 
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/rest/test")
 public class TestController {
 
 	private static final Logger log = LoggerFactory.getLogger(TestController.class);

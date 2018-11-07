@@ -1,5 +1,6 @@
 body {
 	background-color: #f3f3f3;
+	font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", Heiti, "黑体", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", sans-serif;
 }
 
 /* main-top begin */
@@ -14,23 +15,38 @@ body {
 .main-top .top-title {
 	width: 19em;
 }
-.main-top .ui.medium.header {
+.main-top .top-title .ui.medium.header {
 	color: #FFF;
 }
-.main-top .right.borderless.item .search:not(.icon) {
+.main-top .top-toolbar.right.borderless.item .search:not(.icon) {
 	margin-right: 2em;
 }
-.main-top .right.borderless.item .button {
+.main-top .top-toolbar.right.borderless.item .button {
 	margin-right: 2em;
 	color: rgba(0,0,0,.87);
 	background-color: #FFF;
 }
-.main-top .right.borderless.item .button .floating.ui.teal.label{
+.main-top .top-toolbar.right.borderless.item .button .floating.ui.teal.label{
 	padding: .3833em .533em;
 	background-color: red !important;
 }
-.main-top .right.borderless.item .dropdown.button .vertical.menu .scrolling.menu {
+.main-top .top-toolbar.right.borderless.item .dropdown.button .vertical.menu .scrolling.menu {
 	margin: 0!important;
+}
+.main-top .top-tabmenu.ui.secondary.pointing.menu {
+	border-bottom: 2px solid transparent;
+}
+.main-top .top-tabmenu.ui.tabular.menu .item {
+	color: rgba(255,255,255,1);
+	background-color: transparent;
+}
+.main-top .top-tabmenu.ui.secondary.pointing.menu .active.item{
+	color: rgba(255,255,255,1);
+	border-color: #fff;
+}
+.main-top .top-tabmenu.ui.secondary.pointing.menu a.item:hover {
+	background-color: transparent;
+	color: rgba(255,255,255,.87);
 }
 /* main-top end */
 

@@ -1,15 +1,28 @@
 /**
- * Base Package
- */
-window.hmg = hmg = {};
-
-/**
  * 菜单
  */
 ; (function(window, document, $, hmg) {
 	
+	function fOutView(sIcon, sPid, sId, sTitle, sChildNodes) {
+		return '<div class="accordion">'
+			+ '    <div class="title">'
+			+ '        <div class="right floated content">'
+			+ '            <i class="dropdown icon"></i>'
+			+ '        </div>'
+			+ '        <div class="header tree-menu-title">'
+			+ '            ' + sIcon
+			+ '            <span data-menu-pid="' + sPid + '" data-menu-id="' + sId + '">' + sTitle + '</span>'
+			+ '        </div>'
+			+ '    </div>'
+			+ '    <div class="content">'
+			+ '    ' + sChildNodes
+			+ '    </div>'
+			+ '</div>';
+	}
+	
 	var menu = {
-		cName: 'asdfasdf'
+		oData: undefined, // 菜单数据
+		
 	};
 	
 	hmg.Menu = menu;
@@ -50,6 +63,8 @@ window.hmg = hmg = {};
 		$('.tabular.menu .item').tab();
 		
 		// $('.attached.progress').progress();
+		
+		$('.top-tabmenu .item').popup();
 		
 		$('#accordionBtId').click(function() {
 			console.log('---------------------------------------------------------------');

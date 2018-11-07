@@ -8,7 +8,6 @@
 		<title>Hamgol</title>
 		
 		<link rel="stylesheet" type="text/css" href="<c:url value="/assets/components/semantic-ui-v2.2/semantic.min.css" />">
-		<link rel="stylesheet" type="text/css" href="<c:url value="/assets/components/malihu-custom-scrollbar-plugin-master-v3.1.5/jquery.mCustomScrollbar.css" />">
 		<link rel="stylesheet" type="text/css" href="<c:url value="/assets/resources/css/main/main.css" />">
 	</head>
 	<body>
@@ -27,13 +26,13 @@
 			
 			<!-- 多页面标签 -->
 			<div class="ui secondary pointing tabular menu top-tabmenu">
-				<a class="item active" data-tab="tab-name" data-content="Add users to your feed">First</a>
-				<a class="item" data-tab="tab-name2">Second</a>
-				<a class="item" data-tab="tab-name3">Third</a>
+				<a class="item active" data-tab="tab-name" data-content="双击关闭">First</a>
+				<a class="item" data-tab="tab-name2" data-content="双击关闭">Second</a>
+				<a class="item" data-tab="tab-name3" data-content="双击关闭">Third</a>
 			</div>
 			
 			<!-- 顶部菜单 -->
-			<div class="right borderless item">
+			<div class="right borderless item top-toolbar">
 				<div class="ui fluid category search">
 					<div class="ui icon input">
 						<input class="prompt" type="text" placeholder="搜寻动物……">
@@ -132,7 +131,7 @@
 							<div class="right floated content">
 								<i class="dropdown icon"></i>
 							</div>
-							<div class="header tree-menu-title"><i class="icon wifi"></i>Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1</div>
+							<div class="header tree-menu-title"><i class="icon wifi"></i><span>Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1</span></div>
 						</div>
 						<div class="content">
 							<div class="accordion">
@@ -391,7 +390,7 @@
 						<div class="ui two column grid">
 							<div class="column">
 								<div class="ui segment" style="height: 200px;">
-									left - center - left
+									左侧-中间-左侧
 								</div>
 							</div>
 							<div class="column">
@@ -420,7 +419,8 @@
 					</div>
 					<div class="sixteen wide column">
 						<div class="ui segment" style="height: 200px;">
-							left - center - right
+							I will no longer, as has ever been my habit, continue to ruminate on every petty vexation which fortune may dispense; I will enjoy the present, and the past shall be for me the past. 
+							我绝不会再像以前一样，把命运加给我们的一点儿不幸拿来反复咀嚼(念念不忘)；我要享受现时，过去的事就让它过去吧。
 						</div>
 					</div>
 					<div class="ten wide column">
@@ -512,8 +512,9 @@
 		<!-- 架构JavaScript -->
 		<script type="text/javascript" src="<c:url value="/assets/components/jquery-v3.1.1/dist/jquery.min.js" />"></script>
 		<script type="text/javascript" src="<c:url value="/assets/components/semantic-ui-v2.2/semantic.min.js" />"></script>
-		<script type="text/javascript" src="<c:url value="/assets/components/malihu-custom-scrollbar-plugin-master-v3.1.5/jquery.mCustomScrollbar.concat.min.js" />"></script>
+		<script type="text/javascript" src="<c:url value="/assets/components/underscore-v1.9.1/underscore-min.js" />"></script>
 		
+		<script type="text/javascript" src="<c:url value="/assets/resources/js/comm/comm.js" />"></script>
 		<script type="text/javascript" src="<c:url value="/assets/resources/js/main/main.js" />"></script>
 		
 	</body>

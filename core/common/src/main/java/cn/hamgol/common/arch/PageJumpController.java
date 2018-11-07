@@ -20,8 +20,15 @@ public class PageJumpController {
 
 	private static final Logger log = LoggerFactory.getLogger(PageJumpController.class);
 	
+	/**
+	 * Jsp页面跳转
+	 * @param path
+	 * @param page
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping("/{path}/{page}")
-	public ModelAndView urlJump(@PathVariable(value="path") String path, @PathVariable(value="page") String page, HttpServletRequest req) {
+	public ModelAndView pageJump(@PathVariable(value="path") String path, @PathVariable(value="page") String page, HttpServletRequest req) {
 		
 		String url = req.getServletPath();
 		
