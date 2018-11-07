@@ -79,19 +79,4 @@ window.hmg = hmg = {};
 	
 	hmg.fAjax = _fCustomAjax;
 	
-	hmg.fAjax({
-		url: ' http://localhost:8080/bms/rest/test/testError',
-		method: 'POST',
-		contentType: 'application/json',
-		success: function(d) {
-			console.log('success', d);
-		},
-		global: true,
-		error: function(d) {
-			console.log('error', d);
-		},
-		complete: function(d) {
-			console.log('complete', d);
-		}
-	});
 })(window, document, $, hmg, _);
