@@ -64,12 +64,29 @@
 		
 		// $('.attached.progress').progress();
 		
-		$('.top-tabmenu .item').popup();
+		// $('.top-tabmenu .item').popup();
 		
 		$('#accordionBtId').click(function() {
 			console.log('---------------------------------------------------------------');
 			$('.main-menu.ui.accordion').accordion('toggle', 0);
 		});
+		
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"positionClass": "toast-bottom-left",
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		};
+		
+		toastr.info('欢迎光临！');
 	};
 	
 	_initPage();

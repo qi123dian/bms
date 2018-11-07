@@ -3,7 +3,7 @@
  */
 window.hmg = hmg = {};
 
-; (function(window, document, $, hmg) {
+; (function(window, document, $, hmg, _) {
 	
 	/**
 	 * ajaxStart : ajax请求开始前
@@ -16,37 +16,79 @@ window.hmg = hmg = {};
 	$.ajaxSetup({
 		global: true
 	});
-	$(document).ajaxStart = function() {
+	$.ajaxPrefilter(function() {
+		console.log('ajaxPrefilter');
+	});
+	$(document).ajaxStart(function() {
 		console.log('ajaxStart');
-	}
-	$(document).ajaxSend = function() {
+	}).ajaxSend(function() {
 		console.log('ajaxSend');
-	}
-	$(document).ajaxSuccess = function() {
+	}).ajaxSuccess(function() {
 		console.log('ajaxSuccess');
-	}
-	$(document).ajaxComplete = function() {
+	}).ajaxComplete(function() {
 		console.log('ajaxComplete');
-	}
-	$(document).ajaxError = function() {
+	}).ajaxError(function() {
 		console.log('ajaxError');
-	}
-	$(document).ajaxStop = function() {
+	}).ajaxStop(function() {
 		console.log('ajaxStop');
+	});
+	
+	/**
+	 * 封装Ajax
+	 */
+	var _fCustomAjax = function(oOpt) {
+		oOpt = oOpt?oOpt:{};
+		
+		function successBefore() {
+			console.log('successBefore');
+		}
+		function errorBefore() {
+			console.log('errorBefore');
+		}
+		function completeBefore() {
+			console.log('completeBefore');
+		}
+		
+		oOpt = $.extend({}, {
+			success: function(d) {},
+			global: true,
+			error: function(d) {},
+			complete: function(d) {}
+		}, oOpt);
+		
+		var oPrm = $.extend({}, oOpt);
+		
+		oPrm.success = function() {
+			successBefore();
+			oOpt.success();
+		}
+		oPrm.error = function() {
+			errorBefore();
+			oOpt.error();
+		}
+		oPrm.complete = function() {
+			completeBefore();
+			oOpt.complete();
+		}
+		
+		$.ajax = $.ajax(oPrm);
 	}
 	
-	$.ajax({
-		url: 'https://www.datatables.net/examples/ajax/data/arrays.txt?_=1541474101667',
-		method: 'GET',
+	hmg.fAjax = _fCustomAjax;
+	
+	hmg.fAjax({
+		url: ' http://localhost:8080/bms/rest/test/testError',
+		method: 'POST',
+		contentType: 'application/json',
 		success: function(d) {
 			console.log('success', d);
 		},
+		global: true,
 		error: function(d) {
 			console.log('error', d);
 		},
 		complete: function(d) {
 			console.log('complete', d);
 		}
-	})
-	
+	});
 })(window, document, $, hmg, _);

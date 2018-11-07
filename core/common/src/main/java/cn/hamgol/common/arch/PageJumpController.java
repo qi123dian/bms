@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author hamgol
  */
 @Controller
-@RequestMapping(value = "/page", method = {RequestMethod.GET, RequestMethod.POST})
+@RequestMapping(value = "/page", method = {RequestMethod.GET})
 public class PageJumpController {
 
 	private static final Logger log = LoggerFactory.getLogger(PageJumpController.class);

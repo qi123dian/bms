@@ -76,6 +76,10 @@
 			<groupId>org.codehaus.castor</groupId>
 			<artifactId>castor</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+		</dependency>
 
 		<!-- PERSISTENCE begin -->
 		<!-- aop -->
