@@ -244,7 +244,7 @@
 			<div class="ui bottom attached tab active main-box" data-tab="tab-name">
 				<div class="ui grid">
 					<div class="sixteen wide column">
-						<div class="ui segment">
+						<div class="ui segment" id="tabNameId1">
 							First
 						</div>
 					</div>

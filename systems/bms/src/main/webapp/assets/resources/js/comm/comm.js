@@ -74,7 +74,7 @@ window.hmg = hmg = {};
 				oOpt.complete();
 		}
 		
-		$.ajax = $.ajax(oPrm);
+		return $.ajax(oPrm);
 	}
 	
 	hmg.fAjax = _fCustomAjax;

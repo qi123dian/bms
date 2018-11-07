@@ -89,7 +89,7 @@
 		toastr.info('欢迎光临！');
 		
 		hmg.fAjax({
-			url: ' http://localhost:8080/bms/rest/test/testError',
+			url: 'http://localhost:8080/bms/rest/test/testError',
 			method: 'POST',
 			contentType: 'application/json',
 			success: function(d) {
@@ -102,6 +102,12 @@
 			complete: function(d) {
 				console.log('complete', d);
 			}
+		});
+		
+		$.get('http://localhost:8080/bms/index2.jsp', function(d) {
+			console.log(d);
+			// document.getElementById('tabNameId1').innerHTML = d;
+			$('#tabNameId1').html(d);
 		});
 	};
 	
