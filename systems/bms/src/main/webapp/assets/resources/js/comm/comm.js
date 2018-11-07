@@ -62,21 +62,46 @@ window.hmg = hmg = {};
 		var oPrm = $.extend({}, oOpt);
 		
 		oPrm.success = function() {
-			if(successBefore())
-				oOpt.success();
+			if(successBefore.apply(this, arguments))
+				oOpt.success.apply(this, arguments);
 		}
 		oPrm.error = function() {
-			if(errorBefore())
-				oOpt.error();
+			if(errorBefore.apply(this, arguments))
+				oOpt.error.apply(this, arguments);
 		}
 		oPrm.complete = function() {
-			if(completeBefore())
-				oOpt.complete();
+			if(completeBefore.apply(this, arguments))
+				oOpt.complete.apply(this, arguments);
 		}
 		
 		return $.ajax(oPrm);
 	}
 	
+	var _fCustomGet = function() {
+		
+		function successBefore() {
+			console.log('successBefore');
+			return true;
+		}
+		
+		var aArr = [];
+		
+		for(var i=0;i<arguments.length;i++) {
+			if($.isFunction(arguments[i])) {
+				var fFn = arguments[i];
+				aArr.push(function() {
+					successBefore.apply(this, arguments);
+					fFn.apply(this, arguments);
+				});
+			} else {
+				aArr.push(arguments[i]);
+			}
+		}
+		
+		return $.get.apply(_fCustomGet, aArr);
+	}
+	
 	hmg.fAjax = _fCustomAjax;
+	hmg.fGet = _fCustomGet;
 	
 })(window, document, $, hmg, _);

@@ -92,10 +92,10 @@
 			url: 'http://localhost:8080/bms/rest/test/testError',
 			method: 'POST',
 			contentType: 'application/json',
+			global: true,
 			success: function(d) {
 				console.log('success', d);
 			},
-			global: true,
 			error: function(d) {
 				console.log('error', d);
 			},
@@ -104,9 +104,22 @@
 			}
 		});
 		
-		$.get('http://localhost:8080/bms/index2.jsp', function(d) {
+		/*hmg.fAjax({
+			url: 'http://localhost:8080/bms/index2.jsp',
+			dataType: 'html',
+			success: function(d) {
+				console.log('success', d);
+			},
+			error: function(d) {
+				console.log('error', d);
+			},
+			complete: function(d) {
+				console.log('complete', d);
+			}
+		});*/
+		
+		hmg.fGet('http://localhost:8080/bms/index2.jsp', function(d) {
 			console.log(d);
-			// document.getElementById('tabNameId1').innerHTML = d;
 			$('#tabNameId1').html(d);
 		});
 	};
