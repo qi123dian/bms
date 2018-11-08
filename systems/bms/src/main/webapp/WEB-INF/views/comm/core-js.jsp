@@ -5,8 +5,10 @@
 <script type="text/javascript" src="<c:url value="/assets/components/underscore-v1.9.1/underscore-min.js" />"></script>
 
 <script type="text/javascript">
-	var _basePath = '${pageContext.request.contextPath}'; // Application Path
+	window.hmg = hmg = {}; // Base Package
+	hmg.basePath = '${pageContext.request.contextPath}'; // Application Path
 </script>
 
+<script type="text/javascript" src="<c:url value="/assets/resources/js/i18n/locale-cn.js" />"></script>
 <script type="text/javascript" src="<c:url value="/assets/resources/js/comm/core.js" />"></script>
 

@@ -39,6 +39,11 @@ body {
 .main-top .top-tabmenu.ui.tabular.menu .item {
 	color: rgba(255,255,255,1);
 	background-color: transparent;
+	display: inline;
+	max-width: 120px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .main-top .top-tabmenu.ui.secondary.pointing.menu .active.item{
 	color: rgba(255,255,255,1);

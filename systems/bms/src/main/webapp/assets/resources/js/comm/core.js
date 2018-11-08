@@ -1,18 +1,62 @@
+
 /**
- * Base Package
+ * 工具类
  */
-window.hmg = hmg = {};
+; (function(window, document, $, hmg, _) {
+	
+	var util = {
+		getMsg: _fGetMsg,
+		error: _fError,
+		info: _fInfo
+	};
+	
+	/**
+	 * 获取打印消息内容
+	 */
+	function _fGetPrintMsg() {
+		if(arguments.length==0) {
+			return;
+		} if(arguments.length==2) {
+			return (_fGetMsg(arguments[0], arguments[1]));
+		} else {
+			return (arguments[0]);
+		}
+	}
+	
+	/**
+	 * 打印错误信息
+	 */
+	function _fError() {
+		if(s = _fGetPrintMsg.apply(this, arguments))
+			toastr.error(s);
+	}
+	
+	/**
+	 * 打印错误信息
+	 */
+	function _fInfo() {
+		if(s = _fGetPrintMsg.apply(this, arguments))
+			toastr.info(s);
+	}
+	
+	/**
+	 * 获取消息内容
+	 */
+	function _fGetMsg(sModule, sMsg) {
+		return hmg.local.messages[hmg.local.language][sModule][sMsg];
+	}
+	
+	hmg.Util = util;
+	
+	hmg.getMsg = hmg.Util.getMsg; // 简写
+	hmg.error = hmg.Util.error; // 简写
+	hmg.info = hmg.Util.info; // 简写
+})(window, document, $, hmg, _);
 
 /**
  * 核心类
  */
 ; (function(window, document, $, hmg, _) {
-	
-	/**
-	 * 获取项目名称
-	 * 备用在JavaScript代码中使用
-	 */
-	hmg.basePath = _basePath;
 	
 	/**
 	 * ajaxStart : ajax请求开始前
@@ -113,6 +157,10 @@ window.hmg = hmg = {};
 		return $.get.apply(this, aArr);
 	}
 	
+	function _fGetMsg(sMsg) {
+		return hmg.local
+	}
+	
 	/**
 	 * 获取完整请求地址
 	 */
@@ -127,4 +175,130 @@ window.hmg = hmg = {};
 	hmg.fGet = _fCustomGet; // jQuery Get封装
 	hmg.getAppPath = _fGetAppPath; // 获取完整请求地址
 	
+})(window, document, $, hmg, _);
+
+/**
+ * 菜单
+ */
+; (function(window, document, $, hmg, _) {
+	
+	var menu = {
+		oData: undefined // 菜单数据
+	};
+	
+	function fOutView(sIcon, sPid, sId, sTitle, sChildNodes) {
+		return '<div class="accordion">'
+			+ '    <div class="title">'
+			+ '        <div class="right floated content">'
+			+ '            <i class="dropdown icon"></i>'
+			+ '        </div>'
+			+ '        <div class="header tree-menu-title">'
+			+ '            ' + sIcon
+			+ '            <span data-menu-pid="' + sPid + '" data-menu-id="' + sId + '">' + sTitle + '</span>'
+			+ '        </div>'
+			+ '    </div>'
+			+ '    <div class="content">'
+			+ '    ' + sChildNodes
+			+ '    </div>'
+			+ '</div>';
+	}
+	
+	hmg.Menu = menu;
+})(window, document, $, hmg, _);
+
+/**
+ * 标签页
+ */
+; (function(window, document, $, hmg) {
+	
+	var tab = {
+		headId: 'topTabHeadId',
+		contentId: 'mainContentId',
+		addTab: _fAddTab
+	};
+	
+	function _fOutHeadView(sId, sTitle, isActive) {
+		var sActive = isActive?' active':'';
+		return '<a class="item' + sActive + '" data-tab="' + sId + '" data-content="双击关闭" id="head_' + sId + '">' + sTitle + '</a>'
+	}
+	
+	function _fOutContentView(sId, isActive, isLoading) {
+		var sActive = isActive?' active':'';
+		var loading = isLoading?' loading':'';
+		return '<div class="ui bottom attached tab' + sActive + ' main-box' + loading + '" data-tab="' + sId + '" id="content_' + sId + '">'
+		+ '</div>';
+	}
+	
+	function _fLoadView(id, sHtml) {
+		$('#content_' + id).empty().html(sHtml);
+	}
+	
+	function _fLoading(sId, isShow) {
+		var oEl = $('#content_' + sId);
+		if(isShow) {
+			oEl.addClass('loading');
+		} else {
+			oEl.removeClass('loading');
+		}
+	}
+	
+	function _fAddTab(oOpt) {
+		
+		oOpt = $.extend({}, {
+			sId: '',
+			sTitle: '',
+			sUrl: ''
+		}, oOpt);
+		
+		// 校验参数
+		if(!oOpt.sTitle || !oOpt.sId) {
+			hmg.error('core', 'TAB_ADD_FAILED_PARAM');
+			return false;
+		}
+		
+		var tabLen = _fGetTabLen();
+		
+		// 标签页数量不能超过三个
+		if(tabLen>=3) {
+			hmg.error('core', 'TAB_ADD_LENGTH_OUT');
+			return false;
+		}
+		
+		$('#' + tab.headId).append(_fOutHeadView(oOpt.sId, oOpt.sTitle, false));
+		$('#' + tab.contentId).append(_fOutContentView(oOpt.sId, false, false));
+		
+		// 初始化标签页
+		$('#' + tab.headId + ' .item').tab().tab('change tab', oOpt.sId);
+		// 增加loading
+		_fLoading(oOpt.sId, true);
+		
+		// sUrl判断是否为url
+		if(/^\//.test(oOpt.sUrl)) {
+			
+			// 获取页面
+			hmg.fAjax({
+				url: hmg.getAppPath(oOpt.sUrl),
+				dataType: 'html',
+				contentType: 'text/html',
+				success: function(d) {
+					_fLoading(oOpt.sId, false);
+					_fLoadView(oOpt.sId, d);
+				}
+			});
+			
+		} else {
+			_fLoading(oOpt.sId, false);
+			_fLoadView(oOpt.sId, oOpt.sUrl);
+		}
+	}
+	
+	function _fRemoveTab() {
+		
+	}
+	
+	function _fGetTabLen() {
+		return $('#' + tab.headId + ' > .item').length;
+	}
+	
+	hmg.Tab = tab;
 })(window, document, $, hmg, _);
