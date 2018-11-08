@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../comm/taglib.jsp"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Hamgol</title>
 		
-		<link rel="stylesheet" type="text/css" href="<c:url value="/assets/components/semantic-ui-v2.2/semantic.min.css" />">
-		<link rel="stylesheet" type="text/css" href="<c:url value="/assets/components/toastr-v2.1.4/build/toastr.min.css" />">
-		
+		<%@include file="../comm/core-css.jsp"%>
 		<link rel="stylesheet" type="text/css" href="<c:url value="/assets/resources/css/main/main.css" />">
 	</head>
 	<body>
@@ -511,13 +508,7 @@
 			</div>
 		</div>
 		
-		<!-- 架构JavaScript -->
-		<script type="text/javascript" src="<c:url value="/assets/components/jquery-v3.1.1/dist/jquery.min.js" />"></script>
-		<script type="text/javascript" src="<c:url value="/assets/components/semantic-ui-v2.2/semantic.min.js" />"></script>
-		<script type="text/javascript" src="<c:url value="/assets/components/toastr-v2.1.4/build/toastr.min.js" />"></script>
-		<script type="text/javascript" src="<c:url value="/assets/components/underscore-v1.9.1/underscore-min.js" />"></script>
-		
-		<script type="text/javascript" src="<c:url value="/assets/resources/js/comm/comm.js" />"></script>
+		<%@include file="../comm/core-js.jsp"%>
 		<script type="text/javascript" src="<c:url value="/assets/resources/js/main/main.js" />"></script>
 		
 	</body>

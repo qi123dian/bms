@@ -89,7 +89,7 @@
 		toastr.info('欢迎光临！');
 		
 		hmg.fAjax({
-			url: 'http://localhost:8080/bms/rest/test/testError',
+			url: hmg.getAppPath('rest/test/testError'),
 			method: 'POST',
 			contentType: 'application/json',
 			global: true,
@@ -104,11 +104,13 @@
 			}
 		});
 		
-		/*hmg.fAjax({
-			url: 'http://localhost:8080/bms/index2.jsp',
+		hmg.fAjax({
+			url: hmg.getAppPath('/index2.jsp'),
 			dataType: 'html',
+			contentType: 'text/html',
 			success: function(d) {
 				console.log('success', d);
+				$('#tabNameId1').html(d);
 			},
 			error: function(d) {
 				console.log('error', d);
@@ -116,12 +118,12 @@
 			complete: function(d) {
 				console.log('complete', d);
 			}
-		});*/
+		});
 		
-		hmg.fGet('http://localhost:8080/bms/index2.jsp', function(d) {
+		/*hmg.fGet('http://localhost:8080/bms/index2.jsp', function(d) {
 			console.log(d);
 			$('#tabNameId1').html(d);
-		});
+		});*/
 	};
 	
 	_initPage();

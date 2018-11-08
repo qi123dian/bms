@@ -3,7 +3,16 @@
  */
 window.hmg = hmg = {};
 
+/**
+ * 核心类
+ */
 ; (function(window, document, $, hmg, _) {
+	
+	/**
+	 * 获取项目名称
+	 * 备用在JavaScript代码中使用
+	 */
+	hmg.basePath = _basePath;
 	
 	/**
 	 * ajaxStart : ajax请求开始前
@@ -34,9 +43,9 @@ window.hmg = hmg = {};
 	});
 	
 	/**
-	 * 封装Ajax
+	 * 封装jQuery Ajax
 	 */
-	var _fCustomAjax = function(oOpt) {
+	function _fCustomAjax(oOpt) {
 		oOpt = oOpt?oOpt:{};
 		
 		function successBefore() {
@@ -77,7 +86,10 @@ window.hmg = hmg = {};
 		return $.ajax(oPrm);
 	}
 	
-	var _fCustomGet = function() {
+	/**
+	 * 封装jQuery Get
+	 */
+	function _fCustomGet() {
 		
 		function successBefore() {
 			console.log('successBefore');
@@ -90,18 +102,29 @@ window.hmg = hmg = {};
 			if($.isFunction(arguments[i])) {
 				var fFn = arguments[i];
 				aArr.push(function() {
-					successBefore.apply(this, arguments);
-					fFn.apply(this, arguments);
+					if(successBefore.apply(this, arguments))
+						fFn.apply(this, arguments);
 				});
 			} else {
 				aArr.push(arguments[i]);
 			}
 		}
 		
-		return $.get.apply(_fCustomGet, aArr);
+		return $.get.apply(this, aArr);
 	}
 	
-	hmg.fAjax = _fCustomAjax;
-	hmg.fGet = _fCustomGet;
+	/**
+	 * 获取完整请求地址
+	 */
+	function _fGetAppPath(sUrl) {
+		if(sUrl)
+			return hmg.basePath + ((sUrl && (/^\//.test(sUrl)))?sUrl:'/'+sUrl);
+		else
+			return sUrl;
+	}
+	
+	hmg.fAjax = _fCustomAjax; // jQuery Ajax封装
+	hmg.fGet = _fCustomGet; // jQuery Get封装
+	hmg.getAppPath = _fGetAppPath; // 获取完整请求地址
 	
 })(window, document, $, hmg, _);

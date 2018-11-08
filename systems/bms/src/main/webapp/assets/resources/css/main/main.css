@@ -64,7 +64,7 @@ body {
 }
 .main-left .card {
 	height: 9em;
-	background: url(/bms/assets/resources/img/main/profile-menu.png) left top no-repeat;
+	background: url(../../img/main/profile-menu.png) left top no-repeat;
 	background-size: 100%;
 }
 .main-left .card .content {
