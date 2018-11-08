@@ -118,7 +118,7 @@ window.hmg = hmg = {};
 	 */
 	function _fGetAppPath(sUrl) {
 		if(sUrl)
-			return hmg.basePath + ((sUrl && (/^\//.test(sUrl)))?sUrl:'/'+sUrl);
+			return hmg.basePath + (/^\//.test(sUrl)?sUrl:'/'+sUrl);
 		else
 			return sUrl;
 	}
