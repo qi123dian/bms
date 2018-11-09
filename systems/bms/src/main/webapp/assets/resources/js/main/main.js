@@ -15,7 +15,11 @@
 		
 		$('.ui.accordion.tree-menu').accordion({
 			duration: 100,
-			exclusive: false
+			exclusive: false,
+			onOpening: function(a, b, c) {
+				console.log('onOpening', a, b, c);
+				return false;
+			}
 		});
 		
 		$('.tabular.menu .item').tab();
@@ -28,34 +32,25 @@
 			$('.main-menu.ui.accordion').accordion('toggle', 0);
 		});
 		
-		toastr.options = {
-			"closeButton": true,
-			"debug": false,
-			"positionClass": "toast-bottom-left",
-			"onclick": null,
-			"showDuration": "300",
-			"hideDuration": "1000",
-			"timeOut": "5000",
-			"extendedTimeOut": "1000",
-			"showEasing": "swing",
-			"hideEasing": "linear",
-			"showMethod": "fadeIn",
-			"hideMethod": "fadeOut"
-		};
-		
 		hmg.info('欢迎光临！');
 		
 		hmg.Tab.addTab({
 			sId: 'template' + _.now(),
 			sTitle: '模板界面',
-			sUrl: '/page/template/template'
+			sUrl: hmg.getAppPath('/page/template/template')
 		});
 		
-		/*hmg.fAjax({
-			url: hmg.getAppPath('rest/test/testError'),
+		hmg.ajax({
+			url: hmg.getAppPath('rest/test/test'),
 			method: 'POST',
 			contentType: 'application/json',
 			global: true,
+			errorBefore: function(a, b, c, d, e, f) {
+				this.fError.apply(this, arguments);
+			},
+			successBefore: function(a, b, c, d, e, f) {
+				this.fSuccess.apply(this, arguments);
+			},
 			success: function(d) {
 				console.log('success', d);
 			},
@@ -65,14 +60,18 @@
 			complete: function(d) {
 				console.log('complete', d);
 			}
-		});*/
+		});
 		
 		$('#testBtId').click(function() {
+			var sNow = _.now();
 			hmg.Tab.addTab({
-				sId: 'main' + _.now(),
-				sTitle: '模板界面',
-				sUrl: '/page/template/template'
+				sId: 'main' + sNow,
+				sTitle: '模板界面' + sNow,
+				sUrl: 'https://www.baidu.com',
+				isIFrame: true
 			});
+			
+			console.log(hmg.Tab.items);
 		});
 	};
 	

@@ -126,7 +126,10 @@
 							<div class="right floated content">
 								<i class="dropdown icon"></i>
 							</div>
-							<div class="header tree-menu-title"><i class="icon wifi"></i><span>Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1</span></div>
+							<div class="header tree-menu-title">
+								<i class="icon ui tiny active inline loader"></i>
+								<span>Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1</span>
+							</div>
 						</div>
 						<div class="content">
 							<div class="accordion">
