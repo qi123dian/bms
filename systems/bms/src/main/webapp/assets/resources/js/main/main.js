@@ -7,20 +7,20 @@
 	function _initPage() {
 		// $('.main-box').dimmer('show');
 		
-		$('.ui.accordion').accordion({
+		/*$('.ui.accordion').accordion({
 			duration: 100
-		});
+		});*/
 		
 		$('.ui.dropdown').dropdown();
 		
-		$('.ui.accordion.tree-menu').accordion({
+		/*$('.ui.accordion.tree-menu').accordion({
 			duration: 100,
 			exclusive: false,
 			onOpening: function(a, b, c) {
 				console.log('onOpening', a, b, c);
 				return false;
 			}
-		});
+		});*/
 		
 		$('.tabular.menu .item').tab();
 		

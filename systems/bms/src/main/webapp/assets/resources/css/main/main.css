@@ -129,24 +129,27 @@ body {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.main-left .tree-menu-box .tree-menu.ui.accordion .accordion {
+.main-left .tree-menu-box .accordion {
 	margin: 0;
 }
-.main-left .tree-menu-box .tree-menu.ui.accordion .accordion .title {
+.main-left .tree-menu-box .accordion .title {
 	padding: 1em 1em 1em 1em;
 	border-left: 2px solid #e0e1e2;
 }
 .main-left .tree-menu-box .accordion .title .header {
 	font-weight: 400;
 }
-.main-left .tree-menu-box .tree-menu.ui.accordion .title {
-	padding: 1em 1em 1em 1em;
-}
-.main-left .tree-menu-box .tree-menu.ui.accordion .content:not(.floated) {
+.main-left .tree-menu-box .ui.accordion .content:not(.floated) {
 	padding: 0 0 0 2em;
 }
-.main-left .tree-menu-box .tree-menu.ui.accordion .title .header .icon {
+.main-left .tree-menu-box .ui.accordion .accordion .content:not(.floated) {
+	padding: 0 0 0 2em;
+}
+.main-left .tree-menu-box .accordion .title .header .icon {
 	margin: 0 1rem 0 0;
+}
+.main-left .tree-menu-box .accordion .title .header .active.inline.loader {
+	margin-top: -2px;
 }
 /* main-left end */
 

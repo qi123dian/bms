@@ -119,9 +119,9 @@
 			</div>
 			
 			<!-- 菜单 -->
-			<div class="tree-menu-box ui middle aligned list">
-				<div class="item">
-					<div class="ui accordion tree-menu">
+			<div class="ui middle aligned list tree-menu-box">
+				<div class="item" id="treeMenuBoxId">
+					<div class="ui accordion">
 						<div class="title">
 							<div class="right floated content">
 								<i class="dropdown icon"></i>

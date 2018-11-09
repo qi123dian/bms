@@ -122,7 +122,7 @@
 		oPrm.fError = oOpt.error;
 		oPrm.fComplete = oOpt.complete;
 		
-		// 在jQuery Ajax success、error、complete执行之前添加before方法
+		// 在jQuery Ajax在success、error、complete方法执行之前添加before方法
 		oPrm.success = function() {
 			core.successBefore.apply(this, arguments);
 		}
@@ -170,26 +170,237 @@
  */
 ; (function(window, document, $, hmg, _) {
 	
+	var dd = [{
+		id: 'id1',
+		icon: 'add to calendar icon',
+		title: '网站设置',
+		url: '',
+		isChild: false,
+		children: [{
+			id: 'id1-1',
+			icon: 'alarm outline icon',
+			title: '基本设置',
+			url: '',
+			isChild: false,
+			children: [{
+				id: 'id1-1-1',
+				icon: 'alarm mute outline icon',
+				title: '个人设置',
+				url: '',
+				isChild: false,
+				children: []
+			}, {
+				id: 'id1-1-2',
+				icon: 'alarm mute icon',
+				title: '公司设置',
+				url: '',
+				isChild: false,
+				children: []
+			}]
+		}, {
+			id: 'id1-2',
+			title: '高级设置',
+			icon: 'alarm icon',
+			url: '',
+			isChild: false,
+			children: [{
+				id: 'id1-2-1',
+				icon: 'at icon',
+				title: '参数设置',
+				url: '',
+				isChild: false,
+				children: []
+			}]
+		}]
+	}, {
+		id: 'id2',
+		title: '生成管理',
+		icon: 'browser icon',
+		url: '',
+		isChild: false,
+		children: [{
+			id: 'id2-1',
+			title: '生成首页',
+			icon: 'bug icon',
+			url: '',
+			isChild: false,
+			children: [{
+				id: 'id2-1-1',
+				title: '菜单1',
+				icon: 'calendar outline icon',
+				url: '',
+				isChild: false,
+				children: []
+			}]
+		}, {
+			id: 'id2-2',
+			title: '生成列表',
+			icon: 'calendar icon',
+			url: '',
+			isChild: false,
+			children: [{
+				id: 'id2-2-1',
+				icon: 'checked calendar icon',
+				title: '菜单2',
+				url: '',
+				isChild: false,
+				children: []
+			}]
+		}]
+	}, {
+		id: 'id3',
+		title: '系统管理',
+		icon: 'cloud icon',
+		url: '',
+		isChild: false,
+		children: [{
+			id: 'id3-1',
+			title: '会员管理',
+			icon: 'code icon',
+			url: '',
+			isChild: false,
+			children: [{
+				id: 'id3-1-1',
+				title: '菜单3-1-1',
+				icon: 'comment outline icon',
+				url: '',
+				isChild: false,
+				children: []
+			}, {
+				id: 'id3-1-2',
+				icon: 'comment icon',
+				title: '菜单3-1-2',
+				url: '',
+				isChild: false,
+				children: []
+			}]
+		}, {
+			id: 'id3-2',
+			title: '管理员设置',
+			icon: 'comments outline icon',
+			url: '',
+			isChild: false,
+			children: [{
+				id: 'id3-2-1',
+				title: '菜单3-2-1',
+				icon: 'comments icon',
+				url: '',
+				isChild: false,
+				children: []
+			}, {
+				id: 'id3-2-2',
+				icon: 'copyright icon',
+				title: '菜单3-2-2',
+				url: '',
+				isChild: false,
+				children: []
+			}]
+		}, {
+			id: 'id3-3',
+			icon: 'creative commons icon',
+			title: '退出系统',
+			url: '',
+			isChild: false,
+			children: []
+		}]
+	}]
+	
+	var treeData = [];
+	function find(list, idsss) {
+		for(var i in list) {
+			if(list[i].id == idsss) {
+				treeData = list[i].children;
+			}
+			if(list[i].children.length>0) {
+				find(list[i].children, idsss);
+			}
+		}
+	}
+	
+	function getTestData(id) {
+		var arr = [];
+		if(!id) {
+			for(var i in dd) {
+				arr.push(dd[i]);
+			}
+		} else {
+			find(id);
+			arr = treeData;
+		}
+		return arr;
+	}
+	
 	var menu = {
-		oData: undefined // 菜单数据
+		oData: [], // 菜单数据
+		sContentId: 'treeMenuBoxId'
 	};
 	
-	function fOutView(sIcon, sPid, sId, sTitle, sChildNodes) {
-		return '<div class="accordion">'
-			+ '    <div class="title">'
-			+ '        <div class="right floated content">'
-			+ '            <i class="dropdown icon"></i>'
-			+ '        </div>'
-			+ '        <div class="header tree-menu-title">'
-			+ '            ' + sIcon
-			+ '            <span data-menu-pid="' + sPid + '" data-menu-id="' + sId + '">' + sTitle + '</span>'
-			+ '        </div>'
+	function _fOutItem(sIcon, sId, sTitle, sChildNodes) {
+		return '<div class="title" id="">'
+			+ '    <div class="right floated content">'
+			+ '        <i class="dropdown icon"></i>'
 			+ '    </div>'
-			+ '    <div class="content">'
-			+ '    ' + sChildNodes
+			+ '    <div class="header tree-menu-title">'
+			+ '        <i class="' + sIcon + '"></i>'
+			+ '        <span data-menu-id="' + sId + '">' + sTitle + '</span>'
 			+ '    </div>'
+			+ '</div>'
+			+ '<div class="content" data-menu-id="' + sId + '" id="" data-menu-icon="' + sIcon + '">'
+			+ sChildNodes
 			+ '</div>';
 	}
+	
+	function _fOutView(list, isRoot) {
+		if(!list || list.length==0) {
+			return '';
+		}
+		var sRootClass = isRoot?'ui ':'';
+		return '<div class="' + sRootClass + 'accordion tree-menu">'
+		+ _fOutViewItem(list);
+		+ '</div>';
+	}
+	
+	function _fOutViewItem(list) {
+		var sHtm = '';
+		for(var i in list) {
+			sHtm += _fOutItem(list[i].icon, list[i].id, list[i].title, []);
+		}
+		return sHtm;
+	}
+	
+	function _fLoading($el, icon) {
+		if(icon) {
+			$el.find('.tree-menu-title i')[0].className = icon;
+		} else {
+			$el.find('.tree-menu-title i')[0].className = 'icon ui tiny active inline loader';
+		}
+	}
+	
+	function _fOutViewChilds($el) {
+		var sId = $el.attr('data-menu-id');
+		find(dd, sId);
+		var oCData = treeData;
+		
+		var sHtm = _fOutView(oCData);
+		
+		$el.empty().append(sHtm);
+	}
+	
+	function _fInitTree(list) {
+		$('#' + menu.sContentId).empty().append(_fOutView(list, true));
+		
+		$('#' + menu.sContentId + ' .ui.accordion').accordion({
+			duration: 100,
+			exclusive: false,
+			onOpening: function(a, b, c) {
+				_fLoading($(this.prevObject));
+				_fOutViewChilds($(this));
+				_fLoading($(this.prevObject), $(this).attr('data-menu-icon'));
+			}
+		});
+	}
+	
+	_fInitTree(getTestData());
 	
 	hmg.Menu = menu;
 })(window, document, $, hmg, _);
