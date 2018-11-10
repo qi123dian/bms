@@ -97,23 +97,19 @@
 		<!-- 左侧菜单区域 -->
 		<div class="main-left ui sidebar vertical menu visible">
 			<!-- 个人资料 -->
-			<div class="card">
+			<div class="card" id="profileBackgroundImgContentId">
 				<div class="content">
-					<img class="ui medium circular image" src="<c:url value="/assets/resources/img/main/avatar1.jpg" />">
+					<img class="ui medium circular image" id="profileAvatarImgContentId" src="<c:url value="/assets/resources/img/main/avatar1.jpg" />">
 				</div>
-				<button class="fluid ui primary basic button" id="accordionBtId"><span>Primary</span><i class="angle down icon"></i><div class="cleaxfix"></div></button>
+				<button class="fluid ui primary basic button" id="profileAccordionBtId"><span id="profileTitleContentId">Primary</span><i class="angle down icon"></i><div class="cleaxfix"></div></button>
 			</div>
 			
 			<!-- 个人设置 -->
-			<div class="main-menu ui accordion">
+			<div class="main-menu ui accordion" id="profileAccordionId">
 				<div class="title"><i class="dropdown icon"></i></div>
 				<div class="content">
-					<div class="ui vertical fluid buttons">
-						<button class="ui basic button"><i class="icon user"></i>User</button>
-						<button class="ui basic button"><i class="icon music"></i>Music</button>
-						<button class="ui basic button"><i class="icon wifi"></i>WIFI</button>
-						<button class="ui basic button"><i class="icon cog"></i>Settings</button>
-						<button class="ui basic button"><i class="icon calendar outline"></i>Date</button>
+					<div class="ui vertical fluid buttons" id="profileMenuListContentId">
+						<!-- 菜单内容 -->
 					</div>
 				</div>
 			</div>
@@ -121,122 +117,16 @@
 			<!-- 菜单 -->
 			<div class="ui middle aligned list tree-menu-box">
 				<div class="item" id="treeMenuBoxId">
-					<div class="ui accordion">
-						<div class="title">
-							<div class="right floated content">
-								<i class="dropdown icon"></i>
-							</div>
-							<div class="header tree-menu-title">
-								<i class="icon ui tiny active inline loader"></i>
-								<span>Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1 Level Level Level Level Level Level Level Level Level Level 1</span>
-							</div>
-						</div>
-						<div class="content">
-							<div class="accordion">
-								<div class="title">
-									<div class="right floated content">
-										<i class="dropdown icon"></i>
-									</div>
-									<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 1A</div>
-								</div>
-								<div class="content">
-									<div class="accordion">
-										<div class="title">
-											<div class="right floated content">
-												<i class="dropdown icon"></i>
-											</div>
-											<div class="header tree-menu-title">Level Level Level Level Level Level Level Level Level Level 1A-A</div>
-										</div>
-										<div class="content">
-										</div>
-										<div class="title">
-											<div class="right floated content">
-												<i class="dropdown icon"></i>
-											</div>
-											<div class="header tree-menu-title">Level Level Level Level Level Level Level Level Level Level 1A-B</div>
-										</div>
-										<div class="content">
-										</div>
-									</div>
-								</div>
-								<div class="title">
-									<div class="right floated content">
-										<i class="dropdown icon"></i>
-									</div>
-									<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 1B</div>
-								</div>
-								<div class="content">
-								</div>
-								<div class="title">
-									<div class="right floated content">
-										<i class="dropdown icon"></i>
-									</div>
-									<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 1C</div>
-								</div>
-								<div class="content">
-								</div>
-							</div>
-						</div>
-						<div class="title">
-							<div class="right floated content">
-								<i class="dropdown icon"></i>
-							</div>
-							<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 2</div>
-						</div>
-						<div class="content">
-							<div class="accordion">
-								<div class="title">
-									<div class="right floated content">
-										<i class="dropdown icon"></i>
-									</div>
-									<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 2A</div>
-								</div>
-								<div class="content">
-									<div class="accordion">
-										<div class="title">
-											<div class="right floated content">
-												<i class="dropdown icon"></i>
-											</div>
-											<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 2A-A</div>
-										</div>
-										<div class="content">
-										</div>
-										<div class="title">
-											<div class="right floated content">
-												<i class="dropdown icon"></i>
-											</div>
-											<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 2A-B</div>
-										</div>
-										<div class="content">
-										</div>
-									</div>
-								</div>
-								<div class="title">
-									<div class="right floated content">
-										<i class="dropdown icon"></i>
-									</div>
-									<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 2B</div>
-								</div>
-								<div class="content">
-								</div>
-								<div class="title">
-									<div class="right floated content">
-										<i class="dropdown icon"></i>
-									</div>
-									<div class="header tree-menu-title"><i class="icon wifi"></i> Level Level Level Level Level Level Level Level Level Level 2C</div>
-								</div>
-								<div class="content">
-								</div>
-							</div>
-						</div>
-					</div>
+					<!-- 菜单内容 -->
 				</div>
 			</div>
 			
 		</div>
 		
 		<!-- 网页主体 -->
-		<div class="main-center" id="mainContentId"></div>
+		<div class="main-center" id="mainContentId">
+			<!-- 页面主题内容 -->
+		</div>
 		
 		<!-- 网页底部 -->
 		<div class="main-footer">

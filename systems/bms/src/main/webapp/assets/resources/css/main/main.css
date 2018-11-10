@@ -84,20 +84,18 @@ body {
 	padding: .7em .5em .7em 1em;
 	border-radius: 0;
 }
-.main-left .card .ui.basic.button {
+.main-left .card .ui.basic.primary.button {
+	color: #FFF !important;
 	background: rgba(0,0,0,.37) !important;
 	-webkit-box-shadow: 0 0 0 0 #2185d0 inset!important;
 	box-shadow: 0 0 0 0 #2185d0 inset!important;
 	border-radius: 0;
 }
-.main-left .card .ui.basic.primary.button {
-	color: #FFF !important;
-}
-.main-left .card .button span {
+.main-left .card .ui.basic.primary.button span {
 	float: left;
 	color: #FFF;
 }
-.main-left .card .button .icon {
+.main-left .card .ui.basic.primary.button .icon {
 	float: right;
 	color: #FFF;
 }
@@ -108,6 +106,10 @@ body {
 .main-left .main-menu.accordion .title {
 	display: none;
 }
+.main-left .main-menu.accordion .content {
+	border-bottom: 1px dashed rgba(34,36,38,.1);
+	padding-bottom: .5em !important;
+}
 .main-left .main-menu.accordion .content .buttons .ui.button {
 	color: #262626 !important;
 	font-weight: 500 !important;
@@ -115,11 +117,19 @@ body {
 	padding: 1em 1.5em 1em 2em;
 	font-weight: bold;
 }
+.main-left .main-menu.accordion .content .buttons .ui.button .profile-bt-text{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 .main-left .main-menu.accordion .content .buttons .button:hover {
 	background: #f7f7f7 !important;
 }
 .main-left .main-menu.accordion .content .buttons .ui.button .icon {
 	margin: 0 1.5em 0 -.21428571em;
+}
+.main-left .tree-menu-box {
+	margin: 0;
 }
 .main-left .tree-menu-box .accordion .right.floated.content {
 	margin-top: 2px;
@@ -128,6 +138,10 @@ body {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	font-size: 14px;
+}
+.main-left .tree-menu-box .accordion .title .tree-menu-title.child {
+	color: blue;
 }
 .main-left .tree-menu-box .accordion {
 	margin: 0;
@@ -135,6 +149,9 @@ body {
 .main-left .tree-menu-box .accordion .title {
 	padding: 1em 1em 1em 1em;
 	border-left: 2px solid #e0e1e2;
+}
+.main-left .tree-menu-box .accordion .title:hover {
+	background: #f7f7f7 !important;
 }
 .main-left .tree-menu-box .accordion .title .header {
 	font-weight: 400;

@@ -11,6 +11,13 @@
 	};
 	
 	/**
+	 * 获取jQuery id选择器
+	 */
+	function _fGetJqueryIdSelect(s) {
+		return /^#/.test(s)?s:('#' + s);
+	}
+	
+	/**
 	 * 获取打印消息内容
 	 */
 	function _fGetPrintMsg() {
@@ -70,6 +77,7 @@
 	hmg.info = hmg.Util.info; // 简写
 	hmg.getAppPath = _fGetAppPath; // 获取完整请求地址
 	hmg.getRootPath = _fGetRootPath; // 简写
+	hmg.getJid = _fGetJqueryIdSelect;
 })(window, document, $, hmg, _);
 
 /**
@@ -170,237 +178,179 @@
  */
 ; (function(window, document, $, hmg, _) {
 	
-	var dd = [{
-		id: 'id1',
-		icon: 'add to calendar icon',
-		title: '网站设置',
-		url: '',
-		isChild: false,
-		children: [{
-			id: 'id1-1',
-			icon: 'alarm outline icon',
-			title: '基本设置',
-			url: '',
-			isChild: false,
-			children: [{
-				id: 'id1-1-1',
-				icon: 'alarm mute outline icon',
-				title: '个人设置',
-				url: '',
-				isChild: false,
-				children: []
-			}, {
-				id: 'id1-1-2',
-				icon: 'alarm mute icon',
-				title: '公司设置',
-				url: '',
-				isChild: false,
-				children: []
-			}]
-		}, {
-			id: 'id1-2',
-			title: '高级设置',
-			icon: 'alarm icon',
-			url: '',
-			isChild: false,
-			children: [{
-				id: 'id1-2-1',
-				icon: 'at icon',
-				title: '参数设置',
-				url: '',
-				isChild: false,
-				children: []
-			}]
-		}]
-	}, {
-		id: 'id2',
-		title: '生成管理',
-		icon: 'browser icon',
-		url: '',
-		isChild: false,
-		children: [{
-			id: 'id2-1',
-			title: '生成首页',
-			icon: 'bug icon',
-			url: '',
-			isChild: false,
-			children: [{
-				id: 'id2-1-1',
-				title: '菜单1',
-				icon: 'calendar outline icon',
-				url: '',
-				isChild: false,
-				children: []
-			}]
-		}, {
-			id: 'id2-2',
-			title: '生成列表',
-			icon: 'calendar icon',
-			url: '',
-			isChild: false,
-			children: [{
-				id: 'id2-2-1',
-				icon: 'checked calendar icon',
-				title: '菜单2',
-				url: '',
-				isChild: false,
-				children: []
-			}]
-		}]
-	}, {
-		id: 'id3',
-		title: '系统管理',
-		icon: 'cloud icon',
-		url: '',
-		isChild: false,
-		children: [{
-			id: 'id3-1',
-			title: '会员管理',
-			icon: 'code icon',
-			url: '',
-			isChild: false,
-			children: [{
-				id: 'id3-1-1',
-				title: '菜单3-1-1',
-				icon: 'comment outline icon',
-				url: '',
-				isChild: false,
-				children: []
-			}, {
-				id: 'id3-1-2',
-				icon: 'comment icon',
-				title: '菜单3-1-2',
-				url: '',
-				isChild: false,
-				children: []
-			}]
-		}, {
-			id: 'id3-2',
-			title: '管理员设置',
-			icon: 'comments outline icon',
-			url: '',
-			isChild: false,
-			children: [{
-				id: 'id3-2-1',
-				title: '菜单3-2-1',
-				icon: 'comments icon',
-				url: '',
-				isChild: false,
-				children: []
-			}, {
-				id: 'id3-2-2',
-				icon: 'copyright icon',
-				title: '菜单3-2-2',
-				url: '',
-				isChild: false,
-				children: []
-			}]
-		}, {
-			id: 'id3-3',
-			icon: 'creative commons icon',
-			title: '退出系统',
-			url: '',
-			isChild: false,
-			children: []
-		}]
-	}]
-	
-	var treeData = [];
-	function find(list, idsss) {
-		for(var i in list) {
-			if(list[i].id == idsss) {
-				treeData = list[i].children;
-			}
-			if(list[i].children.length>0) {
-				find(list[i].children, idsss);
-			}
-		}
-	}
-	
-	function getTestData(id) {
-		var arr = [];
-		if(!id) {
-			for(var i in dd) {
-				arr.push(dd[i]);
-			}
-		} else {
-			find(id);
-			arr = treeData;
-		}
-		return arr;
-	}
-	
 	var menu = {
+		options: {},
 		oData: [], // 菜单数据
-		sContentId: 'treeMenuBoxId'
+		sContentId: 'treeMenuBoxId',
+		initView: _fInitView,
+		loadChild: _fOutViewChilds,
+		loading: _fLoading,
+		sMenuItemTitleIdFix: 'mt_',
+		sMenuItemContentIdFix: 'mc_',
+		sMenuItemLoadIconIdFix: 'mli_',
+		sMenuItemIconIdFix: 'mi_'
 	};
 	
-	function _fOutItem(sIcon, sId, sTitle, sChildNodes) {
-		return '<div class="title" id="">'
-			+ '    <div class="right floated content">'
+	/**
+	 * 获取菜单项
+	 */
+	function _fOutItem(sId, sTitle, sIcon, isChild) {
+		sId = sId?sId:'';
+		var sElId = sId + _.now();
+		var sRightHtm = '    <div class="right floated content">'
 			+ '        <i class="dropdown icon"></i>'
-			+ '    </div>'
-			+ '    <div class="header tree-menu-title">'
-			+ '        <i class="' + sIcon + '"></i>'
-			+ '        <span data-menu-id="' + sId + '">' + sTitle + '</span>'
+			+ '    </div>';
+		var sChildTitleClass = ' child';
+		var sChildBoxHtm = '<div class="content" data-menu-id="' + sId + '" data-menu-elid="' + sElId + '" data-menu-ischild="' + (isChild?'1':'0') + '" data-menu-isload="0" id="' + menu.sMenuItemTitleIdFix + sElId + '"></div>'
+		var sIconHtm = '<i class="' + sIcon + '" id="' + menu.sMenuItemIconIdFix + sElId + '"></i>';
+		
+		if(!sIcon) {
+			sIconHtm = '';
+		}
+		if(isChild) {
+			sRightHtm = '';
+			childBoxHtm = '';
+		} else {
+			sChildTitleClass = '';
+		}
+		
+		return '<div class="title" id="' + menu.sMenuItemContentIdFix + sElId + '">'
+			+ sRightHtm
+			+ '    <div class="header tree-menu-title' + sChildTitleClass + '">'
+			+ '        <i class="icon ui tiny active inline loader" id="' + menu.sMenuItemLoadIconIdFix + sElId + '" style="display: none;"></i>'
+			+ '        ' + sIconHtm
+			+ '        <span">' + sTitle + '</span>'
 			+ '    </div>'
 			+ '</div>'
-			+ '<div class="content" data-menu-id="' + sId + '" id="" data-menu-icon="' + sIcon + '">'
-			+ sChildNodes
-			+ '</div>';
+			+ sChildBoxHtm;
 	}
 	
+	/**
+	 * 创建菜单项
+	 */
 	function _fOutView(list, isRoot) {
-		if(!list || list.length==0) {
-			return '';
+		var sItemsHtm = '';
+		for(var i in list) {
+			sItemsHtm += _fOutItem(list[i].id, list[i].title, list[i].icon, list[i].isChild);
 		}
+		
 		var sRootClass = isRoot?'ui ':'';
 		return '<div class="' + sRootClass + 'accordion tree-menu">'
-		+ _fOutViewItem(list);
-		+ '</div>';
+		+ sItemsHtm;
+		+ '</div>'
 	}
 	
-	function _fOutViewItem(list) {
-		var sHtm = '';
-		for(var i in list) {
-			sHtm += _fOutItem(list[i].icon, list[i].id, list[i].title, []);
-		}
-		return sHtm;
-	}
-	
-	function _fLoading($el, icon) {
-		if(icon) {
-			$el.find('.tree-menu-title i')[0].className = icon;
-		} else {
-			$el.find('.tree-menu-title i')[0].className = 'icon ui tiny active inline loader';
-		}
-	}
-	
-	function _fOutViewChilds($el) {
-		var sId = $el.attr('data-menu-id');
-		find(dd, sId);
-		var oCData = treeData;
+	/**
+	 * 创建子菜单
+	 */
+	function _fOutViewChilds($el, sPid, isRoot) {
 		
-		var sHtm = _fOutView(oCData);
+		sPid = sPid?sPid:'';
 		
-		$el.empty().append(sHtm);
-	}
-	
-	function _fInitTree(list) {
-		$('#' + menu.sContentId).empty().append(_fOutView(list, true));
+		$el.empty();
 		
-		$('#' + menu.sContentId + ' .ui.accordion').accordion({
-			duration: 100,
-			exclusive: false,
-			onOpening: function(a, b, c) {
-				_fLoading($(this.prevObject));
-				_fOutViewChilds($(this));
-				_fLoading($(this.prevObject), $(this).attr('data-menu-icon'));
+		// 获取数据
+		var aFnPrm = [sPid]; // 方法传递参数
+		var aList = menu.options.loadData.apply(menu, aFnPrm); // 自定义获取数据，注意ajax请求必须为同步
+		
+		if(aList && _.isArray(aList)) {
+			
+			// 渲染子菜单，设置已读取状态
+			var sHtm = _fOutView(aList, isRoot);
+			$el.append(sHtm).attr('data-menu-isload', '1');
+			
+			/**
+			 * TODO 维护menu.oData
+			 */
+			
+			if(isRoot) {
+				// 初始化一次插件
+				$('#' + menu.sContentId + ' .ui.accordion').accordion({
+					duration: 100,
+					exclusive: false,
+					onOpening: function(a, b, c) {
+					},
+					onOpen: function() {
+						
+						var self = $(this);
+						
+						// 校验是否为叶子节点
+						if(self.attr('data-menu-ischild')==='1') {
+							console.log('叶子节点，不需要获取数据');
+							/**
+							 * TODO 菜单逻辑
+							 */
+							return false;
+						}
+						
+						// 校验是否重新加载已加载内容
+						if(!menu.options.isChildRefresh && self.attr('data-menu-isload')==='1') {
+							console.log('已加载数据，不需要获取数据');
+							return false;
+						}
+						
+						var sElId = _fGetElId(self); // 获取元素id
+						var sId = _fGetId(self);
+						
+						_fLoading(sElId, true); // 显示Loading
+						
+						_fOutViewChilds(self, sId, false); // 渲染
+						
+						_fLoading(sElId, false); // 关闭Loading
+					}
+				});
 			}
-		});
+		} else {
+			// 数据加载失败时，可以重新加载数据
+			$el.attr('data-menu-isload', '0');
+		}
+		return true;
 	}
 	
-	_fInitTree(getTestData());
+	/**
+	 * Loading
+	 */
+	function _fLoading(sElId, isShow) {
+		if(isShow) {
+			$(hmg.getJid(menu.sMenuItemIconIdFix + sElId)).hide();
+			$(hmg.getJid(menu.sMenuItemLoadIconIdFix + sElId)).show();
+		} else {
+			$(hmg.getJid(menu.sMenuItemLoadIconIdFix + sElId)).hide();
+			$(hmg.getJid(menu.sMenuItemIconIdFix + sElId)).show();
+		}
+	}
+	
+	/**
+	 * 获取菜单id
+	 */
+	function _fGetId($el) {
+		return $el.attr('data-menu-id');
+	}
+	
+	/**
+	 * 获取元素编码
+	 */
+	function _fGetElId($el) {
+		return $el.attr('data-menu-elid');
+	}
+	
+	/**
+	 * 初始化菜单页面
+	 */
+	function _fInitView(oOpt) {
+		
+		oOpt = $.extend({}, {
+			loadData: function() {
+				return [];
+			},
+			isChildRefresh: false // 指示子节点每次展开需要重新获取数据
+		}, oOpt);
+		
+		menu.options = oOpt;
+		
+		// 加载根节点
+		_fOutViewChilds($(hmg.getJid(menu.sContentId)), '', true);
+	}
 	
 	hmg.Menu = menu;
 })(window, document, $, hmg, _);
