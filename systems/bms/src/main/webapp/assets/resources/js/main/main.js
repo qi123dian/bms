@@ -126,7 +126,7 @@
 		hmg.Tab.addTab({
 			sId: 'template' + _.now(),
 			sTitle: '模板界面',
-			sUrl: hmg.getAppPath('/page/template/template')
+			sUrl: '/page/template/template'
 		});
 		
 		var dd = [{
@@ -269,6 +269,13 @@
 				isChild: true,
 				children: []
 			}]
+		}, {
+			id: 'id5',
+			icon: 'creative commons icon',
+			title: '测试标签页2',
+			url: '/page/template/template',
+			isChild: true,
+			children: []
 		}]
 		
 		function find(list, idsss) {
@@ -323,7 +330,7 @@
 			hmg.Tab.addTab({
 				sId: 'main' + sNow,
 				sTitle: '模板界面' + sNow,
-				sUrl: 'https://www.baidu.com',
+				sUrl: 'http://semantic-ui.cn/modules/accordion.html#/settings',// 'https://www.baidu.com',
 				isIFrame: true
 			});
 			

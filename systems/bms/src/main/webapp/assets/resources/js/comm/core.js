@@ -194,14 +194,14 @@
 	/**
 	 * 获取菜单项
 	 */
-	function _fOutItem(sId, sTitle, sIcon, isChild) {
+	function _fOutItem(sId, sTitle, sUrl, sIcon, isChild) {
 		sId = sId?sId:'';
 		var sElId = sId + _.now();
 		var sRightHtm = '    <div class="right floated content">'
 			+ '        <i class="dropdown icon"></i>'
 			+ '    </div>';
 		var sChildTitleClass = ' child';
-		var sChildBoxHtm = '<div class="content" data-menu-id="' + sId + '" data-menu-elid="' + sElId + '" data-menu-ischild="' + (isChild?'1':'0') + '" data-menu-isload="0" id="' + menu.sMenuItemTitleIdFix + sElId + '"></div>'
+		var sChildBoxHtm = '<div class="content" data-menu-id="' + sId + '" data-menu-elid="' + sElId + '" data-menu-url="' + sUrl + '" data-menu-title="' + sTitle + '" data-menu-ischild="' + (isChild?'1':'0') + '" data-menu-isload="0" id="' + menu.sMenuItemTitleIdFix + sElId + '"></div>'
 		var sIconHtm = '<i class="' + sIcon + '" id="' + menu.sMenuItemIconIdFix + sElId + '"></i>';
 		
 		if(!sIcon) {
@@ -231,7 +231,7 @@
 	function _fOutView(list, isRoot) {
 		var sItemsHtm = '';
 		for(var i in list) {
-			sItemsHtm += _fOutItem(list[i].id, list[i].title, list[i].icon, list[i].isChild);
+			sItemsHtm += _fOutItem(list[i].id, list[i].title, list[i].url, list[i].icon, list[i].isChild);
 		}
 		
 		var sRootClass = isRoot?'ui ':'';
@@ -265,7 +265,7 @@
 			
 			if(isRoot) {
 				// 初始化一次插件
-				$('#' + menu.sContentId + ' .ui.accordion').accordion({
+				$(hmg.getJid(menu.sContentId + ' .ui.accordion')).accordion({
 					duration: 100,
 					exclusive: false,
 					onOpening: function(a, b, c) {
@@ -273,24 +273,27 @@
 					onOpen: function() {
 						
 						var self = $(this);
+						var sElId = _fGetElId(self); // 获取元素id
+						var sId = _fGetId(self);
+						var sTitle = self.attr('data-menu-title');
+						var sUrl = self.attr('data-menu-url');
 						
 						// 校验是否为叶子节点
 						if(self.attr('data-menu-ischild')==='1') {
-							console.log('叶子节点，不需要获取数据');
-							/**
-							 * TODO 菜单逻辑
-							 */
+							// 菜单单击事件
+							hmg.Tab.addTab({
+								sId: sId + _.now(),
+								sTitle: sTitle,
+								sUrl: sUrl
+							});
+							
 							return false;
 						}
 						
 						// 校验是否重新加载已加载内容
 						if(!menu.options.isChildRefresh && self.attr('data-menu-isload')==='1') {
-							console.log('已加载数据，不需要获取数据');
 							return false;
 						}
-						
-						var sElId = _fGetElId(self); // 获取元素id
-						var sId = _fGetId(self);
 						
 						_fLoading(sElId, true); // 显示Loading
 						
@@ -383,7 +386,7 @@
 		var sActive = isActive?' active':'';
 		var loading = isLoading?' loading':'';
 		return '<div class="ui bottom attached tab' + sActive + ' main-box' + loading + '" data-tab="' + sId + '" id="' + sContentId + '">'
-		+ (sIFrameId?'<iframe style="border-width: 0px;" id="' + sIFrameId + '" width="100%" src=""></iframe>':'')
+		+ (sIFrameId?'<iframe style="border-width: 0px; width: 100%;" id="' + sIFrameId + '" width="100%" src=""></iframe>':'')
 		+ '</div>';
 	}
 	
@@ -454,7 +457,7 @@
 	 */
 	function _fActiveTabOfId(sId) {
 		if(sId) {
-			$('#' + tab.headId + ' .item').tab('change tab', sId);
+			$(hmg.getJid(tab.headId + ' .item')).tab('change tab', sId);
 		}
 	}
 
@@ -497,7 +500,7 @@
 	function _fInitTab() {
 		if(_fGetTabLen()>0) {
 			// 初始化tab
-			$('#' + tab.headId + ' .item').tab();
+			$(hmg.getJid(tab.headId + ' .item')).tab();
 		}
 	}
 	
@@ -549,11 +552,11 @@
 		oOpt.sIFrameId = oOpt.isIFrame?('iframe_' + oOpt.sId):'';
 		
 		// 添加标签页HTML，增加事件
-		$('#' + tab.headId).append(_fOutHeadView(oOpt.sId, oOpt.sHeadId, oOpt.sTitle, false));
-		$('#' + tab.contentId).append(_fOutContentView(oOpt.sId, oOpt.sContentId, false, false, oOpt.sIFrameId));
+		$(hmg.getJid(tab.headId)).append(_fOutHeadView(oOpt.sId, oOpt.sHeadId, oOpt.sTitle, false));
+		$(hmg.getJid(tab.contentId)).append(_fOutContentView(oOpt.sId, oOpt.sContentId, false, false, oOpt.sIFrameId));
 		
 		// 初始化标签页
-		$('#' + tab.headId + ' .item').tab().tab('change tab', oOpt.sId);
+		$(hmg.getJid(tab.headId + ' .item')).tab().tab('change tab', oOpt.sId);
 		
 		// 双击关闭标签页
 		$('#head_' + oOpt.sId).bind('dblclick', function() {
@@ -564,10 +567,25 @@
 		// 增加loading
 		_fLoading(oOpt.sId, true);
 		
+		if(/^\//.test(oOpt.sUrl)) {
+			oOpt.sUrl = hmg.getAppPath(oOpt.sUrl);
+		}
+		
 		// sUrl判断是否为url
 		var rReg = new RegExp('^\\' + hmg.getRootPath());
 		if(oOpt.sIFrameId) {
-			$('#' + oOpt.sIFrameId).attr('src', oOpt.sUrl);
+			var $iframeEl = $(hmg.getJid(oOpt.sIFrameId)).attr('src', oOpt.sUrl);
+			var domIframeEl = $iframeEl[0];
+			if(domIframeEl.attachEvent) {
+				domIframeEl.attachEvent("onload", function() {
+					// ie 处理方式
+				});
+			}else{
+				domIframeEl.onload = function() {
+					$iframeEl.css('height', domIframeEl.contentWindow.top.innerHeight + 'px');
+				};
+			}
+			
 			// 去掉Loading，加载页面
 			_fLoading(oOpt.sId, false);
 		} if(rReg.test(oOpt.sUrl) || /^[http|https|localhost]/.test(oOpt.sUrl)) {
@@ -613,8 +631,8 @@
 		var oOpt = _fGetDataOfIndex(iInd);
 		
 		// 移除active和loading
-		$('#' + oOpt.sHeadId).remove();
-		$('#' + oOpt.sContentId).remove();
+		$(hmg.getJid(oOpt.sHeadId)).remove();
+		$(hmg.getJid(oOpt.sContentId)).remove();
 		
 		// 维护标签页参数
 		_fRemoveItem(sId);
