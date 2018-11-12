@@ -18,6 +18,9 @@ body {
 .main-top .top-title .ui.medium.header {
 	color: #FFF;
 }
+.main-top .top-title div h4 {
+	cursor: pointer;
+}
 .main-top .top-toolbar.right.borderless.item .search:not(.icon) {
 	margin-right: 2em;
 }

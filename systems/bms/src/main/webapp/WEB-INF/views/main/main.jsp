@@ -19,7 +19,7 @@
 			<!-- 网站标题 -->
 			<div class="item top-title">
 				<div class="ui medium header">
-					<h4>HamgoL</h4>
+					<h4 id="leftMenuContrlBtId">HamgoL</h4>
 				</div>
 			</div>
 			
@@ -82,6 +82,21 @@
 									</div>
 								</h5>
 							</div>
+							<div class="item">
+								<h5 class="ui header">
+									<div class="content">
+										账户设置 <div class="sub header">Manage your preferences Manage your preferencesManage your preferencesManage your preferencesManage your preferencesManage your preferencesManage your preferences</div>
+									</div>
+								</h5>
+							</div>
+							<div class="fitted item">
+								<h5 class="ui header">
+									<img class="ui small avatar image" src="<c:url value="/assets/resources/img/main/avatar1.jpg" />">
+									<div class="content">
+										账户设置
+									</div>
+								</h5>
+							</div>
 						</div>
 						<div class="divider"></div>
 						<div class="header">
@@ -95,7 +110,7 @@
 		</div>
 		
 		<!-- 左侧菜单区域 -->
-		<div class="main-left ui sidebar vertical menu visible">
+		<div class="main-left ui sidebar vertical menu visible" id="leftMenuContentId">
 			<!-- 个人资料 -->
 			<div class="card" id="profileBackgroundImgContentId">
 				<div class="content">

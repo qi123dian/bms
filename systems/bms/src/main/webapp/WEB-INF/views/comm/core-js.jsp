@@ -2,6 +2,7 @@
 <script type="text/javascript" src="<c:url value="/assets/components/jquery-v3.1.1/dist/jquery.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/assets/components/semantic-ui-v2.2/semantic.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/assets/components/toastr-v2.1.4/build/toastr.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/assets/components/animsition-v4.0.2/dist/js/animsition.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/assets/components/underscore-v1.9.1/underscore-min.js" />"></script>
 
 <script type="text/javascript">
