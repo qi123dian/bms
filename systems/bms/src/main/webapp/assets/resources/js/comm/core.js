@@ -763,7 +763,7 @@
 		options: {},
 		outHead: _fOutHead,
 		initView: _fInitView,
-		initPlugin: _fInitPlugin
+		outDivider: _fOutDivider
 	}
 	
 	/**
@@ -890,12 +890,10 @@
 		if(list && list.length && list.length>0) {
 			for(var i in list) {
 				$el.append(_fOutMenuItem(list[i].title, list[i].icon));
-				$el.find('.item:eq(' + i + ')').click(function() {
-					var fFn = list[i]['callback'];
-					if(fFn && _.isFunction(fFn)) {
-						fFn.call(this);
-					}
-				});
+				var fFn = list[i]['callback'];
+				if(fFn && _.isFunction(fFn)) {
+					$el.find('.item:eq(' + i + ')').click(fFn);
+				}
 			}
 		}
 	}
@@ -911,6 +909,12 @@
 				title: '隐藏左侧菜单',
 				icon: 'th',
 				callback: hmg.Menu.menuCtrl
+			}, {
+				title: '存储页面设置',
+				icon: 'save',
+				callback: function() {
+					hmg.info('存储页面设置成功');
+				}
 			}]
 		}, oOpt);
 		
