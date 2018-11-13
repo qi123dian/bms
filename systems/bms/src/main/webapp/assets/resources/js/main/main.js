@@ -112,15 +112,7 @@
 	// 页面初始化
 	function _initPage() {
 		
-		// $('.main-box').dimmer('show');
-		
-		// $('.ui.dropdown').dropdown();
-		
-		// $('.attached.progress').progress();
-		
-		// $('.top-tabmenu .item').popup();
-		
-		// $('#leftMenuContentId').sidebar();
+		$('.ui.dropdown').dropdown();
 		
 		// 欢迎语
 		hmg.info('欢迎光临！');

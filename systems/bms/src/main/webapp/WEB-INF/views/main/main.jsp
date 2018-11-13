@@ -23,8 +23,8 @@
 			<div class="ui secondary pointing tabular menu top-tabmenu" id="topTabHeadId"></div>
 			
 			<!-- 顶部菜单 -->
-			<div class="right borderless item top-toolbar">
-				
+			<div class="right borderless item top-toolbar" id="topToolbarContentId">
+				<!--
 				<div class="ui right action left icon input">
 					<i class="search icon"></i>
 					<input type="text" placeholder="Search">
@@ -42,7 +42,7 @@
 					<input type="text" placeholder="Search...">
 					<i class="search icon"></i>
 				</div>
-				
+				-->
 				<div class="ui category search">
 					<div class="ui icon input">
 						<input class="prompt" type="text" placeholder="Search animals...">
@@ -52,16 +52,16 @@
 				</div>
 				
 				<!-- 顶部按钮区域 -->
-				<button class="circular ui icon top right pointing dropdown button top-menu-botton setting-button" id="topSettingPageBtId">
+				<!-- <button class="circular ui icon top right pointing dropdown button top-menu-botton setting-button" id="topSettingPageBtId">
 					<i class="icon cog"></i>
 					<div class="menu" id="topSettingPageMenuContentId">
 						<div class="header" id="topSettingPageColorContentId"></div>
 						<div class="ui divider"></div>
 					</div>
 				</button>
-				<div class="circular ui icon top right pointing dropdown button top-menu-botton" id="testBtId">
+				<button class="circular ui icon top right pointing dropdown button top-menu-botton" id="testBtId">
 					<i class="wrench icon"></i><div class="floating ui teal label">99+</div>
-				</div>
+				</button> -->
 				
 				<div class="circular ui icon top left pointing dropdown button top-menu-botton">
 					<i class="wrench icon"></i><div class="floating ui teal label">22</div>

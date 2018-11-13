@@ -7,6 +7,7 @@
 		},
 		elId: {
 			topContentId: 'topContentId', // 头部元素编码
+			topToolbarContentId: 'topToolbarContentId',
 			leftContentId: 'leftContentId',
 			centerContentId: 'centerContentId'
 		}
@@ -32,6 +33,10 @@
 	 */
 	function _fGetJqueryIdSelect(s) {
 		return /^#/.test(s)?s:('#' + s);
+	}
+	
+	function _fGetJqueryEl(s) {
+		return $(_fGetJqueryIdSelect(s));
 	}
 	
 	/**
@@ -95,6 +100,7 @@
 	hmg.getAppPath = _fGetAppPath; // 获取完整请求地址
 	hmg.getRootPath = _fGetRootPath; // 简写
 	hmg.getJid = _fGetJqueryIdSelect;
+	hmg.getJel = _fGetJqueryEl;
 })(window, document, $, hmg, _);
 
 /**
@@ -382,7 +388,7 @@
 				'left': '-20em'
 			}, function() {
 				$el.attr('data-show-flag', '0');
-				self.text('显示左侧菜单');
+				self.find('span').text('显示左侧菜单');
 			});
 			$('.main-center').animate({'padding-left': '0em'});
 			$('.main-footer').animate({'padding-left': '0em'});
@@ -393,7 +399,7 @@
 				'left': '0'
 			}, function() {
 				$el.attr('data-show-flag', '1');
-				self.text('隐藏左侧菜单');
+				self.find('span').text('隐藏左侧菜单');
 			});
 		}
 	}
@@ -750,6 +756,80 @@
 })(window, document, $, hmg, _);
 
 /**
+ * 顶部菜单
+ */
+; (function(window, document, $, hmg) {
+	var control = {
+		options: {},
+		outHead: _fOutHead,
+		initView: _fInitView,
+		initPlugin: _fInitPlugin
+	}
+	
+	/**
+	 * 返回分隔符
+	 */
+	function _fOutDivider() {
+		return '<div class="divider"></div>';
+	}
+	
+	/**
+	 * 返回头部项
+	 */
+	function _fOutHead() {
+		return '<div class="header"></div>';
+	}
+	
+	/**
+	 * 创建元素
+	 */
+	function _fOutView(sBtId, sIcon, sMenuId, iCount, sCls, isScroll) {
+		
+		sCls = sCls?' ' + sCls:'';
+		
+		if(isNaN(iCount)) {
+			iCount = 0;
+		}
+		iCount = parseInt(iCount);
+		
+		var sCountStr = '';
+		if(iCount>0) {
+			sCountStr = '<div class="floating ui teal label">' + (iCount>99?'99+':iCount) + '</div>';
+		}
+		
+		return '<button class="circular ui icon top right pointing dropdown button top-menu-botton' + sCls + '" id="' + sBtId + '">' +
+			'    <i class="' + sIcon + ' icon"></i>' + sCountStr +
+			'    <div class="menu" id="' + sMenuId + '"></div>' +
+			'</button>';
+	}
+	
+	/**
+	 * 初始化
+	 */
+	function _fInitView(oOpt) {
+		control.options = $.extend({}, {
+			btId: '',
+			count: 0,
+			icon: '',
+			menuId: '',
+			menuScroll: true,
+			cls: ''
+		}, oOpt);
+		
+		var htm = _fOutView(control.options.btId, control.options.icon, control.options.menuId, control.options.icon, control.options.cls);
+		
+		// 渲染及初始化插件
+		hmg.getJel(hmg.Comm.elId.topToolbarContentId).append(htm).find(hmg.getJid(control.options.btId)).dropdown();
+		
+		return control;
+	}
+	
+	hmg.Control = control;
+	
+})(window, document, $, hmg, _);
+
+
+/**
  * 页面设置菜单
  */
 ; (function(window, document, $, hmg) {
@@ -773,8 +853,9 @@
 	/**
 	 * 创建菜单项
 	 */
-	function _fOutMenuItem(title) {
-		return '<div class="item">' + title + '</div>';
+	function _fOutMenuItem(title, icon) {
+		icon = icon?'<i class="' + icon + ' icon"></i>':'';
+		return '<div class="item">' + icon + '<span>' + title + '</span></div>';
 	}
 	
 	/**
@@ -782,15 +863,15 @@
 	 */
 	function _fSetTopBackColor(color) {
 		// 设置顶部背景
-		$(hmg.getJid(hmg.Comm.elId.topContentId)).css('background', color);
+		hmg.getJel(hmg.Comm.elId.topContentId).css('background', color);
 	}
 	
 	/**
 	 * 渲染颜色
 	 */
-	function _fOutColors(list) {
+	function _fOutColors($el, list) {
+		$el = $el.append(hmg.Control.outHead()).find('.header');
 		if(list && list.length && list.length>0) {
-			var $el = $(hmg.getJid(settingPage.sColorContentEl)).empty();
 			for(var i in list) {
 				// 渲染元素
 				$el.append(_fOutColorItem(list[i]));
@@ -805,11 +886,10 @@
 	/**
 	 * 渲染菜单
 	 */
-	function _fOutMenus(list) {
+	function _fOutMenus($el, list) {
 		if(list && list.length && list.length>0) {
-			var $el = $(hmg.getJid(settingPage.sMenuContentEl));
 			for(var i in list) {
-				$el.append(_fOutMenuItem(list[i].title));
+				$el.append(_fOutMenuItem(list[i].title, list[i].icon));
 				$el.find('.item:eq(' + i + ')').click(function() {
 					var fFn = list[i]['callback'];
 					if(fFn && _.isFunction(fFn)) {
@@ -824,32 +904,36 @@
 	 * 初始化
 	 */
 	function _fInitView(oOpt) {
-		oOpt = $.extend({}, {
+		
+		settingPage.options = $.extend({}, {
 			color: ['#2196F3', '#03A9F4', '#607D8B', '#00BCD4', '#009688', '#FF9800'],
 			menu: [{
 				title: '隐藏左侧菜单',
+				icon: 'th',
 				callback: hmg.Menu.menuCtrl
 			}]
 		}, oOpt);
 		
+		// 初始化下拉菜单按钮
+		var control = hmg.Control.initView({
+			btId: 'topControlSettingPageBtId',
+			icon: 'cog',
+			menuId: 'topControlSettingPageMenuId',
+			count: 0,
+			cls: 'setting-button'
+		});
+		
+		var $menuEl = hmg.getJel(control.options.menuId);
+		
 		// 初始化颜色
-		_fOutColors(oOpt.color);
+		_fOutColors($menuEl, settingPage.options.color);
+		$menuEl.append(hmg.Control.outDivider());
 		// 初始化菜单
-		_fOutMenus(oOpt.menu);
+		_fOutMenus($menuEl, settingPage.options.menu);
 		
 		// 初始化下拉菜单
-		$(hmg.getJid(settingPage.sBtEl)).dropdown();
 	}
 	
 	hmg.SettingPage = settingPage;
-})(window, document, $, hmg, _);
-
-; (function(window, document, $, hmg) {
-	var control = {
-		options: []
-	}
-	
-	hmg.Control = control;
-	
 })(window, document, $, hmg, _);
 
