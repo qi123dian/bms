@@ -111,32 +111,22 @@
 	
 	// 页面初始化
 	function _initPage() {
+		
 		// $('.main-box').dimmer('show');
 		
-		$('.ui.dropdown').dropdown();
+		// $('.ui.dropdown').dropdown();
 		
 		// $('.attached.progress').progress();
 		
 		// $('.top-tabmenu .item').popup();
 		
-		// 左侧菜单显示/隐藏
-		$('#leftMenuContrlBtId').click(function() {
-			var $el = $('#leftMenuContentId');
-			if($el.hasClass('visible')) {
-				$el.removeClass('visible');
-				$('.main-center').animate({'padding-left': '0em'});
-				$('.main-footer').animate({'padding-left': '0em'});
-			} else {
-				$el.addClass('visible');
-				$('.main-center').animate({'padding-left': '19em'});
-				$('.main-footer').animate({'padding-left': '19em'});
-			}
-		})
-		
 		// $('#leftMenuContentId').sidebar();
 		
 		// 欢迎语
 		hmg.info('欢迎光临！');
+		
+		// 初始化页面设置
+		hmg.SettingPage.initView();
 		
 		// 默认标签页
 		hmg.Tab.addTab({
@@ -341,7 +331,7 @@
 			}
 		});
 		
-		$('#testBtId').click(function() {
+		/*$('#testBtId').click(function() {
 			var sNow = _.now();
 			hmg.Tab.addTab({
 				sId: 'main' + sNow,
@@ -351,7 +341,7 @@
 			});
 			
 			console.log(hmg.Tab.items);
-		});
+		});*/
 	};
 	
 	_initPage();

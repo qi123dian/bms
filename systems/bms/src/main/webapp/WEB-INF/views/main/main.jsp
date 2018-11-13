@@ -11,15 +11,11 @@
 	</head>
 	<body>
 		<!-- 顶部菜单 -->
-		<div class="main-top ui fixed borderless menu">
-			<!-- 页面进度条 -->
-			<!-- <div class="ui top attached progress warning">
-				<div class="bar"></div>
-			</div> -->
+		<div class="main-top ui fixed borderless menu" id="topContentId">
 			<!-- 网站标题 -->
 			<div class="item top-title">
 				<div class="ui medium header">
-					<h4 id="leftMenuContrlBtId">HamgoL</h4>
+					<h4>HamgoL</h4>
 				</div>
 			</div>
 			
@@ -28,22 +24,46 @@
 			
 			<!-- 顶部菜单 -->
 			<div class="right borderless item top-toolbar">
-				<div class="ui fluid category search">
+				
+				<div class="ui right action left icon input">
+					<i class="search icon"></i>
+					<input type="text" placeholder="Search">
+					<div class="ui basic floating dropdown button">
+						<div class="text">This Page</div>
+						<i class="dropdown icon"></i>
+						<div class="menu">
+							<div class="item">This Organization</div>
+							<div class="item">Entire Site</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="ui inverted transparent icon input">
+					<input type="text" placeholder="Search...">
+					<i class="search icon"></i>
+				</div>
+				
+				<div class="ui category search">
 					<div class="ui icon input">
-						<input class="prompt" type="text" placeholder="搜寻动物……">
+						<input class="prompt" type="text" placeholder="Search animals...">
 						<i class="search icon"></i>
 					</div>
 					<div class="results"></div>
 				</div>
-				<button class="circular ui icon button">
-					<i class="icon settings"></i>
-					<div class="floating ui teal label">22</div>
+				
+				<!-- 顶部按钮区域 -->
+				<button class="circular ui icon top right pointing dropdown button top-menu-botton setting-button" id="topSettingPageBtId">
+					<i class="icon cog"></i>
+					<div class="menu" id="topSettingPageMenuContentId">
+						<div class="header" id="topSettingPageColorContentId"></div>
+						<div class="ui divider"></div>
+					</div>
 				</button>
-				<div class="circular ui icon top left pointing dropdown button" id="testBtId">
+				<div class="circular ui icon top right pointing dropdown button top-menu-botton" id="testBtId">
 					<i class="wrench icon"></i><div class="floating ui teal label">99+</div>
 				</div>
 				
-				<div class="circular ui icon top left pointing dropdown button">
+				<div class="circular ui icon top left pointing dropdown button top-menu-botton">
 					<i class="wrench icon"></i><div class="floating ui teal label">22</div>
 					
 					<div class="ui vertical massive menu">
@@ -110,7 +130,7 @@
 		</div>
 		
 		<!-- 左侧菜单区域 -->
-		<div class="main-left ui sidebar vertical menu visible" id="leftMenuContentId">
+		<div class="main-left ui sidebar vertical menu visible" data-show-flag="1" id="leftContentId">
 			<!-- 个人资料 -->
 			<div class="card" id="profileBackgroundImgContentId">
 				<div class="content">
@@ -131,7 +151,7 @@
 			
 			<!-- 菜单 -->
 			<div class="ui middle aligned list tree-menu-box">
-				<div class="item" id="treeMenuBoxId">
+				<div class="item" id="leftMenuBoxId">
 					<!-- 菜单内容 -->
 				</div>
 			</div>
@@ -139,7 +159,7 @@
 		</div>
 		
 		<!-- 网页主体 -->
-		<div class="main-center" id="mainContentId">
+		<div class="main-center" id="centerContentId">
 			<!-- 页面主题内容 -->
 		</div>
 		

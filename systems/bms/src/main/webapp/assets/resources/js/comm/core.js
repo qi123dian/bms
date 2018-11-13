@@ -1,4 +1,21 @@
 
+; (function(window, document, $, hmg, _) {
+	
+	var comm = {
+		variable: {
+			
+		},
+		elId: {
+			topContentId: 'topContentId', // 头部元素编码
+			leftContentId: 'leftContentId',
+			centerContentId: 'centerContentId'
+		}
+	}
+	
+	hmg.Comm = comm;
+	
+})(window, document, $, hmg, _);
+
 /**
  * 工具类
  */
@@ -181,14 +198,15 @@
 	var menu = {
 		options: {},
 		oData: [], // 菜单数据
-		sContentId: 'treeMenuBoxId',
+		sContentId: 'leftMenuBoxId',
 		initView: _fInitView,
 		loadChild: _fOutViewChilds,
 		loading: _fLoading,
 		sMenuItemTitleIdFix: 'mt_',
 		sMenuItemContentIdFix: 'mc_',
 		sMenuItemLoadIconIdFix: 'mli_',
-		sMenuItemIconIdFix: 'mi_'
+		sMenuItemIconIdFix: 'mi_',
+		menuCtrl: _fControlLeftMenu
 	};
 	
 	/**
@@ -355,6 +373,31 @@
 		_fOutViewChilds($(hmg.getJid(menu.sContentId)), '', true);
 	}
 	
+	// 左侧菜单显示/隐藏
+	function _fControlLeftMenu() {
+		var self = $(this);
+		var $el = $(hmg.getJid(hmg.Comm.elId.leftContentId));
+		if($el.attr('data-show-flag')=='1') {
+			$el.animate({
+				'left': '-20em'
+			}, function() {
+				$el.attr('data-show-flag', '0');
+				self.text('显示左侧菜单');
+			});
+			$('.main-center').animate({'padding-left': '0em'});
+			$('.main-footer').animate({'padding-left': '0em'});
+		} else {
+			$('.main-center').animate({'padding-left': '19em'});
+			$('.main-footer').animate({'padding-left': '19em'});
+			$el.animate({
+				'left': '0'
+			}, function() {
+				$el.attr('data-show-flag', '1');
+				self.text('隐藏左侧菜单');
+			});
+		}
+	}
+	
 	hmg.Menu = menu;
 })(window, document, $, hmg, _);
 
@@ -365,7 +408,6 @@
 	
 	var tab = {
 		headId: 'topTabHeadId',
-		contentId: 'mainContentId',
 		addTab: _fAddTab,
 		removeTab: _fRemoveTab,
 		items: []
@@ -553,7 +595,7 @@
 		
 		// 添加标签页HTML，增加事件
 		$(hmg.getJid(tab.headId)).append(_fOutHeadView(oOpt.sId, oOpt.sHeadId, oOpt.sTitle, false));
-		$(hmg.getJid(tab.contentId)).append(_fOutContentView(oOpt.sId, oOpt.sContentId, false, false, oOpt.sIFrameId));
+		$(hmg.getJid(hmg.Comm.elId.centerContentId)).append(_fOutContentView(oOpt.sId, oOpt.sContentId, false, false, oOpt.sIFrameId));
 		
 		// 初始化标签页
 		$(hmg.getJid(tab.headId + ' .item')).tab().tab('change tab', oOpt.sId);
@@ -706,3 +748,108 @@
 		this.completeBefore.apply(this, arguments);
 	};*/
 })(window, document, $, hmg, _);
+
+/**
+ * 页面设置菜单
+ */
+; (function(window, document, $, hmg) {
+	
+	var settingPage = {
+		sBtEl: 'topSettingPageBtId',
+		sMenuContentEl: 'topSettingPageMenuContentId',
+		sColorContentEl: 'topSettingPageColorContentId',
+		options: {},
+		oData: {},
+		initView: _fInitView
+	}
+	
+	/**
+	 * 创建颜色项
+	 */
+	function _fOutColorItem(color) {
+		return '<i class="circle icon" style="color: ' + color + ';"></i>';
+	}
+	
+	/**
+	 * 创建菜单项
+	 */
+	function _fOutMenuItem(title) {
+		return '<div class="item">' + title + '</div>';
+	}
+	
+	/**
+	 * 颜色按钮事件
+	 */
+	function _fSetTopBackColor(color) {
+		// 设置顶部背景
+		$(hmg.getJid(hmg.Comm.elId.topContentId)).css('background', color);
+	}
+	
+	/**
+	 * 渲染颜色
+	 */
+	function _fOutColors(list) {
+		if(list && list.length && list.length>0) {
+			var $el = $(hmg.getJid(settingPage.sColorContentEl)).empty();
+			for(var i in list) {
+				// 渲染元素
+				$el.append(_fOutColorItem(list[i]));
+				// 在渲染元素上添加事件
+				$el.find('i:eq(' + i + ')').click(function() {
+					_fSetTopBackColor($(this).css('color'));
+				});
+			}
+		}
+	}
+	
+	/**
+	 * 渲染菜单
+	 */
+	function _fOutMenus(list) {
+		if(list && list.length && list.length>0) {
+			var $el = $(hmg.getJid(settingPage.sMenuContentEl));
+			for(var i in list) {
+				$el.append(_fOutMenuItem(list[i].title));
+				$el.find('.item:eq(' + i + ')').click(function() {
+					var fFn = list[i]['callback'];
+					if(fFn && _.isFunction(fFn)) {
+						fFn.call(this);
+					}
+				});
+			}
+		}
+	}
+	
+	/**
+	 * 初始化
+	 */
+	function _fInitView(oOpt) {
+		oOpt = $.extend({}, {
+			color: ['#2196F3', '#03A9F4', '#607D8B', '#00BCD4', '#009688', '#FF9800'],
+			menu: [{
+				title: '隐藏左侧菜单',
+				callback: hmg.Menu.menuCtrl
+			}]
+		}, oOpt);
+		
+		// 初始化颜色
+		_fOutColors(oOpt.color);
+		// 初始化菜单
+		_fOutMenus(oOpt.menu);
+		
+		// 初始化下拉菜单
+		$(hmg.getJid(settingPage.sBtEl)).dropdown();
+	}
+	
+	hmg.SettingPage = settingPage;
+})(window, document, $, hmg, _);
+
+; (function(window, document, $, hmg) {
+	var control = {
+		options: []
+	}
+	
+	hmg.Control = control;
+	
+})(window, document, $, hmg, _);
+

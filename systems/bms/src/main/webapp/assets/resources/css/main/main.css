@@ -24,10 +24,14 @@ body {
 .main-top .top-toolbar.right.borderless.item .search:not(.icon) {
 	margin-right: 2em;
 }
-.main-top .top-toolbar.right.borderless.item .button {
-	margin-right: 2em;
+.main-top .top-toolbar.right.borderless.item .button.top-menu-botton {
+	margin-right: 1.4em;
 	color: rgba(0,0,0,.87);
 	background-color: #FFF;
+}
+.main-top .top-toolbar.right.borderless.item .button.top-menu-botton.setting-button .menu .header .icon{
+	font-size: 18px;
+	cursor: pointer;
 }
 .main-top .top-toolbar.right.borderless.item .button .floating.ui.teal.label{
 	padding: .3833em .533em;
