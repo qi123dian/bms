@@ -816,7 +816,7 @@
 			cls: ''
 		}, oOpt);
 		
-		var htm = _fOutView(control.options.btId, control.options.icon, control.options.menuId, control.options.icon, control.options.cls);
+		var htm = _fOutView(control.options.btId, control.options.icon, control.options.menuId, control.options.count, control.options.cls);
 		
 		// 渲染及初始化插件
 		hmg.getJel(hmg.Comm.elId.topToolbarContentId).append(htm).find(hmg.getJid(control.options.btId)).dropdown();

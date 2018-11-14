@@ -24,26 +24,7 @@
 			
 			<!-- 顶部菜单 -->
 			<div class="right borderless item top-toolbar" id="topToolbarContentId">
-				<!--
-				<div class="ui right action left icon input">
-					<i class="search icon"></i>
-					<input type="text" placeholder="Search">
-					<div class="ui basic floating dropdown button">
-						<div class="text">This Page</div>
-						<i class="dropdown icon"></i>
-						<div class="menu">
-							<div class="item">This Organization</div>
-							<div class="item">Entire Site</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="ui inverted transparent icon input">
-					<input type="text" placeholder="Search...">
-					<i class="search icon"></i>
-				</div>
-				-->
-				<div class="ui category search">
+				<div class="ui category search" id="topSearchBtId">
 					<div class="ui icon input">
 						<input class="prompt" type="text" placeholder="Search animals...">
 						<i class="search icon"></i>
@@ -52,17 +33,6 @@
 				</div>
 				
 				<!-- 顶部按钮区域 -->
-				<!-- <button class="circular ui icon top right pointing dropdown button top-menu-botton setting-button" id="topSettingPageBtId">
-					<i class="icon cog"></i>
-					<div class="menu" id="topSettingPageMenuContentId">
-						<div class="header" id="topSettingPageColorContentId"></div>
-						<div class="ui divider"></div>
-					</div>
-				</button>
-				<button class="circular ui icon top right pointing dropdown button top-menu-botton" id="testBtId">
-					<i class="wrench icon"></i><div class="floating ui teal label">99+</div>
-				</button> -->
-				
 				<div class="circular ui icon top left pointing dropdown button top-menu-botton">
 					<i class="wrench icon"></i><div class="floating ui teal label">22</div>
 					
