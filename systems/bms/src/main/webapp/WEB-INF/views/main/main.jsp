@@ -36,7 +36,7 @@
 				<div class="circular ui icon top left pointing dropdown button top-menu-botton">
 					<i class="wrench icon"></i><div class="floating ui teal label">22</div>
 					
-					<div class="ui vertical massive menu">
+					<div class="ui vertical massive menu top-menu-menu">
 						<div class="header">
 							<i class="calendar icon"></i> Filter by date
 						</div>
@@ -68,14 +68,16 @@
 								<h5 class="ui header">
 									<img class="ui small avatar image" src="<c:url value="/assets/resources/img/main/avatar1.jpg" />">
 									<div class="content">
-										账户设置 <div class="sub header">Manage your preferences</div>
+										<span>账户设置账户设置账户设置账户设置账户设置</span>
+										<div class="sub header">Manage your preferences Manage your preferences Manage your preferences Manage your preferences Manage your preferences Manage your preferences</div>
 									</div>
 								</h5>
 							</div>
 							<div class="item">
 								<h5 class="ui header">
 									<div class="content">
-										账户设置 <div class="sub header">Manage your preferences Manage your preferencesManage your preferencesManage your preferencesManage your preferencesManage your preferencesManage your preferences</div>
+										<span>账户设置账户设置账户设置账户设置账户设置账户设置账户设置账户设置账户设置账户设置</span>
+										<div class="sub header">Manage your preferences Manage your preferences Manage your preferences Manage your preferences Manage your preferences Manage your preferences</div>
 									</div>
 								</h5>
 							</div>
@@ -83,7 +85,7 @@
 								<h5 class="ui header">
 									<img class="ui small avatar image" src="<c:url value="/assets/resources/img/main/avatar1.jpg" />">
 									<div class="content">
-										账户设置
+										<span>账户设置</span>
 									</div>
 								</h5>
 							</div>

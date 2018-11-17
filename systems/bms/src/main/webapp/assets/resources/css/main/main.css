@@ -33,6 +33,24 @@ body {
 	font-size: 18px;
 	cursor: pointer;
 }
+.main-top .top-toolbar.right.borderless.item .top-menu-botton .top-menu-menu .item .header .content {
+	width: 100%;
+}
+.main-top .top-toolbar.right.borderless.item .top-menu-botton .top-menu-menu .item .header .image + .content {
+	width: calc(100% - 2.75em) !important;
+}
+.main-top .top-toolbar.right.borderless.item .top-menu-botton .top-menu-menu .item .header .content span {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-weight: 500;
+}
+.main-top .top-toolbar.right.borderless.item .top-menu-botton .top-menu-menu .item .header .content .sub.header {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 .main-top .top-toolbar.right.borderless.item .button .floating.ui.teal.label{
 	padding: .3833em .533em;
 	background-color: red !important;
