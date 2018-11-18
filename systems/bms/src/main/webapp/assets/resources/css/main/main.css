@@ -3,6 +3,12 @@ body {
 	font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", Heiti, "黑体", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", sans-serif;
 }
 
+body ::-webkit-scrollbar {
+	-webkit-appearance: none;
+	width: 5px;
+	height: 5px;
+}
+
 /* main-top begin */
 .main-top.ui.menu {
 	height: 5em;
@@ -21,13 +27,26 @@ body {
 .main-top .top-title div h4 {
 	cursor: pointer;
 }
+.main-top .top-toolbar .top-search .results {
+	left: auto !important;
+	right: 0;
+	max-height: 27.42857143rem;
+	overflow: auto;
+}
 .main-top .top-toolbar.right.borderless.item .search:not(.icon) {
-	margin-right: 2em;
+	margin-right: 1.2em;
 }
 .main-top .top-toolbar.right.borderless.item .button.top-menu-botton {
 	margin-right: 1.4em;
 	color: rgba(0,0,0,.87);
 	background-color: #FFF;
+}
+.main-top .top-toolbar.right.borderless.item .button.top-menu-botton .top-menu-menu .header.top-menu-last-button {
+	text-align: center;
+	font-size: 12px;
+}
+.main-top .top-toolbar.right.borderless.item .button.top-menu-botton .top-menu-menu .header.top-menu-last-button .icon {
+	margin-right: .5em;
 }
 .main-top .top-toolbar.right.borderless.item .button.top-menu-botton.setting-button .menu .header .icon{
 	font-size: 18px;
@@ -35,9 +54,11 @@ body {
 }
 .main-top .top-toolbar.right.borderless.item .top-menu-botton .top-menu-menu .item .header .content {
 	width: 100%;
+	font-size: 14px;
 }
 .main-top .top-toolbar.right.borderless.item .top-menu-botton .top-menu-menu .item .header .image + .content {
 	width: calc(100% - 2.75em) !important;
+	font-size: 14px;
 }
 .main-top .top-toolbar.right.borderless.item .top-menu-botton .top-menu-menu .item .header .content span {
 	display: block;
@@ -50,6 +71,7 @@ body {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	font-size: 12px;
 }
 .main-top .top-toolbar.right.borderless.item .button .floating.ui.teal.label{
 	padding: .3833em .533em;

@@ -347,6 +347,18 @@
 			minCharacters : 3
 		});*/
 		
+		$('#topSearchQueryBtId').click(function() {
+			var $el = $('#topSearchQueryResultContentId');
+			if($el.hasClass('visible')) {
+				$el.removeClass('visible').removeClass('transition').unbind('outclick');
+			} else {
+				$el.addClass('transition').addClass('visible').outclick(function() {
+					// 区域外单机事件关闭界面
+					$(this).removeClass('visible').removeClass('transition').unbind('outclick');
+				});
+			}
+		});
+		
 		
 	};
 	

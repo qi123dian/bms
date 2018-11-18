@@ -16,4 +16,18 @@ public class ApplicationContextUtil implements ApplicationContextAware {
 	public static ApplicationContext getApplicationContext() {
 		return context;
 	}
+	
+	/**
+	 * 获取Spring Bean
+	 * @param beanName
+	 * @return
+	 * @throws Exception
+	 */
+	public static Object getBean(String beanName) throws Exception{
+		return context.getBean(beanName);
+	}
+	
+	public static <T> T getBean(String beanName, Class<T> clazz) throws Exception{
+		return clazz.cast(getBean(beanName));
+	}
 }

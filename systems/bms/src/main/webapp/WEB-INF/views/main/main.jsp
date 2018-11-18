@@ -24,12 +24,13 @@
 			
 			<!-- 顶部菜单 -->
 			<div class="right borderless item top-toolbar" id="topToolbarContentId">
-				<div class="ui category search" id="topSearchBtId">
+				
+				<div class="ui top left pointing dropdown category search top-search" id="topSearchBtId">
 					<div class="ui icon input">
 						<input class="prompt" type="text" placeholder="Search animals...">
-						<i class="search icon"></i>
+						<i class="circular search link icon" id="topSearchQueryBtId"></i>
 					</div>
-					<div class="results"></div>
+					<div class="results" id="topSearchQueryResultContentId"><div class="category"><div class="name">Animals</div><div class="results"><a class="result"><div class="content"><div class="title">African Elephant</div><div class="description">Vulnerable</div></div></a><a class="result"><div class="content"><div class="title">African Wild Dog</div><div class="description">Endangered</div></div></a><a class="result"><div class="content"><div class="title">Albacore Tuna</div><div class="description">Near Threatened</div></div></a></div></div><div class="category"><div class="name">Animals</div><div class="results"><a class="result"><div class="content"><div class="title">African Elephant</div><div class="description">Vulnerable</div></div></a><a class="result"><div class="content"><div class="title">African Wild Dog</div><div class="description">Endangered</div></div></a><a class="result"><div class="content"><div class="title">Albacore Tuna</div><div class="description">Near Threatened</div></div></a></div></div><div class="category"><div class="name">Animals</div><div class="results"><a class="result"><div class="content"><div class="title">African Elephant</div><div class="description">Vulnerable</div></div></a><a class="result"><div class="content"><div class="title">African Wild Dog</div><div class="description">Endangered</div></div></a><a class="result"><div class="content"><div class="title">Albacore Tuna</div><div class="description">Near Threatened</div></div></a></div></div><div class="category"><div class="name">Passwords</div><div class="results"><a class="result"><div class="content"><div class="title">abc123</div></div></a><a class="result"><div class="content"><div class="title">andrew</div></div></a><a class="result"><div class="content"><div class="title">asshole</div></div></a></div></div><div class="category"><div class="name">Dogs</div><div class="results"><a class="result"><div class="content"><div class="title">Abby</div><div class="description">13th most popular Female name</div></div></a><a class="result"><div class="content"><div class="title">Abby</div><div class="description">53th most popular Female name</div></div></a><a class="result"><div class="content"><div class="title">Alex</div><div class="description">25th most popular Female name</div></div></a></div></div><div class="category"><div class="name">Cats</div><div class="results"><a class="result"><div class="content"><div class="title">Abby</div><div class="description">13th most popular Female name</div></div></a><a class="result"><div class="content"><div class="title">Abby</div><div class="description">53th most popular Female name</div></div></a><a class="result"><div class="content"><div class="title">Alex</div><div class="description">25th most popular Female name</div></div></a></div></div></div>
 				</div>
 				
 				<!-- 顶部按钮区域 -->
@@ -91,8 +92,9 @@
 							</div>
 						</div>
 						<div class="divider"></div>
-						<div class="header">
-							<button class="ui fluid basic button"><i class="icon wifi"></i>WIFI</button>
+						<div class="header top-menu-last-button">
+							<a href="javascript:void(0)"><i class="icon wifi"></i>更多</a>
+							<!-- <button class="ui fluid basic button"><i class="icon wifi"></i>WIFI</button> -->
 						</div>
 					</div>
 					
