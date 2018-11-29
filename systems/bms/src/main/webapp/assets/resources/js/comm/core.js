@@ -294,7 +294,7 @@
 					exclusive: false,
 					onOpening: function(a, b, c) {
 					},
-					onOpen: function() {
+					onChange: function() {
 						
 						var self = $(this);
 						var sElId = _fGetElId(self); // 获取元素id
