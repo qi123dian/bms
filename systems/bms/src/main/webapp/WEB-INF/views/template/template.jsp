@@ -3,21 +3,21 @@
 <div class="ui grid">
 	<!-- 主体页面标题操作区域 -->
 	<div class="sixteen wide column">
-		<div class="ui secondary menu page-header">
+		<div class="ui secondary menu page-header page-top">
 			<!-- 页面标题 -->
-			<div class="item">
+			<div class="item page-opera-title">
 				<div class="ui medium header">
 					<h4 class="ui header">
-						<i class="settings icon"></i>
+						<i class="list alternate outline icon"></i>
 						<div class="content">
-							账户设置
-							<div class="sub header">Manage your preferences</div>
+							<span>模板页面</span>
+							<div class="sub header">模板内容页面</div>
 						</div>
 					</h4>
 				</div>
 			</div>
 			<!-- 页面操作 -->
-			<div class="right borderless item">
+			<div class="right borderless item page-opera-opera">
 				<button class="circular ui icon button">
 					<i class="icon settings"></i>
 				</button>

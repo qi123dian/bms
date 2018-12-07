@@ -5,7 +5,7 @@
 <script type="text/javascript" src="<c:url value="/assets/components/animsition-v4.0.2/dist/js/animsition.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/assets/components/underscore-v1.9.1/underscore-min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/assets/components/jquery-outclick/outclick.min.js" />"></script>
-<script type="text/javascript" src="<c:url value="/assets/components/slim-scroll-v1.3.3/dist/slimscroll.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/assets/components/layer-v3.1.1/dist/layer.js" />"></script>
 
 <script type="text/javascript">
 	window.hmg = hmg = {}; // Base Package

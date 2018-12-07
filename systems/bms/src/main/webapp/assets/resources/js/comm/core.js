@@ -79,10 +79,15 @@
 	 * 获取完整请求地址
 	 */
 	function _fGetAppPath(sUrl) {
-		if(sUrl)
-			return _fGetRootPath() + (/^\//.test(sUrl)?sUrl:'/'+sUrl);
-		else
+		if(_fIsUrlBase(sUrl)) {
+			if((new RegExp('^\\' + hmg.getRootPath())).test(sUrl)) {
+				return sUrl;
+			} else {
+				return _fGetRootPath() + (/^\//.test(sUrl)?sUrl:'/'+sUrl);
+			}
+		} else {
 			return sUrl;
+		}
 	}
 	
 	/**
@@ -90,6 +95,40 @@
 	 */
 	function _fGetRootPath() {
 		return hmg.basePath;
+	}
+	
+	/**
+	 * 判断URL是否为本地链接
+	 */
+	function _fIsUrlBase(url) {
+		if(/assets/.test(url) || /\/page|rest\/[a-zA-Z0-9_]+\/[a-zA-Z0-9_]+$/.test(url) || /\/page|rest\/[a-zA-Z0-9_]+\/[a-zA-Z0-9_]+\?/.test(url)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * URL添加参数
+	 */
+	function _fAddUrlParam(url, opt) {
+		url = url?url:'';
+		if(opt && _.isObject(opt)) {
+			if(/&|\?/.test(url)) {
+				url += '&';
+			} else {
+				url += '?';
+			}
+			for(var s in opt) {
+				url += s + '=' + encodeURIComponent(opt[s]) + '&';
+			}
+			if(/&$/.test(url)) {
+				url = url.replace(/&$/, '');
+			}
+			return url;
+		} else {
+			return url;
+		}
 	}
 	
 	hmg.Util = util;
@@ -101,6 +140,8 @@
 	hmg.getRootPath = _fGetRootPath; // 简写
 	hmg.getJid = _fGetJqueryIdSelect;
 	hmg.getJel = _fGetJqueryEl;
+	hmg.addUrlParam = _fAddUrlParam;
+	hmg.isUrlBase = _fIsUrlBase;
 })(window, document, $, hmg, _);
 
 /**
@@ -416,7 +457,8 @@
 		headId: 'topTabHeadId',
 		addTab: _fAddTab,
 		removeTab: _fRemoveTab,
-		items: []
+		items: [],
+		loadPage: _fLoadPage
 	};
 	
 	/**
@@ -430,10 +472,10 @@
 	/**
 	 * 标签页内容HTML
 	 */
-	function _fOutContentView(sId, sContentId, isActive, isLoading, sIFrameId) {
+	function _fOutContentView(sId, sContentId, sTitle, sUrl, isActive, isLoading, sIFrameId) {
 		var sActive = isActive?' active':'';
 		var loading = isLoading?' loading':'';
-		return '<div class="ui bottom attached tab' + sActive + ' main-box' + loading + '" data-tab="' + sId + '" id="' + sContentId + '">'
+		return '<div class="ui bottom attached tab' + sActive + ' main-box' + loading + '" data-tab="' + sId + '" data-tab-title="' + sTitle + '" data-tab-url="' + sUrl + '" id="' + sContentId + '">'
 		+ (sIFrameId?'<iframe style="border-width: 0px; width: 100%;" id="' + sIFrameId + '" width="100%" src=""></iframe>':'')
 		+ '</div>';
 	}
@@ -442,7 +484,7 @@
 	 * 加载内容
 	 */
 	function _fLoadView(sId, sHtml) {
-		$('#content_' + sId).empty().html(sHtml);
+		$('#content_' + sId).html(sHtml);
 	}
 	
 	/**
@@ -553,6 +595,69 @@
 	}
 	
 	/**
+	 * Tab 加载页面
+	 */
+	function _fLoadPage(sId) {
+		
+		$('#content_' + sId).empty();
+		
+		var index = _fGetIndexOfId(sId);
+		var oOpt = _fGetDataOfIndex(index);
+		
+		// 增加loading
+		_fLoading(oOpt.sId, true);
+		
+		if(/^\//.test(oOpt.sUrl)) {
+			oOpt.sUrl = hmg.getAppPath(oOpt.sUrl);
+		}
+		
+		if(hmg.isUrlBase(oOpt.sUrl)) { // 本地页面直接Ajax获取
+			oOpt.sUrl = hmg.getAppPath(oOpt.sUrl);
+			
+			var uprm = {};
+			_.map(oOpt, function(num, key) {
+				uprm[key] = encodeURI(oOpt[key]);
+			});
+			
+			// Ajax Get获取页面
+			hmg.ajax({
+				url: oOpt.sUrl,
+				dataType: 'html',
+				data: uprm,
+				contentType: 'text/html',
+				success: function(d) {
+					_fLoadView(oOpt.sId, d);
+				},
+				error: function(d) {
+				},
+				complete: function(d) {
+					// 去掉Loading，加载页面
+					_fLoading(oOpt.sId, false);
+				}
+			});
+		} else if(/^[http|https]/.test(oOpt.sUrl)){ // 其他url在iframe中展现
+			var $iframeEl = hmg.getJel(oOpt.sIFrameId).attr('src', oOpt.sUrl);
+			var domIframeEl = $iframeEl[0];
+			if(domIframeEl.attachEvent) {
+				domIframeEl.attachEvent("onload", function() {
+					// ie 处理方式
+				});
+			} else {
+				domIframeEl.onload = function() {
+					$iframeEl.css('height', domIframeEl.contentWindow.top.innerHeight + 'px');
+				};
+			}
+			
+			// 去掉Loading，加载页面
+			_fLoading(oOpt.sId, false);
+		} else { // 字符串直接展现
+			// 去掉Loading，加载页面
+			_fLoading(oOpt.sId, false);
+			_fLoadView(oOpt.sId, oOpt.sUrl);
+		}
+	}
+	
+	/**
 	 * 新增标签页
 	 */
 	function _fAddTab(oOpt) {
@@ -562,8 +667,7 @@
 			sTitle: '',
 			sUrl: '',
 			sHeadId: '',
-			sContentId: '',
-			isIFrame: false
+			sContentId: ''
 		}, oOpt);
 		
 		// 校验参数
@@ -601,7 +705,7 @@
 		
 		// 添加标签页HTML，增加事件
 		$(hmg.getJid(tab.headId)).append(_fOutHeadView(oOpt.sId, oOpt.sHeadId, oOpt.sTitle, false));
-		$(hmg.getJid(hmg.Comm.elId.centerContentId)).append(_fOutContentView(oOpt.sId, oOpt.sContentId, false, false, oOpt.sIFrameId));
+		$(hmg.getJid(hmg.Comm.elId.centerContentId)).append(_fOutContentView(oOpt.sId, oOpt.sContentId, oOpt.sTitle, oOpt.sUrl, false, false, oOpt.sIFrameId));
 		
 		// 初始化标签页
 		$(hmg.getJid(tab.headId + ' .item')).tab().tab('change tab', oOpt.sId);
@@ -612,57 +716,10 @@
 			_fRemoveTab($(this).attr('data-tab'));
 		});
 		
-		// 增加loading
-		_fLoading(oOpt.sId, true);
-		
-		if(/^\//.test(oOpt.sUrl)) {
-			oOpt.sUrl = hmg.getAppPath(oOpt.sUrl);
-		}
-		
-		// sUrl判断是否为url
-		var rReg = new RegExp('^\\' + hmg.getRootPath());
-		if(oOpt.sIFrameId) {
-			var $iframeEl = $(hmg.getJid(oOpt.sIFrameId)).attr('src', oOpt.sUrl);
-			var domIframeEl = $iframeEl[0];
-			if(domIframeEl.attachEvent) {
-				domIframeEl.attachEvent("onload", function() {
-					// ie 处理方式
-				});
-			}else{
-				domIframeEl.onload = function() {
-					$iframeEl.css('height', domIframeEl.contentWindow.top.innerHeight + 'px');
-				};
-			}
-			
-			// 去掉Loading，加载页面
-			_fLoading(oOpt.sId, false);
-		} if(rReg.test(oOpt.sUrl) || /^[http|https|localhost]/.test(oOpt.sUrl)) {
-			
-			// Ajax Get获取页面
-			hmg.ajax({
-				url: oOpt.sUrl,
-				dataType: 'html',
-				contentType: 'text/html',
-				success: function(d) {
-					_fLoadView(oOpt.sId, d);
-				},
-				error: function(d) {
-				},
-				complete: function(d) {
-					// 去掉Loading，加载页面
-					_fLoading(oOpt.sId, false);
-				}
-			});
-			
-		} else {
-			
-			// 去掉Loading，加载页面
-			_fLoading(oOpt.sId, false);
-			_fLoadView(oOpt.sId, oOpt.sUrl);
-		}
-		
 		// 维护标签页参数
 		_fAddItem(oOpt);
+		
+		_fLoadPage(oOpt.sId);
 	}
 	
 	/**
@@ -941,3 +998,187 @@
 	hmg.SettingPage = settingPage;
 })(window, document, $, hmg, _);
 
+
+/**
+ * 加载页面操作
+ */
+; (function(window, document, $, hmg) {
+	
+	var pageOpera = {
+		renderContentId: '',
+		tabContentId: '',
+		items: ['help', 'action'],
+		init: _initView
+	}
+	
+	function _helpView(renderEl, icon, msg) {
+		icon = icon?'<i class="' + icon + '"></i>':'';
+		var htm = '<button class="circular ui icon button page-top-action-help">'
+			+ '    ' + icon
+			+ '</button>';
+		
+		var el = renderEl.append(htm).find('.page-top-action-help');
+		el.click(function() {
+			layer.open({
+				title: '帮助信息',
+				content: msg
+			});
+		});
+	}
+	
+	function _actionView(renderEl, icon, items) {
+		
+		items = _.isArray(items)?items:[];
+		icon = icon?'<i class="' + icon + '"></i>':'';
+		
+		var htm = '<div class="ui icon top left pointing dropdown button page-top-action-sett">'
+			+ '    ' + icon
+			+ '    <div class="menu page-top-action-sett-menu" tabindex="-1"></div>'
+			+ '</div>';
+		
+		var btEl = renderEl.append(htm).find('.page-top-action-sett');
+		var menuEl = btEl.find('.page-top-action-sett-menu');
+		var itemEl = undefined;
+		var o = undefined;
+		
+		for(var i in items) {
+			o = items[i];
+			o = _.isObject(o)?o:{};
+			o['icon'] = o['icon']?'<i class="' + o['icon'] + '"></i>':'';
+			itemEl = $('<div class="item">'
+			+ '    ' + o['icon']
+			+ '    ' + o['text']
+			+ '</div>');
+			itemEl.click((function(fn) {
+				return function() {
+					fn.apply(this, [o]);
+				}
+			})(o['handler']));
+			menuEl.append(itemEl);
+		}
+		
+		btEl.dropdown();
+	}
+	
+	function _titleView(icon, text, subText) {
+		icon = icon?('<i class="' + icon + '"></i>'):'';
+		return '<div class="item page-opera-title">'
+			+ '    <div class="ui medium header">'
+			+ '        <h4 class="ui header">'
+			+ '            ' + icon
+			+ '            <div class="content">'
+			+ '                <span>' + text + '</span>'
+			+ '                <div class="sub header">' + subText + '</div>'
+			+ '            </div>'
+			+ '        </h4>'
+			+ '    </div>'
+			+ '</div>';
+	}
+	
+	function _reloadPage(opt) {
+		opt = opt?opt:{};
+		
+		var tabContentEl = hmg.getJel(opt.pageId).parents('.ui.main-box');
+		if(tabContentEl.hasClass('tab')) {
+			var id = tabContentEl.attr('data-tab');
+			hmg.Tab.loadPage(id);
+		} else {
+			hmg.info('暂无实现');
+		}
+	}
+	
+	function _closeTab(opt) {
+		opt = opt?opt:{};
+		
+		var tabContentEl = hmg.getJel(opt.pageId).parents('.ui.main-box');
+		if(tabContentEl.hasClass('tab')) {
+			var id = tabContentEl.attr('data-tab');
+			hmg.Tab.removeTab(id);
+		} else {
+			hmg.info('暂无实现');
+		}
+	}
+	
+	function _fullScreenPage(opt) {
+		opt = opt?opt:{};
+		
+		var tabContentEl = hmg.getJel(opt.pageId).parents('.ui.main-box');
+		
+		if(tabContentEl.hasClass('tab')) {
+			var title = tabContentEl.attr('data-tab-title');
+			var url = tabContentEl.attr('data-tab-url');
+			
+			var index = layer.open({
+				type: 2,
+				title: '<span style="font-weight: bold;">[ 全屏显示 ]&nbsp;-&nbsp;' + title + '</span>',
+				content: hmg.addUrlParam(hmg.getAppPath('/page/comm/fullscreen'), {pageUrl: hmg.getAppPath(url)}),
+				area: 'auto',
+				maxmin: false,
+				resize: false
+			});
+			layer.full(index);
+		} else {
+			hmg.info('暂无实现');
+		}
+	}
+	
+	function _initView(pageId, selector, icon, text, subText, plugins) {
+		var htm = '<div class="ui secondary menu page-header page-top">'
+			+ '    ' + _titleView(icon, text, subText)
+			+ '    <div class="right borderless item page-opera-opera">'
+			+ '    </div>'
+			+ '</div>';
+		
+		console.log('pageId', pageId);
+		
+		var tabContentEl = hmg.getJel(pageId).parents('.ui.main-box');
+		var el = tabContentEl.find(selector);
+		var aEl = el.prepend(htm).find('.page-opera-opera');
+		
+		plugins = _.isArray(plugins)?plugins:[];
+		var o = undefined;
+		
+		for(var i in plugins) {
+			o = plugins[i];
+			o = _.isObject(o)?o:{};
+			
+			if(o.type=='help' && o.msg) {
+				_helpView(aEl, 'icon question circle outline', o.msg);
+			} else if(o.type=='action' && _.isArray(o.items) && o.items.length>0) {
+				
+				var pluginArr = [];
+				var oo = undefined;
+				for(var ii in o.items) {
+					oo = o.items[ii];
+					if(oo=='refresh') {
+						pluginArr.push({
+							text: '重新加载页面',
+							icon: 'refresh icon',
+							handler: _reloadPage,
+							pageId: pageId
+						});
+					} else if(oo=='close') {
+						pluginArr.push({
+							text: '关闭当前页',
+							icon: 'recycle icon',
+							handler: _closeTab,
+							pageId: pageId
+						});
+					} else if(oo=='fullscreen'){
+						pluginArr.push(_.extend({}, {
+							text: '全屏显示',
+							icon: 'expand arrows alternate icon',
+							handler: _fullScreenPage,
+							pageId: pageId
+						}));
+					}
+				}
+				
+				_actionView(aEl, 'icon ellipsis vertical', pluginArr);
+			}
+		}
+	}
+	
+	hmg.PageOpera = pageOpera;
+	
+})(window, document, $, hmg, _);

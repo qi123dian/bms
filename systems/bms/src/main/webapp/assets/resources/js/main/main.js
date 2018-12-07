@@ -269,9 +269,9 @@
 			}]
 		}, {
 			id: 'id5',
-			icon: 'creative commons icon',
-			title: '测试标签页2',
-			url: '/page/template/template',
+			icon: 'file alternate icon',
+			title: '菜单管理',
+			url: '/page/menu/menu',
 			isChild: true,
 			children: []
 		}]
@@ -322,30 +322,6 @@
 				console.log('complete', d);
 			}
 		});
-		
-		/*$('#testBtId').click(function() {
-			var sNow = _.now();
-			hmg.Tab.addTab({
-				sId: 'main' + sNow,
-				sTitle: '模板界面' + sNow,
-				sUrl: 'http://semantic-ui.cn/modules/accordion.html#/settings',// 'https://www.baidu.com',
-				isIFrame: true
-			});
-			
-			console.log(hmg.Tab.items);
-		});*/
-		
-		/*hmg.getJel('topSearchBtId').search({
-			apiSettings: {
-				url: '//api.github.com/search/repositories?q={query}'
-			},
-			fields: {
-				results : 'items',
-				title   : 'name',
-				url     : 'html_url'
-			},
-			minCharacters : 3
-		});*/
 		
 		$('#topSearchQueryBtId').click(function() {
 			var $el = $('#topSearchQueryResultContentId');

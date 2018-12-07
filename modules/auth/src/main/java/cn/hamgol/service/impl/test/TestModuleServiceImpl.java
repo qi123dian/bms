@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.hamgol.common.utils.Util;
 import cn.hamgol.dao.core.auth.SysUserMapper;
 import cn.hamgol.dao.db.test.custom.TestModuleCustomMapper;
 import cn.hamgol.entity.core.auth.SysUser;
@@ -69,9 +70,9 @@ public class TestModuleServiceImpl implements TestModuleService{
 		
 		su = new SysUser();
 		
-		su.setUserId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
-		su.setUserName("testTransaction");
-		su.setUserPwd("123456");
+		su.setId(Util.getUId());
+		su.setTitle("testTransaction");
+		su.setPwd("123456");
 		su.setCreateUser("admin");
 		su.setCreateTime(new Date());
 		

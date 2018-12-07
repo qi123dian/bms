@@ -184,6 +184,5 @@
 		
 		<%@include file="../comm/core-js.jsp"%>
 		<script type="text/javascript" src="<c:url value="/assets/resources/js/main/main.js" />"></script>
-		
 	</body>
 </html>
