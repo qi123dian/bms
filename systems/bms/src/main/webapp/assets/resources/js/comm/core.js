@@ -1129,8 +1129,6 @@
 			+ '    </div>'
 			+ '</div>';
 		
-		console.log('pageId', pageId);
-		
 		var tabContentEl = hmg.getJel(pageId).parents('.ui.main-box');
 		var el = tabContentEl.find(selector);
 		var aEl = el.prepend(htm).find('.page-opera-opera');
