@@ -3,17 +3,17 @@
  */
 ; (function(window, document, $, hmg, _) {
 	
-	var menuPage = {
+	var page = {
 		pageId: pageId,
 		pageBoxEl: hmg.getJel(pageId),
 		init: _init
 	}
 	
-	function _init(opt) {
+	function _init(pageId) {
 		
-		hmg.PageOpera.init(opt, '.center-page-top', 'list alternate outline icon', '菜单管理', '页面操作功能区域', [{
+		hmg.PageOpera.init(pageId, '.center-page-top', 'list alternate outline icon', '菜单管理', '页面操作功能区域', [{
 			type: 'help',
-			msg: menuPage.pageId
+			msg: '菜单管理'
 		},
 		{
 			type: 'action',
@@ -22,7 +22,7 @@
 	}
 	
 	$(document).ready(function(){
-		_init(menuPage.pageId);
+		_init(page.pageId);
 	});
 })(window, document, $, hmg, _);
 

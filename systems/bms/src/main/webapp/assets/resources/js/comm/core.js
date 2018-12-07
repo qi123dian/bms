@@ -1000,7 +1000,7 @@
 
 
 /**
- * 加载页面操作
+ * 页面操作
  */
 ; (function(window, document, $, hmg) {
 	
@@ -1011,6 +1011,9 @@
 		init: _initView
 	}
 	
+	/**
+	 * 帮助功能
+	 */
 	function _helpView(renderEl, icon, msg) {
 		icon = icon?'<i class="' + icon + '"></i>':'';
 		var htm = '<button class="circular ui icon button page-top-action-help">'
@@ -1026,6 +1029,9 @@
 		});
 	}
 	
+	/**
+	 * 操作功能
+	 */
 	function _actionView(renderEl, icon, items) {
 		
 		items = _.isArray(items)?items:[];
@@ -1060,6 +1066,9 @@
 		btEl.dropdown();
 	}
 	
+	/**
+	 * 页面标题
+	 */
 	function _titleView(icon, text, subText) {
 		icon = icon?('<i class="' + icon + '"></i>'):'';
 		return '<div class="item page-opera-title">'
@@ -1075,6 +1084,9 @@
 			+ '</div>';
 	}
 	
+	/**
+	 * 重新加载页面
+	 */
 	function _reloadPage(opt) {
 		opt = opt?opt:{};
 		
@@ -1087,6 +1099,9 @@
 		}
 	}
 	
+	/**
+	 * 关闭当前页
+	 */
 	function _closeTab(opt) {
 		opt = opt?opt:{};
 		
@@ -1099,6 +1114,9 @@
 		}
 	}
 	
+	/**
+	 * 全屏显示
+	 */
 	function _fullScreenPage(opt) {
 		opt = opt?opt:{};
 		
@@ -1122,6 +1140,9 @@
 		}
 	}
 	
+	/**
+	 * 页面初始化
+	 */
 	function _initView(pageId, selector, icon, text, subText, plugins) {
 		var htm = '<div class="ui secondary menu page-header page-top">'
 			+ '    ' + _titleView(icon, text, subText)
