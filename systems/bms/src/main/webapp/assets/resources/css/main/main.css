@@ -278,6 +278,10 @@ body ::-webkit-scrollbar {
 .main-center .main-box .page-top .page-opera-title .header .ui.header .sub.header{
 	font-size: 12px;
 }
+.ui.dividing.form {
+	border-bottom: 1px solid rgba(34,36,38,.15);
+	margin-bottom: 1em;
+}
 /* main-center end */
 
 /* main-footer begin */
@@ -297,6 +301,9 @@ body ::-webkit-scrollbar {
 .cleaxfix {
 	clear: both;
 }
+.alignright {
+	text-align: right;
+}
 /* common end */
 
 /* layer modal */
@@ -305,4 +312,38 @@ body ::-webkit-scrollbar {
 }
 .layui-layer .layui-layer-content iframe {
 	height: 100% !important;
+}
+/* datatables */
+table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 18px;
+	border-bottom: 1px solid #b5a6ff;
+}
+table.dataTable.no-footer {
+	border-bottom: 1px solid #b5a6ff;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+	color: white !important;
+	border-width: 0;
+	background-color: #cacbcd;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0.5em 1em;
+	margin-left: 0;
+	color: #333 !important;
+	border-width: 0;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+	border-width: 0;
+}
+.ui.pagination.menu .active.item {
+	padding: 0.5em 1em;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+	color: #333 !important;
+}
+table.dataTable.stripe tbody>tr.odd.selected, table.dataTable.stripe tbody>tr.odd>.selected, table.dataTable.display tbody>tr.odd.selected, table.dataTable.display tbody>tr.odd>.selected {
+	background-color: rgba(193, 171, 10, 0.43);
+}
+table.dataTable.stripe tbody>tr.even.selected, table.dataTable.stripe tbody>tr.even>.selected, table.dataTable.display tbody>tr.even.selected, table.dataTable.display tbody>tr.even>.selected {
+	background-color: rgba(193, 171, 10, 0.43);
 }

@@ -6,6 +6,10 @@
 <script type="text/javascript" src="<c:url value="/assets/components/underscore-v1.9.1/underscore-min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/assets/components/jquery-outclick/outclick.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/assets/components/layer-v3.1.1/dist/layer.js" />"></script>
+<script type="text/javascript" src="<c:url value="/assets/components/datatables-v1.10.19/DataTables-1.10.18/js/jquery.dataTables.js" />"></script>
+<script type="text/javascript" src="<c:url value="/assets/components/datatables-v1.10.19/DataTables-1.10.18/js/dataTables.semanticui.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/assets/components/datatables-v1.10.19/Select-1.2.6/js/dataTables.select.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/assets/components/datatables-v1.10.19/Select-1.2.6/js/select.semanticui.min.js" />"></script>
 
 <script type="text/javascript">
 	window.hmg = hmg = {}; // Base Package

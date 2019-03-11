@@ -1,34 +1,11 @@
 <%@page pageEncoding="UTF-8"%>
+<%@include file="../comm/taglib.jsp"%>
+<%@include file="../comm/core-page.jsp"%>
+
 <!-- 主题页面容器 -->
-<div class="ui grid">
+<div class="ui grid" id="<%=pageId%>">
 	<!-- 主体页面标题操作区域 -->
-	<div class="sixteen wide column">
-		<div class="ui secondary menu page-header page-top">
-			<!-- 页面标题 -->
-			<div class="item page-opera-title">
-				<div class="ui medium header">
-					<h4 class="ui header">
-						<i class="list alternate outline icon"></i>
-						<div class="content">
-							<span>模板页面</span>
-							<div class="sub header">模板内容页面</div>
-						</div>
-					</h4>
-				</div>
-			</div>
-			<!-- 页面操作 -->
-			<div class="right borderless item page-opera-opera">
-				<button class="circular ui icon button">
-					<i class="icon settings"></i>
-				</button>
-				<button class="circular ui icon button">
-					<i class="icon question circle outline"></i>
-				</button>
-				<button class="circular ui icon button">
-					<i class="icon ellipsis vertical"></i>
-				</button>
-			</div>
-		</div>
+	<div class="sixteen wide column page-cls">
 		<!-- 页面内容 -->
 		<div class="ui segment" style="height: 200px;">
 			left - center - left
@@ -36,7 +13,67 @@
 	</div>
 	<div class="sixteen wide column">
 		<div class="ui segment">
-			<h5 class="ui header">
+			<h5 class="ui dividing header">
+				查询展现
+			</h5>
+			<div class="ui dividing form">
+				<div class="four fields">
+					<div class="field error">
+						<label>First Name</label>
+						<input placeholder="First Name" type="text">
+					</div>
+					<div class="field">
+						<label>Last Name</label>
+						<input placeholder="Last Name" type="text">
+					</div>
+					<div class="field error">
+						<label>First Name</label>
+						<input placeholder="First Name" type="text">
+					</div>
+					<div class="field">
+						<label>Last Name</label>
+						<input placeholder="Last Name" type="text">
+					</div>
+				</div>
+				<div class="four fields">
+					<div class="field error">
+						<label>First Name</label>
+						<input placeholder="First Name" type="text">
+					</div>
+					<div class="field">
+						<label>Last Name</label>
+						<input placeholder="Last Name" type="text">
+					</div>
+					<div class="field error">
+						<label>Gender</label>
+						<div class="ui selection dropdown">
+							<div class="default text">Select</div>
+							<i class="dropdown icon"></i>
+							<input type="hidden" name="gender">
+							<div class="menu">
+								<div class="item" data-value="male">Male</div>
+								<div class="item" data-value="female">Female</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="fields">
+					<div class="sixteen wide field alignright">
+						<button class="ui button">查询 </button>
+						<button class="ui button">查询 </button>
+						<button class="ui button">查询 </button>
+						<button class="ui button">查询 </button>
+						<button class="ui button">查询 </button>
+						<button class="ui button">查询 </button>
+					</div>
+				</div>
+			</div>
+			<table id="example" class="display" width="100%"></table>
+		</div>
+	</div>
+	<div class="sixteen wide column">
+		<div class="ui segment">
+			<h5 class="ui dividing header">
 				账户设置
 				<div class="sub header">管理你的账户设置并设置邮箱</div>
 			</h5>
@@ -71,7 +108,7 @@
 	</div>
 	<div class="sixteen wide column">
 		<div class="ui segment">
-			<h5 class="ui header">
+			<h5 class="ui dividing header">
 				账户设置
 				<div class="sub header">管理你的账户设置并设置邮箱</div>
 			</h5>
@@ -192,3 +229,4 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="<c:url value="/assets/resources/js/template/template.js" />"></script>

@@ -11,16 +11,16 @@
 	
 	function _init(pageId) {
 		
-		hmg.PageOpera.init(pageId, '.center-page-top', 'list alternate outline icon', '菜单管理', '页面操作功能区域', [{
+		hmg.PageOpera.init(pageId, '.page-cls', 'list alternate outline icon', '模板页面', '功能展示', [{
 			type: 'help',
-			msg: '菜单管理'
+			msg: '展示常用功能'
 		},
 		{
 			type: 'action',
 			items: ['refresh', 'close', 'fullscreen']
-		}]);
+		}])
 		
-		$('#menuTreeContentId').DataTable({
+		$('#example').DataTable({
 			ajax: function (data, callback, settings) {
 				var dataSet = {
 					"data": [{
@@ -32,76 +32,21 @@
 						"office": "Edinburgh",
 						"extn": "5421",
 						"children": [{
-								"id": "55",
-								"name": "Shad Decker",
-								"position": "Regional Director",
-								"salary": "$183,000",
-								"start_date": "2008/11/13",
-								"office": "Edinburgh",
-								"extn": "6373"
-							},
-							{
-								"id": "56",
-								"name": "Michael Bruce",
-								"position": "Javascript Developer",
-								"salary": "$183,000",
-								"start_date": "2011/06/27",
-								"office": "Singapore",
-								"extn": "5384",
-								"children": [{
-										"id": "55",
-										"name": "Shad Decker",
-										"position": "Regional Director",
-										"salary": "$183,000",
-										"start_date": "2008/11/13",
-										"office": "Edinburgh",
-										"extn": "6373"
-									},
-									{
-										"id": "56",
-										"name": "Michael Bruce",
-										"position": "Javascript Developer",
-										"salary": "$183,000",
-										"start_date": "2011/06/27",
-										"office": "Singapore",
-										"extn": "5384",
-										"children": [{
-												"id": "55",
-												"name": "Shad Decker",
-												"position": "Regional Director",
-												"salary": "$183,000",
-												"start_date": "2008/11/13",
-												"office": "Edinburgh",
-												"extn": "6373"
-											},
-											{
-												"id": "56",
-												"name": "Michael Bruce",
-												"position": "Javascript Developer",
-												"salary": "$183,000",
-												"start_date": "2011/06/27",
-												"office": "Singapore",
-												"extn": "5384",
-												"children": [{
-														"id": "55",
-														"name": "Shad Decker",
-														"position": "Regional Director",
-														"salary": "$183,000",
-														"start_date": "2008/11/13",
-														"office": "Edinburgh",
-														"extn": "6373"
-													},
-													{
-														"id": "56",
-														"name": "Michael Bruce",
-														"position": "Javascript Developer",
-														"salary": "$183,000",
-														"start_date": "2011/06/27",
-														"office": "Singapore",
-														"extn": "5384"
-												}]
-										}]
-								}]
+							"id": "100",
+							"name": "Garrett Winters",
+							"position": "Accountant",
+							"salary": "$170,750",
+							"start_date": "2011/07/25",
+							"office": "Tokyo",
+							"extn": "8422"
+						}, {
+							"id": "101",
+							"name": "Garrett Winters",
+							"position": "Accountant",
+							"salary": "$170,750",
+							"start_date": "2011/07/25",
+							"office": "Tokyo",
+							"extn": "8422"
 						}]
 					},
 					{
@@ -616,11 +561,11 @@
 			lengthChange: false,
 			searching: false,
 			sorting: false,
-			ordering: false,
-			orderMulti: false,
-			order: [],
-			serverSide: true,
-			autoWidth: false,
+			treeGrid: {
+				left: 10,
+				expandIcon: '<span>+</span>',
+				collapseIcon: '<span>-</span>'
+			},
 			language: {
 				"decimal": "",
 				"emptyTable": "No data available in table",
@@ -648,20 +593,17 @@
 			select: {
 				style: 'single'
 			},
-			treeGrid: {
-				left: 40,
-				expandIcon: '<i class="caret right icon" style="cursor: pointer; height: auto;"></i>',
-				collapseIcon: '<i class="caret down icon" style="cursor: pointer; height: auto;"></i>'
-			},
 			columns: [
 				{
 					data: 'id',
-					title: '#',
+					title: 'id',
 					target: 0,
-					width: '30%',
 					className: 'treegrid-control',
 					data: function (item) {
-						return '<div style="height: 37px; border-width: 0; width: 1px; float: left; margin: -9px 0px -9px -10px !important; border-left: 1px dashed #ccc;"></div><i class="caret right icon" style="cursor: pointer; height: auto;"></i>' + item.id;
+						if (item.children) {
+							return '<span>+</span>';
+						}
+						return item.id;
 					}
 				},
 				{ data: "name", title: 'name' },
