@@ -1135,8 +1135,8 @@
 				title: '<span style="font-weight: bold;">[ 全屏显示 ]&nbsp;-&nbsp;' + title + '</span>',
 				content: hmg.getJel(opt.pageId).parents('.main-center'),// hmg.addUrlParam(hmg.getAppPath('/page/comm/fullscreen'), {pageUrl: hmg.getAppPath(url)}),
 				area: 'auto',
-				maxmin: true,
-				resize: true
+				maxmin: false,
+				resize: false
 			});
 			layer.full(index);
 		} else {
