@@ -3,7 +3,7 @@
 <%@include file="../comm/core-page.jsp"%>
 
 <!-- 主题页面容器 -->
-<div class="ui grid" id="<%=pageId%>">
+<div class="ui grid">
 	<!-- 主体页面标题操作区域 -->
 	<div class="sixteen wide column center-page-top">
 		<!-- 页面内容 -->

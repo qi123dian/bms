@@ -4,14 +4,14 @@
 ; (function(window, document, $, hmg, _) {
 	
 	var page = {
-		pageId: pageId,
-		pageBoxEl: hmg.getJel(pageId),
+		pagerId: pagerId,
+		pagerEl: pagerEl,
 		init: _init
 	}
 	
-	function _init(pageId) {
+	function _init(pagerId) {
 		
-		hmg.PageOpera.init(pageId, '.center-page-top', 'list alternate outline icon', '菜单管理', '页面操作功能区域', [{
+		hmg.PageOpera.init(pagerId, '.center-page-top', 'list alternate outline icon', '菜单管理', '页面操作功能区域', [{
 			type: 'help',
 			msg: '菜单管理'
 		},
@@ -675,7 +675,7 @@
 	}
 	
 	$(document).ready(function(){
-		_init(page.pageId);
+		_init(page.pagerId);
 	});
 })(window, document, $, hmg, _);
 

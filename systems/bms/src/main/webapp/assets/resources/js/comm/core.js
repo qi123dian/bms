@@ -284,7 +284,7 @@
 			+ '    <div class="header tree-menu-title' + sChildTitleClass + '">'
 			+ '        <i class="icon ui tiny active inline loader" id="' + menu.sMenuItemLoadIconIdFix + sElId + '" style="display: none;"></i>'
 			+ '        ' + sIconHtm
-			+ '        <span">' + sTitle + '</span>'
+			+ '        <span>' + sTitle + '</span>'
 			+ '    </div>'
 			+ '</div>'
 			+ sChildBoxHtm;
