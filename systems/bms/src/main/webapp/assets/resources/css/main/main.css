@@ -1,5 +1,5 @@
 body {
-	background-color: #f3f3f3;
+	/* background-color: #f3f3f3; */
 	font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", Heiti, "黑体", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", sans-serif;
 }
 
@@ -219,11 +219,14 @@ body ::-webkit-scrollbar {
 
 /* main-center begin */
 .main-center {
-	width: 100%;
+	background-color: #eeeeee;
 	padding-left: 19em;
 	padding-top: 5em;
 	padding-right: 0;
 	padding-bottom: 0;
+	width: 100%;
+	/* background: url(../../img/main/background1.svg) no-repeat;
+	background-size: cover; */
 }
 .main-center .main-box {
 	padding: 1em 2em 1em 2em;
@@ -312,6 +315,10 @@ body ::-webkit-scrollbar {
 }
 .layui-layer .layui-layer-content iframe {
 	height: 100% !important;
+}
+.layui-layer .layui-layer-content .main-center.layui-layer-wrap {
+	padding-left: 0;
+	padding-top: 0;
 }
 /* datatables */
 table.dataTable thead th, table.dataTable thead td {

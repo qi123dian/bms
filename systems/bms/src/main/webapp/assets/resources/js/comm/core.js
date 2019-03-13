@@ -1133,10 +1133,10 @@
 			var index = layer.open({
 				type: 1,
 				title: '<span style="font-weight: bold;">[ 全屏显示 ]&nbsp;-&nbsp;' + title + '</span>',
-				content: hmg.getJel(opt.pageId),// hmg.addUrlParam(hmg.getAppPath('/page/comm/fullscreen'), {pageUrl: hmg.getAppPath(url)}),
+				content: hmg.getJel(opt.pageId).parents('.main-center'),// hmg.addUrlParam(hmg.getAppPath('/page/comm/fullscreen'), {pageUrl: hmg.getAppPath(url)}),
 				area: 'auto',
-				maxmin: false,
-				resize: false
+				maxmin: true,
+				resize: true
 			});
 			layer.full(index);
 		} else {
