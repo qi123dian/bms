@@ -3,7 +3,8 @@
 <%@include file="../comm/core-page.jsp"%>
 
 <!-- 主题页面容器 -->
-<div class="ui grid" id="<%=pageId%>">
+<!-- ui grid元素不允许给ID值，用pagerId就可以了，程序自动计算赋值 -->
+<div class="ui grid">
 	<!-- 主体页面标题操作区域 -->
 	<div class="sixteen wide column page-cls">
 		<!-- 页面内容 -->

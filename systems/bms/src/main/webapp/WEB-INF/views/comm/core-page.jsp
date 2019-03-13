@@ -25,11 +25,20 @@
 		prmStr += " \"" + val + "\"";
 	}
 	prmStr = "{" + prmStr + "}";
-	
-	String pageId = "id" + new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
 %>
 
+<div id="currentPageId" style="display: none;"></div>
+
 <script type="text/javascript">
+	// 解决无法获取页面ID问题
+	var pagerId = 'pager_' + _.now();
+	var pagerEl = undefined;
 	var pageParam = <%=prmStr%>;
-	var pageId = "<%=pageId%>";
+	
+	$(document).ready(function(){
+		var el = $('#currentPageId');
+		pagerEl = el.nextAll('.ui.grid');
+		el.remove();
+		pagerEl.attr('id', pagerId);
+	});
 </script>

@@ -484,7 +484,11 @@
 	 * 加载内容
 	 */
 	function _fLoadView(sId, sHtml) {
-		$('#content_' + sId).html(sHtml);
+		var parentEl = $('#content_' + sId).empty().append(sHtml);
+		var childEl = parentEl.children('.ui.grid');
+		if(childEl && childEl.length>0) {
+			childEl.attr('data-menu-id', sId);
+		}
 	}
 	
 	/**
@@ -1127,9 +1131,9 @@
 			var url = tabContentEl.attr('data-tab-url');
 			
 			var index = layer.open({
-				type: 2,
+				type: 1,
 				title: '<span style="font-weight: bold;">[ 全屏显示 ]&nbsp;-&nbsp;' + title + '</span>',
-				content: hmg.addUrlParam(hmg.getAppPath('/page/comm/fullscreen'), {pageUrl: hmg.getAppPath(url)}),
+				content: hmg.getJel(opt.pageId),// hmg.addUrlParam(hmg.getAppPath('/page/comm/fullscreen'), {pageUrl: hmg.getAppPath(url)}),
 				area: 'auto',
 				maxmin: false,
 				resize: false
@@ -1149,6 +1153,10 @@
 			+ '    <div class="right borderless item page-opera-opera">'
 			+ '    </div>'
 			+ '</div>';
+		
+		if(!pageId) {
+			return false;
+		}
 		
 		var tabContentEl = hmg.getJel(pageId).parents('.ui.main-box');
 		var el = tabContentEl.find(selector);

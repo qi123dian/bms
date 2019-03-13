@@ -3,15 +3,9 @@
  */
 ; (function(window, document, $, hmg, _) {
 	
-	var page = {
-		pageId: pageId,
-		pageBoxEl: hmg.getJel(pageId),
-		init: _init
-	}
-	
-	function _init(pageId) {
+	function _init(pagerId) {
 		
-		hmg.PageOpera.init(pageId, '.page-cls', 'list alternate outline icon', '模板页面', '功能展示', [{
+		hmg.PageOpera.init(pagerId, '.page-cls', 'list alternate outline icon', '模板页面', '功能展示', [{
 			type: 'help',
 			msg: '展示常用功能'
 		},
@@ -617,7 +611,15 @@
 	}
 	
 	$(document).ready(function(){
-		_init(page.pageId);
+		var page = {
+			pagerId: pagerId,
+			pagerEl: pagerEl,
+			init: _init
+		}
+		
+		_init(page.pagerId);
+		
+		console.log(page);
 	});
 })(window, document, $, hmg, _);
 

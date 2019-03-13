@@ -188,7 +188,7 @@ body ::-webkit-scrollbar {
 	font-size: 14px;
 }
 .main-left .tree-menu-box .accordion .title .tree-menu-title.child {
-	color: blue;
+	color: #2196f3;
 }
 .main-left .tree-menu-box .accordion {
 	margin: 0;
